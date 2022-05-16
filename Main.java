@@ -13,6 +13,7 @@ public class Main {
         f.push(8);
         f.push(9);
         System.out.println(f.pop());
+        System.out.println(f.peek());
         System.out.println(f.pop());
         f.push(10);
         f.push(11);

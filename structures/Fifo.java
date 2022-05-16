@@ -1,5 +1,6 @@
 package structures;
 
+//TODO implemented fifo head out of bounds
 public class Fifo{
     private Object[] queue;
     private int head = 0;
@@ -18,15 +19,17 @@ public class Fifo{
     }
 
     public Object pop() throws IndexOutOfBoundsException{
-        if(head >= tail || head >= queue.length)
-            throw new IndexOutOfBoundsException("The queue head is out of it's bounds!");//TODO let logger handle this
-        return queue[head++];
+        return getAtIndex(head++);
     }
 
     public Object peek() throws IndexOutOfBoundsException{
-        if(head > tail)
-            throw new IndexOutOfBoundsException("The queue head is out of it's bounds!");
-        return queue[head];
+        return getAtIndex(head);
+    }
+
+    public Object getAtIndex(int index) throws IndexOutOfBoundsException{
+        if(index >= tail || index >= queue.length)
+            throw new IndexOutOfBoundsException("The requested index is out of queue bounds!");//TODO let logger handle this
+        return queue[index];
     }
 
     public boolean IsEmpty(){
