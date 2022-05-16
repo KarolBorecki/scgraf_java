@@ -23,6 +23,10 @@ public class Fifo{
         return queue[head++];
     }
 
+    public boolean IsEmpty(){
+        return head == tail;
+    }
+
     private void resizeQueue(int resizeFactor){
         Object[] newQueue = new Object[resizeFactor * queue.length];
         System.arraycopy(queue, 0, newQueue, 0, queue.length);
