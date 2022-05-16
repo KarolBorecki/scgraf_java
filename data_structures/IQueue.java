@@ -1,4 +1,4 @@
-package structures;
+package data_structures;
 
 public interface IQueue {
     static final int RESIZE_FACTOR = 2;

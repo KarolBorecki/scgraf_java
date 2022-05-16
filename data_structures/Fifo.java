@@ -1,6 +1,4 @@
-package structures;
-
-import java.util.Arrays;
+package data_structures;
 
 //TODO implemented fifo head out of bounds
 public class Fifo extends Queue {

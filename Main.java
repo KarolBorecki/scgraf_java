@@ -1,4 +1,4 @@
-import structures.Fifo;
+import data_structures.Fifo;
 
 public class Main {
     public static void main(String[] args){
