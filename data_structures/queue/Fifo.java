@@ -1,7 +1,7 @@
 package data_structures.queue;
 
 //TODO implemented fifo head out of bounds
-public class Fifo extends Queue {
+public class Fifo extends Queue<Object> {
     public Fifo(int size){
         super(size);
     }

@@ -1,15 +1,15 @@
 package data_structures.queue;
 
-public interface IQueue {
+public interface IQueue<T> {
     static final int RESIZE_FACTOR = 2;
 
-    void push(Object o) throws IndexOutOfBoundsException;
+    void push(T o) throws IndexOutOfBoundsException;
 
-    Object pop() throws IndexOutOfBoundsException;
+    T pop() throws IndexOutOfBoundsException;
 
-    Object peek() throws IndexOutOfBoundsException;
+    T peek() throws IndexOutOfBoundsException;
 
-    Object getAtIndex(int index) throws IndexOutOfBoundsException;
+    T getAtIndex(int index) throws IndexOutOfBoundsException;
 
     boolean IsEmpty();
 
