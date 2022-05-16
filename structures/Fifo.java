@@ -1,9 +1,9 @@
 package structures;
 
 public class Fifo{
-    public Object[] queue;
-    public int head = 0;
-    public int tail = 0;
+    private Object[] queue;
+    private int head = 0;
+    private int tail = 0;
 
     private static final int RESIZE_FACTOR = 2;
 
@@ -21,6 +21,12 @@ public class Fifo{
         if(head >= tail || head >= queue.length)
             throw new IndexOutOfBoundsException("The queue head is out of it's bounds!");//TODO let logger handle this
         return queue[head++];
+    }
+
+    public Object peek() throws IndexOutOfBoundsException{
+        if(head > tail)
+            throw new IndexOutOfBoundsException("The queue head is out of it's bounds!");
+        return queue[head];
     }
 
     public boolean IsEmpty(){
