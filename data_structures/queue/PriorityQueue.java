@@ -1,6 +1,6 @@
 package data_structures.queue;
 
-import java.util.Collections;
+import utils.Utils;
 
 public class PriorityQueue<T extends Comparable<T>> extends Queue<T>{
     @SuppressWarnings("unchecked")
@@ -12,9 +12,10 @@ public class PriorityQueue<T extends Comparable<T>> extends Queue<T>{
     public T pop() throws IndexOutOfBoundsException {
         int greatest = head;
         for(int i=head+1; i<tail; i++)
-            if (getAtIndex(i).compareTo(getAtIndex(i)) > 0)
+            if (getAtIndex(greatest).compareTo(getAtIndex(i)) < 0)
                 greatest = i;
-        swap()
-        return greatest;
+
+        Utils.Swap(queue, greatest, head);
+        return getAtIndex(head++);
     }
 }
