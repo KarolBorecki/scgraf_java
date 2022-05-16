@@ -1,9 +1,7 @@
-import data_structures.queue.Fifo;
 import data_structures.queue.PriorityQueue;
 
 public class Main {
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
         PriorityQueue<Integer> f = new PriorityQueue<Integer>(5);
         f.push(4);
         f.push(2);
