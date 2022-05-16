@@ -1,5 +1,7 @@
 package structures;
 
+import java.util.Arrays;
+
 //TODO implemented fifo head out of bounds
 public class Fifo{
     private Object[] queue;
@@ -40,5 +42,13 @@ public class Fifo{
         Object[] newQueue = new Object[resizeFactor * queue.length];
         System.arraycopy(queue, 0, newQueue, 0, queue.length);
         queue = newQueue;
+    }
+
+    @Override
+    public String toString() {
+        return "FIFO:" +
+                "\n   queue = " + Arrays.toString(queue) +
+                "\n   head =  " + head +
+                "\n   tail =  " + tail;
     }
 }

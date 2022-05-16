@@ -17,5 +17,6 @@ public class Main {
         System.out.println(f.pop());
         f.push(10);
         f.push(11);
+        System.out.println(f);
     }
 }
