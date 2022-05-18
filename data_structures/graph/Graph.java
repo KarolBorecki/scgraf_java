@@ -2,42 +2,55 @@ package data_structures.graph;
 
 import java.util.Arrays;
 
+import data_structures.tuples.Size;
+
 public class Graph {
     private Node[][] nodes;
-    private int width = 10;
-    private int height = 10;
 
-    private static int nodeIdCounter;
+    private final Size size = new Size();
+
+    private double maxConnectionWeight;
 
     public Graph setWidth(int width){
-        this.width = width;
+        size.setWidth(width);
         return this;
     }
 
     public Graph setHeight(int height){
-        this.height = height;
-        return this;
-    }
-
-    public Graph setNodes(Node[][] nodes){
-        this.nodes = nodes;
+        size.setHeight(height);
         return this;
     }
 
     public void build(){
-        if(nodes == null)
-            nodes = new Node[width][height];
+        nodes = new Node[size.width()][size.height()];
+
+        for(int x = 0; x<size.width(); x++)
+            for(int y = 0; y<size.height(); y++)
+                nodes[x][y] = new Node();
     }
 
-    public static int getNextNodeId() {
-        return nodeIdCounter++;
+    public double getMaxConnectionWeight(){
+        return maxConnectionWeight;
+    }
+
+    public Node getNode(int x, int y){
+        return nodes[x][y];
+    }
+
+    public Size getSize(){
+        return size;
+    }
+
+    public void setMaxConnectionWeight(double newMaxConnectionWeight){
+        //TODO maybe we should update this value depended by analysing the graph connections?
+        maxConnectionWeight = newMaxConnectionWeight;
     }
 
     @Override
     public String toString(){
         return "Graph:" +
-                "\n   Width: " + width +
-                "\n   Height: " + height +
+                "\n   Width: " + size.width() +
+                "\n   Height: " + size.height() +
                 "\n   Nodes: " + Arrays.deepToString(nodes);
     }
 

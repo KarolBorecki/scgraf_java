@@ -2,9 +2,11 @@ package data_structures.graph;
 
 import java.util.Arrays;
 
-public class Node {
-    private final int id;
+public class Node implements Comparable<Node>{
+    protected final int id;
     private final Connection[] connections = new Connection[4];;
+
+    private static int nodeIdCounter;
 
     public enum ConnectionSide{
         TOP(0),
@@ -20,7 +22,7 @@ public class Node {
     }
 
     public Node(){
-        this.id = Graph.getNextNodeId();
+        this.id = nodeIdCounter++;
     }
 
     public Node setupConnection(ConnectionSide side, Connection connection){
@@ -38,6 +40,11 @@ public class Node {
 
     public int getId(){
         return id;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return this.id - o.id;
     }
 
     @Override

@@ -1,13 +1,8 @@
 package data_structures.graph;
 
-public class Connection {
-    private double weight = 1;
+public record Connection(double weight) {
 
-    public Connection(double weight){
-        this.weight = weight;
-    }
-
-    public double getWeight(){
+    public double getWeight() {
         return weight;
     }
 }
