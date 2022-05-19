@@ -1,13 +1,16 @@
 package data_structures.queue;
 
+import data_structures.graph.Node;
+
 //TODO implemented fifo head out of bounds
-public class Fifo extends Queue<Object> {
+public class Fifo<T extends Node> extends Queue<T> {
+    @SuppressWarnings("unchecked")
     public Fifo(int size){
-        queue = new Object[size];
+        queue = (T[]) new Node[size];
     }
 
     @Override
-    public Object pop() throws IndexOutOfBoundsException{
+    public T pop() throws IndexOutOfBoundsException{
         return getAtIndex(head++);
     }
 }

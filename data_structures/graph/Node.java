@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Node implements Comparable<Node>{
     protected final int id;
-    private final Connection[] connections = new Connection[4];;
+    private final Connection[] connections = new Connection[4];
 
     private static int nodeIdCounter;
 
@@ -30,8 +30,21 @@ public class Node implements Comparable<Node>{
         return this;
     }
 
+    public Node setupConnection(ConnectionSide side, Connection connection, boolean isDoubleWay){
+        connections[side.index] = connection;
+
+        return this;
+    }
+
     public void build(){
-        ;;
+        ;
+    }
+
+    public boolean isConnectionNull(ConnectionSide side){
+        if(this.connections[side.index] == null)
+            return true;
+        else
+            return false;
     }
 
     public double getConnectionWeight(ConnectionSide side){
