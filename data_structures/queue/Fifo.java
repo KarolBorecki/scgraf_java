@@ -13,4 +13,8 @@ public class Fifo<T extends Node> extends Queue<T> {
     public T pop() throws IndexOutOfBoundsException{
         return getAtIndex(head++);
     }
+
+    public int fifoHeadIndex(){
+        return head;
+    }
 }

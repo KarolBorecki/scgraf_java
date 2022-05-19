@@ -28,15 +28,19 @@ public class Main {
 
 
         Graph g = new Graph();
-        g.setHeight(10);
-        g.setWidth(20);
-        g.buildExample(1.0000000000000000000000000000000000000000000000000000000000000000000000000000000001);
+        g.setHeight(30);
+        g.setWidth(30);
+        g.buildExample();
 
         //g.buildExample();
         System.out.println(g.toStringformatted());
         System.out.println(g);
 
-        dijkstra d = new dijkstra(g, g.getNode(0));
-        d.printDijkstrasTable();
+        dijkstra d = new dijkstra(g, g.getNode(19));
+
+        System.out.println(d.getShortestPath(g.getNode(3)));
+        System.out.println(d.getShortestPathLength(g.getNode(3)));
+
+        d.printDijkstraResult(g.getNode(3));
     }
 }

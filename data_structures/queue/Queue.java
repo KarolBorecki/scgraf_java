@@ -38,10 +38,22 @@ public abstract class Queue<T> implements IQueue<T>{
     }
 
     @Override
+    public void swapElements(int index1, int index2) throws IndexOutOfBoundsException{
+        T temp = this.getAtIndex(index1);
+        queue[index1] = queue[index2];
+        queue[index2] = temp;
+    }
+
+    public int getLength(){
+        return queue.length;
+    }
+
+    @Override
     public String toString() {
         return "QUEUE:" +
                 "\n   queue = " + Arrays.toString(queue) +
                 "\n   head =  " + head +
                 "\n   tail =  " + tail;
     }
+
 }
