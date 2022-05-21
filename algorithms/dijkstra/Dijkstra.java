@@ -17,25 +17,25 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
     private final Graph graph;
     private final Node startNode;
 
-    private double [] pathLengths; // Use new class DijkstraData
+    private double [] pathLengths; // uzyj nowej klasy DijkstraData - jest wygodniej operowac na obiektach
     private Node [] previousNode;
-    private DijkstraData[] dijkstraTable; //WOWO
+    private DijkstraData[] dijkstraTable; //O tak lepiej
 
-    private Fifo<Node> queToVisit; // Use priority queue!!!!
-    private int amountOfNodes; // Wasting memory!!!!  - same as graph.getNodesCount();
+    private Fifo<Node> queToVisit; // Uzyj priority queue!!!!
+    private int amountOfNodes; // Marnujesz pamięć - to samo co graph.getNodesCount();
 
     public Dijkstra(Graph g, Node startNode){
         graph = g;
         this.startNode = startNode;
 
         initializeDijkstraTable();
-        fillDijkstraTable();
+        fillDijkstraTable(); // dla dużych grafów sama inicjalizacja będzie trwać bardzo długo
     }
 
     private void initializeDijkstraTable(){
         amountOfNodes = graph.getNodesCount();
 
-        queToVisit= initializeQueToVisit(amountOfNodes);
+        queToVisit= initializeQueueToVisit(amountOfNodes);
 
         pathLengths = new double[amountOfNodes];
         previousNode = new Node[amountOfNodes];
@@ -49,7 +49,7 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
         }
     }
 
-    private void fillDijkstraTable() {
+    private void fillDijkstraTable() { //SOLVE();
         while(!queToVisit.IsEmpty()){
             Node currentVertex = queToVisit.pop();
             for(Path.Side side : Path.Side.values()){
@@ -66,7 +66,7 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
         }
 
     }
-/* TODO DELETE THIS - REDUNDANT CODE - use priority queue*/
+/* TODO DELETE THIS - REDUNDANT CODE - use priority queue */
     private void setFifoHead(){
         double minDistance = Double.MAX_VALUE;
         double actualDistance = 0.;
@@ -83,24 +83,23 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
             queToVisit.swapElements(queToVisit.fifoHeadIndex(), minDistanceIndex);
     }
 
-    private Fifo<Node> initializeQueToVisit(int size){
+    private Fifo<Node> initializeQueueToVisit(int size){
         Fifo<Node> queToVisit = new Fifo<>(size);
 
         queToVisit.push(startNode);
-        int startNodeIndex = startNode.getGraphID(), currentIndex;
 
-        for(int i = 0; i < graph.getSize().height(); i++){
-            for(int j = 0; j < graph.getSize().width(); j++) {
-                currentIndex = i * graph.getSize().width() + j;
-                if (currentIndex != startNodeIndex)
-                    queToVisit.push(graph.getNode(i, j));
+        for(int y = 0; y < graph.getSize().height(); y++){
+            for(int x = 0; x < graph.getSize().width(); x++) {
+                Node node = graph.getNode(y, x);
+                if (node.compareTo(startNode) != 0)
+                    queToVisit.push(node);
             }
         }
 
         return queToVisit;
     }
 
-    public void printDijkstraTable(){
+    public void printDijkstraTable(){// Może lepiej toString()?
         System.out.println("-----Dijkstra table-----");
         System.out.println(queToVisit);
         System.out.println("NODE\t\t\tS. PATH\t\t\tPREV NODE");
