@@ -1,67 +1,50 @@
 package data_structures.graph;
 
-import java.util.Arrays;
-
 public class Node implements Comparable<Node>{
-    protected final int id;
-    private final Connection[] connections = new Connection[4];
+    protected final int ID;
+    protected final int graphID;
 
-    private static int nodeIdCounter;
+    private final Path[] paths = new Path[4];
 
-    public enum ConnectionSide{
-        TOP(0),
-        RIGHT(1),
-        BOTTOM(2),
-        LEFT(3);
+    private static int nodeIDCounter = 0;
 
-        final int index;
+    public Node(Graph parentGraph){
 
-        ConnectionSide(int index) {
-            this.index = index;
-        }
+        this.ID = nodeIDCounter++;
+        this.graphID = parentGraph.getNextGraphID();
     }
 
-    public Node(){
-        this.id = nodeIdCounter++;
+    public void setupPath(Path.Side side, double pathWeight){
+        setupPath(side, new Path(pathWeight));
     }
 
-    public Node setupConnection(ConnectionSide side, Connection connection){
-        connections[side.index] = connection;
-        return this;
+    public void setupPath(Path.Side side, Path path){
+        paths[side.index] = path;
     }
 
-    public Node setupConnection(ConnectionSide side, Connection connection, boolean isDoubleWay){
-        connections[side.index] = connection;
-
-        return this;
+    public boolean isConnected(Path.Side side){
+        return paths[side.index] != null;
     }
 
-    public void build(){
-        ;
-    }
+    public int getID(){return ID;}
 
-    public boolean isConnectionNull(ConnectionSide side){
-        if(this.connections[side.index] == null)
-            return true;
-        else
-            return false;
-    }
+    public int getGraphID(){return graphID;}
 
-    public double getConnectionWeight(ConnectionSide side){
-        return connections[side.index].getWeight();
-    }
-
-    public int getId(){
-        return id;
+    public double getConnectionWeight(Path.Side side){
+        return paths[side.index].getWeight();
     }
 
     @Override
     public int compareTo(Node o) {
-        return this.id - o.id;
+        return this.ID - o.ID;
     }
 
     @Override
     public String toString(){
-        return "Node " + id + "{" +  Arrays.toString(connections) + "}";
+        StringBuilder resultString = new StringBuilder("   [" + graphID + "]" + "Node " + ID + ":\n");
+        for(Path.Side side : Path.Side.values())
+            if(paths[side.index] != null)
+                resultString.append("      ").append(side).append(": ").append(paths[side.index].getWeight()).append("\n");
+        return  resultString.toString();
     }
 }

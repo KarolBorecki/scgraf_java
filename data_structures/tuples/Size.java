@@ -23,4 +23,6 @@ public class Size extends Pair<Integer, Integer>{
     public void setHeight(int newHeight){
         second = newHeight;
     }
+
+    public int getTotalSize(){return width() * height();}
 }

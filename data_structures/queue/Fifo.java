@@ -3,10 +3,10 @@ package data_structures.queue;
 import data_structures.graph.Node;
 
 //TODO implemented fifo head out of bounds
-public class Fifo<T extends Node> extends Queue<T> {
-    @SuppressWarnings("unchecked")
+public class Fifo<T> extends Queue<T> {
+    @SuppressWarnings("unchecked") /* T will always be extending Object */
     public Fifo(int size){
-        queue = (T[]) new Node[size];
+        queue = (T[]) new Object[size];
     }
 
     @Override
