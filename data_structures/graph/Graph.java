@@ -2,7 +2,9 @@ package data_structures.graph;
 
 import data_structures.tuples.Size;
 
-public class Graph {
+import java.util.Iterator;
+
+public class Graph implements Iterable<Node>{
     private Node[][] nodes;
 
     private Size size = new Size(); /* TODO assigndefault values */
@@ -117,6 +119,43 @@ public class Graph {
                 s.append(nodes[x][y]).append("\n");
         }
         return s.toString();
+    }
+
+    @Override
+    public Iterator<Node> iterator() {
+        return new GraphIterator(this.nodes, this.getSize().width(), this.getSize().height());
+    }
+
+    private static class GraphIterator implements Iterator<Node> {
+
+        private Node [][] t;
+        int x, y;
+        int lgt;
+        int curr;
+
+        public GraphIterator(Node [][] t, int x, int y){
+            int n = x * y;
+            if(n != 0) {
+                this.t = new Node[y][x];
+                this.x = x;
+                this.y = y;
+                for(int i= 0; i < y; i++){
+                    System.arraycopy(t[i], 0, this.t[i], 0, x);
+                }
+            }
+            this.lgt = n;
+            this.curr = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return curr < lgt;
+        }
+
+        @Override
+        public Node next() {
+            return t[curr / x][curr++ % x];
+        }
     }
 
 }

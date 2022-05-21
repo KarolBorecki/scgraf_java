@@ -1,2 +1,4 @@
-package data_handling;public class FileReaderG {
+package data_handling;
+
+public class FileReaderG {
 }
