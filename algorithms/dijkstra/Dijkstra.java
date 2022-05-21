@@ -64,15 +64,6 @@ public class Dijkstra implements Algorithm{
         this.dijkstraTable[startNode.getGraphID()].previousNode = startNode;
     }
 
-    private String toStringDijkstraTable(){
-        StringBuilder s = new StringBuilder();
-        s.append("Node index\tPath Length\tPrev Node\n");
-        for(int i= 0; i<graph.getNodesCount(); i++)
-            s.append("\"Node ").append(i).append("\"").append(dijkstraTable[i]).append("\n");
-
-        return s.toString();
-    }
-
     @Override
     public void Solve(){
         ;
@@ -97,6 +88,52 @@ public class Dijkstra implements Algorithm{
         isSolved = true;
     }
 
+    public Node [] getShortestPath(Node finishNode){
+        Node [] t = new Node [STARTING_SIZE];
+        return t;
+    }
+
+    public Node getStartNode(){
+        return this.startNode;
+    }
+
+    public double getShortestPathLength(Node finishNode){
+        double shortestPath= 0;
+        if(finishNode == this.startNode)
+            return 0;
+        for(int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
+            shortestPath += dijkstraTable[i].length;
+        return shortestPath;
+    }
+
+    public String toStringDijkstraTable(){
+        StringBuilder s = new StringBuilder();
+        s.append("Node index\tPath Length\tPrev Node\n");
+        for(int i= 0; i<graph.getNodesCount(); i++)
+            s.append("\"Node ").append(i).append("\"").append(dijkstraTable[i]).append("\n");
+
+        return s.toString();
+    }
+
+    public String getShortestPathString(Node finishNode){ //TODO RETURN ARRRAY OF NODES???
+        StringBuilder path = new StringBuilder();
+        if(finishNode == this.startNode)
+            return path.toString();
+        path.append(finishNode.getGraphID());
+        for(int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
+            path.append(" -> ").append(dijkstraTable[i].previousNode.getGraphID());
+        path.append(" -> ").append(startNode.getGraphID());
+        return path.toString();
+    }
+
+    public String getDijkstraResult(Node finishNode){
+        String s = "";
+        s += ("-----Dijkstra result-----\n");
+        s += "\tShortest path from: "+this.startNode.getGraphID()+" to "+finishNode.getGraphID()+" = "+this.getShortestPathLength(finishNode)+"\n";
+        s += "\tThe following path:\n\t"+this.getShortestPathString(finishNode)+"\n";
+        return s;
+    }
+
     @Override
     public String toString(){
         if(!isSolved) {
@@ -112,42 +149,4 @@ public class Dijkstra implements Algorithm{
             s.append(dijkstraTable[i].getCurrentNode().getGraphID()).append("\t\t\t").append(dijkstraTable[i].length).append("\t\t\t").append((dijkstraTable[i].previousNode == null ? "-" : dijkstraTable[i].previousNode.getGraphID())).append("\n");
         return s.toString();
     }
-
-    public String getDijkstraResult(Node finishNode){
-        String s = "";
-        s += ("-----Dijkstra result-----\n");
-        s += "\tShortest path from: "+this.startNode.getGraphID()+" to "+finishNode.getGraphID()+" = "+this.getShortestPathLength(finishNode)+"\n";
-        s += "\tThe following path:\n\t"+this.getShortestPathString(finishNode)+"\n";
-        return s;
-    }
-
-    public double getShortestPathLength(Node finishNode){
-        double shortestPath= 0;
-        if(finishNode == this.startNode)
-            return 0;
-        for(int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
-            shortestPath += dijkstraTable[i].length;
-        return shortestPath;
-    }
-
-    public String getShortestPathString(Node finishNode){ //TODO RETURN ARRRAY OF NODES???
-        StringBuilder path = new StringBuilder();
-        if(finishNode == this.startNode)
-            return path.toString();
-        path.append(finishNode.getGraphID());
-        for(int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
-            path.append(" -> ").append(dijkstraTable[i].previousNode.getGraphID());
-        path.append(" -> ").append(startNode.getGraphID());
-        return path.toString();
-    }
-
-    public Node [] getShortestPath(Node finishNode){
-        Node [] t = new Node [STARTING_SIZE];
-        return t;
-    }
-
-    public Node getStartNode(){
-        return this.startNode;
-    }
-
 }
