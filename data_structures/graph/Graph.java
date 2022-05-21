@@ -45,15 +45,15 @@ public class Graph implements Iterable<Node>{
     }
 */
     public Node getNeighbourNode(Node node, Path.Side side){
-        int row = node.graphID / size.height();
-        int column = node.graphID % size.height();
+        int row = node.graphID / size.width();
+        int column = node.graphID % size.width();
 
         if(side == Path.Side.LEFT)
             if(column <= 0) return null;
             else column--;
 
         else if(side == Path.Side.RIGHT)
-            if(column >= size.width()) return null;
+            if(column >= size.width()-1) return null;
             else column++;
 
         else if(side == Path.Side.TOP)
@@ -61,36 +61,15 @@ public class Graph implements Iterable<Node>{
             else row--;
 
         else if(side == Path.Side.BOTTOM)
-            if(row >= size.height()) return null;
+            if(row >= size.height()-1) return null;
             else row++;
 
 
         return getNode(row, column);
     }
 
-    /* TODO DELTE THIS - RETURNS MAGIC NUMBER NOT  ASSOSCIATED WITH GRAPH!!! */
-    public int getIdOfConnectedVertex(Node nodeFrom, Path.Side side){
-        int currentId = nodeFrom.graphID;
-
-        if(side == Path.Side.LEFT)
-            return currentId - 1;
-        else if(side == Path.Side.RIGHT)
-            return currentId + 1;
-        else if(side == Path.Side.TOP)
-            return currentId - size.width();
-        else if(side == Path.Side.BOTTOM)
-            return currentId + size.width();
-
-        //TODO Should be throwing error if connection is invalid(? unless we handle it already in connections ?)
-        return -1;
-    }
-
     public Node getNode(int row, int column){
         return nodes[row][column];
-    }
-
-    public Node getNode(int id){ /* TODO DELTE! */
-        return nodes[id / this.getSize().width()][id % this.getSize().width()];
     }
 
     public int getNodesCount(){
@@ -123,7 +102,7 @@ public class Graph implements Iterable<Node>{
 
     @Override
     public Iterator<Node> iterator() {
-        return new GraphIterator(this.nodes, this.getSize().width(), this.getSize().height());
+        return new GraphIterator(this);
     }
 
     private static class GraphIterator implements Iterator<Node> {
@@ -133,15 +112,12 @@ public class Graph implements Iterable<Node>{
         int lgt;
         int curr;
 
-        public GraphIterator(Node [][] t, int x, int y){
-            int n = x * y;
+        public GraphIterator(Graph graph){
+            int n = graph.getSize().width() * graph.getSize().height();
             if(n != 0) {
-                this.t = new Node[y][x];
-                this.x = x;
-                this.y = y;
-                for(int i= 0; i < y; i++){
-                    System.arraycopy(t[i], 0, this.t[i], 0, x);
-                }
+                this.t = graph.nodes;
+                this.x = graph.getSize().width();
+                this.y = graph.getSize().height();
             }
             this.lgt = n;
             this.curr = 0;

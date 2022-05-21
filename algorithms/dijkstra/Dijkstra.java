@@ -3,70 +3,67 @@ package algorithms.dijkstra;
 import data_structures.graph.*;
 import data_structures.queue.*;
 
-public class Dijkstra { //IMPLEMENTS ALGORITHMS
+public class Dijkstra implements Algorithm{
+
     protected static class DijkstraData implements Comparable<DijkstraData>{
-        public double length;
-        public Node previousNode;
+        public double length = Double.MAX_VALUE;
+        public Node previousNode = null;
 
         @Override
         public int compareTo(DijkstraData o) {
-            return this.length - o.length > 0 ? -1 : 1;
+            return this.length < o.length ? 1 : -1;
         }
     }
 
     private final Graph graph;
     private final Node startNode;
 
-    private double [] pathLengths; // uzyj nowej klasy DijkstraData - jest wygodniej operowac na obiektach
-    private Node [] previousNode;
-    private DijkstraData[] dijkstraTable; //O tak lepiej
+    private DijkstraData[] dijkstraTable;
 
-    private Fifo<Node> queToVisit; // Uzyj priority queue!!!!
-    private int amountOfNodes; // Marnujesz pamięć - to samo co graph.getNodesCount();
+    private PriorityQueue<Node> queToVisit;
+    private final static int STARTING_SIZE = 4;
 
     public Dijkstra(Graph g, Node startNode){
-        graph = g;
+        this.graph = g;
         this.startNode = startNode;
 
         initializeDijkstraTable();
-        fillDijkstraTable(); // dla dużych grafów sama inicjalizacja będzie trwać bardzo długo
     }
 
     private void initializeDijkstraTable(){
-        amountOfNodes = graph.getNodesCount();
+        queToVisit= initializeQueueToVisit(graph.getNodesCount());
 
-        queToVisit= initializeQueueToVisit(amountOfNodes);
+        this.dijkstraTable = new DijkstraData [graph.getNodesCount()];
+        for(int i = 0; i<graph.getNodesCount(); i++)
+            dijkstraTable[i] = new DijkstraData();
 
-        pathLengths = new double[amountOfNodes];
-        previousNode = new Node[amountOfNodes];
-
-        for(int i = 0; i < amountOfNodes; i++){
-            previousNode[i] = null;
-            if(i == startNode.getGraphID())
-                pathLengths[i] = 0;
-            else
-                pathLengths[i] = Double.MAX_VALUE;
-        }
+        this.dijkstraTable[startNode.getGraphID()].length = 0;
     }
 
-    private void fillDijkstraTable() { //SOLVE();
+    @Override
+    public void Solve(){
+        ;
+    }
+
+    public void Solve(Node finishNode) { //SOLVE();
         while(!queToVisit.IsEmpty()){
-            Node currentVertex = queToVisit.pop();
+            Node currentNode = queToVisit.pop();
             for(Path.Side side : Path.Side.values()){
-                if(currentVertex.isConnected(side)){
-                    double valToCheck = currentVertex.getConnectionWeight(side) + pathLengths[currentVertex.getGraphID()];
-                    int index = graph.getIdOfConnectedVertex(currentVertex, side);
-                    if(index >= 0 && index < graph.getNodesCount() && valToCheck < pathLengths[index] ){
-                        pathLengths[index] = valToCheck;
-                        previousNode[index] = currentVertex;
+                if(currentNode.isConnected(side)){
+                    double valToCheck = currentNode.getConnectionWeight(side) + dijkstraTable[currentNode.getGraphID()].length;
+                    Node Neighbour = graph.getNeighbourNode(currentNode, side);
+                    int index = Neighbour.getGraphID();
+                    if(index >= 0 && index < graph.getNodesCount() && valToCheck < dijkstraTable[index].length ){
+                        dijkstraTable[index].length = valToCheck;
+                        dijkstraTable[index].previousNode = currentNode;
                     }
                 }
             }
-            setFifoHead();
         }
 
     }
-/* TODO DELETE THIS - REDUNDANT CODE - use priority queue */
+/* TODO DELETE THIS - REDUNDANT CODE - use priority queue *//*
+
     private void setFifoHead(){
         double minDistance = Double.MAX_VALUE;
         double actualDistance = 0.;
@@ -82,9 +79,10 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
         if(queToVisit.fifoHeadIndex() != queToVisit.getLength())
             queToVisit.swapElements(queToVisit.fifoHeadIndex(), minDistanceIndex);
     }
+*/
 
-    private Fifo<Node> initializeQueueToVisit(int size){
-        Fifo<Node> queToVisit = new Fifo<>(size);
+    private PriorityQueue<Node> initializeQueueToVisit(int size){
+        PriorityQueue<Node> queToVisit = new PriorityQueue<>(size);
 
         queToVisit.push(startNode);
 
@@ -102,41 +100,47 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
     @Override
     public String toString(){// Może lepiej toString()?
         StringBuilder s = new StringBuilder();
-        s.append("-----Dijkstra table-----");
-        s.append(queToVisit);
-        s.append("NODE\t\t\tS. PATH\t\t\tPREV NODE");
-        for(int i = 0; i< amountOfNodes; i++){
-            s.append(graph.getNode(i).getGraphID()).append("\t\t\t").append(pathLengths[i]).append("\t\t\t").append((previousNode[i] == null ? "-" : previousNode[i].getGraphID()));
+        s.append("-----Dijkstra table-----\n");
+        s.append(queToVisit).append("\n");
+        s.append("NODE\t\t\tS. PATH\t\t\tPREV NODE\n");
+        for(int i = 0; i< graph.getSize().height(); i++){
+            for(int j= 0; j<graph.getSize().width(); j++)
+            s.append(graph.getNode(i, j).getGraphID()).append("\t\t\t").append(dijkstraTable[i].length).append("\t\t\t").append((dijkstraTable[i].previousNode == null ? "-" : dijkstraTable[i].previousNode.getGraphID())).append("\n");
         }
         return s.toString();
     }
 
-    public String getResult(Node finishNode){
-        StringBuilder s = new StringBuilder();
-        s.append("-----Dijkstra result-----\n");
-        s.append("\tShortest path from: ").append(this.startNode.getGraphID()).append(" to ").append(finishNode.getGraphID()).append(" = ").append(this.getShortestPathLength(finishNode)).append("\n");
-        s.append("\tThe following path:\n\t").append(this.getShortestPathString(finishNode)).append("\n");
-        return s.toString();
+    public String getDijkstraResult(Node finishNode){
+        String s = "";
+        s += ("-----Dijkstra result-----\n");
+        s += "\tShortest path from: "+this.startNode.getGraphID()+" to "+finishNode.getGraphID()+" = "+this.getShortestPathLength(finishNode)+"\n";
+        s += "\tThe following path:\n\t"+this.getShortestPathString(finishNode)+"\n";
+        return s;
     }
 
     public double getShortestPathLength(Node finishNode){
         double shortestPath= 0;
         if(finishNode == this.startNode)
             return 0;
-        for(int i = finishNode.getGraphID(); previousNode[i] != startNode; i = previousNode[i].getGraphID())
-            shortestPath += pathLengths[i];
+        for(int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
+            shortestPath += dijkstraTable[i].length;
         return shortestPath;
     }
 
     public String getShortestPathString(Node finishNode){ //TODO RETURN ARRRAY OF NODES???
-        String path= "";
+        StringBuilder path = new StringBuilder();
         if(finishNode == this.startNode)
-            return path;
-        path += finishNode.getGraphID();
-        for(int i = finishNode.getGraphID(); previousNode[i] != startNode; i = previousNode[i].getGraphID())
-            path += " -> " + previousNode[i].getGraphID();
-        path += " -> " + startNode.getGraphID();
-        return path;
+            return path.toString();
+        path.append(finishNode.getGraphID());
+        for(int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
+            path.append(" -> ").append(dijkstraTable[i].previousNode.getGraphID());
+        path.append(" -> ").append(startNode.getGraphID());
+        return path.toString();
+    }
+
+    public Node [] getShortestPath(Node finishNode){
+        Node [] t = new Node [STARTING_SIZE];
+        return t;
     }
 
     public Node getStartNode(){

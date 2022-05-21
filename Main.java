@@ -12,7 +12,9 @@ public class Main {
 
         Dijkstra d = new Dijkstra(g, g.getNode(0, 0));
 
-        System.out.println(d.getResult(g.getNode(1,1)));
+        d.Solve(g.getNode(1,1));
+        d.getDijkstraResult(g.getNode(1,1));
+        System.out.println(d);
 
         FileWriterG fg = new FileWriterG("example");
         fg.writeGraphToFile(g);

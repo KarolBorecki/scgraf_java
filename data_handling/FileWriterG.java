@@ -58,7 +58,7 @@ public class FileWriterG{
             printWriter.printf("\t");
             for(Path.Side connection : Path.Side.values()){
                 if(n.isConnected(connection)){
-                    printWriter.printf("%d: %f ", g.getIdOfConnectedVertex(n, connection), n.getConnectionWeight(connection));
+                    printWriter.printf("%d: %f ", g.getNeighbourNode(n, connection).getGraphID(), n.getConnectionWeight(connection));
                 }
             }
             printWriter.printf("\n");
@@ -76,10 +76,7 @@ public class FileWriterG{
             }
             isOpen = true;
         }
-        printWriter.println("-----Dijkstra result-----");
-        printWriter.println("\tShortest path from: " + d.getStartNode() + " to " + finishNode.getGraphID() + " = " + d.getShortestPathLength(finishNode));
-        printWriter.println("\tThe following path:\n\t" + d.getShortestPathString(finishNode));
-
+        this.printWriter.println(d.getDijkstraResult(finishNode));
         this.closeFileWriter();
     }
 
