@@ -99,19 +99,24 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
         return queToVisit;
     }
 
-    public void printDijkstraTable(){// Może lepiej toString()?
-        System.out.println("-----Dijkstra table-----");
-        System.out.println(queToVisit);
-        System.out.println("NODE\t\t\tS. PATH\t\t\tPREV NODE");
+    @Override
+    public String toString(){// Może lepiej toString()?
+        StringBuilder s = new StringBuilder();
+        s.append("-----Dijkstra table-----");
+        s.append(queToVisit);
+        s.append("NODE\t\t\tS. PATH\t\t\tPREV NODE");
         for(int i = 0; i< amountOfNodes; i++){
-            System.out.println(graph.getNode(i).getGraphID() + "\t\t\t" + pathLengths[i] + "\t\t\t" + (previousNode[i] == null ? "-" : previousNode[i].getGraphID()));
+            s.append(graph.getNode(i).getGraphID()).append("\t\t\t").append(pathLengths[i]).append("\t\t\t").append((previousNode[i] == null ? "-" : previousNode[i].getGraphID()));
         }
+        return s.toString();
     }
 
-    public void printDijkstraResult(Node finishNode){
-        System.out.println("-----Dijkstra result-----");
-        System.out.println("\tShortest path from: " + this.startNode.getGraphID() + " to " + finishNode.getGraphID() + " = " + this.getShortestPathLength(finishNode));
-        System.out.println("\tThe following path:\n\t" + this.getShortestPath(finishNode));
+    public String getResult(Node finishNode){
+        StringBuilder s = new StringBuilder();
+        s.append("-----Dijkstra result-----\n");
+        s.append("\tShortest path from: ").append(this.startNode.getGraphID()).append(" to ").append(finishNode.getGraphID()).append(" = ").append(this.getShortestPathLength(finishNode)).append("\n");
+        s.append("\tThe following path:\n\t").append(this.getShortestPathString(finishNode)).append("\n");
+        return s.toString();
     }
 
     public double getShortestPathLength(Node finishNode){
@@ -123,7 +128,7 @@ public class Dijkstra { //IMPLEMENTS ALGORITHMS
         return shortestPath;
     }
 
-    public String getShortestPath(Node finishNode){ //TODO RETURN ARRRAY OF NODES???
+    public String getShortestPathString(Node finishNode){ //TODO RETURN ARRRAY OF NODES???
         String path= "";
         if(finishNode == this.startNode)
             return path;

@@ -11,7 +11,7 @@ public class Main {
 
         Dijkstra d = new Dijkstra(g, g.getNode(0, 0));
 
-        d.printDijkstraResult(g.getNode(2, 2));
+        System.out.println(d.getResult(g.getNode(1,1)));
 
     }
 }
