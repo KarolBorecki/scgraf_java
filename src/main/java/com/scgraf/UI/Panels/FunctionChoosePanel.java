@@ -2,10 +2,8 @@ package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.FormattedButton;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
 
 public class FunctionChoosePanel extends HBox {
     public FunctionChoosePanel(){

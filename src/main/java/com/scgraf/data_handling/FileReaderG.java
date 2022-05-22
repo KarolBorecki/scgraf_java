@@ -1,8 +1,10 @@
 package src.main.com.scgraf.data_handling;
 
-import java.io.*;
-
 import src.main.com.scgraf.utils.CFormat;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 public class FileReaderG {
 

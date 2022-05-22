@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
 
 public class FormattedButton extends Button {

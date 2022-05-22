@@ -6,7 +6,6 @@ import com.scgraf.UI.UIConfig;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class FunctionsView extends HBox {
     public FunctionsView(){

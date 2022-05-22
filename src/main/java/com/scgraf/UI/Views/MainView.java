@@ -1,15 +1,12 @@
 package com.scgraf.UI.Views;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.FormattedButton;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class MainView extends BorderPane {
