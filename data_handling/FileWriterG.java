@@ -8,13 +8,11 @@ import data_structures.graph.Path;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Locale;
 
 public class FileWriterG{
     private PrintWriter printWriter;
     private File handledFile;
-
-    private final String handledFileName;
-    private final String handledFilePath;
 
     private boolean isOpen;
 
@@ -25,8 +23,7 @@ public class FileWriterG{
         catch(java.io.IOException e){
             e.printStackTrace();
         }
-        this.handledFileName = handledFile.getName();
-        this.handledFilePath = handledFile.getAbsolutePath();
+
         this.isOpen = true;
     }
 
@@ -38,14 +35,13 @@ public class FileWriterG{
         catch(java.io.IOException e){
             e.printStackTrace();
         }
-        this.handledFileName = handledFile.getName();
-        this.handledFilePath = handledFile.getAbsolutePath();
+
         this.isOpen = true;
     }
 
     public void writeGraphToFile(Graph g){
         if(!isOpen){
-            this.handledFile = new File(handledFilePath);
+            this.handledFile = new File(handledFile.getAbsolutePath());
             try {
                 this.printWriter = new PrintWriter(new FileWriter(this.handledFile));
             }catch(java.io.IOException e){
@@ -58,7 +54,8 @@ public class FileWriterG{
             printWriter.printf("\t");
             for(Path.Side connection : Path.Side.values()){
                 if(n.isConnected(connection)){
-                    printWriter.printf("%d: %f ", g.getNeighbourNode(n, connection).getGraphID(), n.getConnectionWeight(connection));
+                    String inp = g.getNeighbourNode(n, connection).getGraphID() + ": " + n.getConnectionWeight(connection);
+                    printWriter.printf("%s ", inp);
                 }
             }
             printWriter.printf("\n");
@@ -68,7 +65,7 @@ public class FileWriterG{
 
     public void writeDijkstraResultToFile(Dijkstra d, Node finishNode){
         if(!isOpen){
-            this.handledFile = new File(handledFilePath);
+            this.handledFile = new File(handledFile.getAbsolutePath());
             try {
                 this.printWriter = new PrintWriter(new FileWriter(this.handledFile));
             }catch(java.io.IOException e){
@@ -78,14 +75,6 @@ public class FileWriterG{
         }
         this.printWriter.println(d.getDijkstraResult(finishNode));
         this.closeFileWriter();
-    }
-
-    public String getHandledFileName(){
-        return handledFileName;
-    }
-
-    public String getHandledFilePath(){
-        return handledFilePath;
     }
 
     private void closeFileWriter(){
