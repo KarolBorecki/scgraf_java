@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Scene scene = new Scene(new MainView(), 320, 240);
+        Scene scene = new Scene(new MainView(), 800, 800);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
