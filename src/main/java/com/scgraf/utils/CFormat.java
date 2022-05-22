@@ -1,4 +1,4 @@
-package src.main.com.scgraf.utils;
+package com.scgraf.utils;
 
 import java.util.ArrayList;
 

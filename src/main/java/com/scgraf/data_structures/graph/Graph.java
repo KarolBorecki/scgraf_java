@@ -1,6 +1,6 @@
-package src.main.com.scgraf.data_structures.graph;
+package com.scgraf.data_structures.graph;
 
-import src.main.com.scgraf.data_structures.tuples.Size;
+import com.scgraf.data_structures.tuples.Size;
 
 import java.util.Iterator;
 
@@ -66,6 +66,19 @@ public class Graph implements Iterable<Node>{
 
 
         return getNode(row, column);
+    }
+
+    public Path.Side getPathForConnection(Node startNode, Node endNode){//TODO Should be throwing an error
+        if(startNode.getGraphID() + 1 == endNode.getGraphID()){
+            return Path.Side.RIGHT;
+        }else if(startNode.getGraphID() - 1 == endNode.getGraphID()){
+            return Path.Side.LEFT;
+        }else if(startNode.getGraphID() + this.getSize().width() == endNode.getGraphID()){
+            return Path.Side.BOTTOM;
+        }else if(startNode.getGraphID() - this.getSize().width() == endNode.getGraphID()){
+            return Path.Side.TOP;
+        }
+        return null;
     }
 
     public Node getNode(int row, int column){

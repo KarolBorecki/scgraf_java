@@ -1,4 +1,4 @@
-package src.main.com.scgraf.data_structures.graph;
+package com.scgraf.data_structures.graph;
 
 public class Node implements Comparable<Node>{
     protected final int ID;

@@ -2,12 +2,16 @@ package com.scgraf;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.Views.MainView;
+import com.scgraf.data_handling.FileReaderG;
+import com.scgraf.data_structures.graph.Graph;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
@@ -60,5 +64,13 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) {
         launch();
+        try {
+            FileReaderG fileReaderG = new FileReaderG(new File("example"));
+            Graph g = fileReaderG.readGraphToFile();
+            System.out.println(g);
+        } catch (IOException | FileReaderG.FileFormatError e) {
+            e.printStackTrace();
+        }
+
     }
 }

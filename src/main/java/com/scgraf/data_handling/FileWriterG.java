@@ -1,9 +1,9 @@
-package src.main.com.scgraf.data_handling;
+package com.scgraf.data_handling;
 
-import src.main.com.scgraf.algorithms.dijkstra.Dijkstra;
-import src.main.com.scgraf.data_structures.graph.Graph;
-import src.main.com.scgraf.data_structures.graph.Node;
-import src.main.com.scgraf.data_structures.graph.Path;
+import com.scgraf.algorithms.dijkstra.Dijkstra;
+import com.scgraf.data_structures.graph.Graph;
+import com.scgraf.data_structures.graph.Node;
+import com.scgraf.data_structures.graph.Path;
 
 import java.io.File;
 import java.io.FileWriter;

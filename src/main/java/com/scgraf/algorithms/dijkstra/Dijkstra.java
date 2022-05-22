@@ -1,7 +1,9 @@
-package src.main.com.scgraf.algorithms.dijkstra;
+package com.scgraf.algorithms.dijkstra;
 
-import src.main.com.scgraf.data_structures.graph.*;
-import src.main.com.scgraf.data_structures.queue.*;
+import com.scgraf.data_structures.graph.Graph;
+import com.scgraf.data_structures.graph.Node;
+import com.scgraf.data_structures.graph.Path;
+import com.scgraf.data_structures.queue.PriorityQueue;
 
 public class Dijkstra implements Algorithm{
 

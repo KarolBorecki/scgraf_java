@@ -1,6 +1,6 @@
-package src.main.com.scgraf.data_structures.queue;
+package com.scgraf.data_structures.queue;
 
-import src.main.com.scgraf.utils.Utils;
+import com.scgraf.utils.Utils;
 
 public class PriorityQueue<T extends Comparable<T>> extends Queue<T>{
     @SuppressWarnings("unchecked")

@@ -1,4 +1,4 @@
-package src.main.com.scgraf.data_structures.queue;
+package com.scgraf.data_structures.queue;
 
 //TODO implemented fifo head out of bounds
 public class Fifo<T> extends Queue<T> {

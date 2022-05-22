@@ -1,4 +1,4 @@
-package src.main.com.scgraf.generator;
+package com.scgraf.generator;
 
 public interface IGenerator<T> {
 
