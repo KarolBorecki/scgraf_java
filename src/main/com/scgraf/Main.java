@@ -1,15 +1,11 @@
-import algorithms.dijkstra.Dijkstra;
-import data_handling.FileWriterG;
-import data_structures.graph.Graph;
-import data_structures.queue.PriorityQueue;
-import data_structures.tuples.Size;
-import generator.GraphGenerator;
-import data_handling.FileReaderG;
-import utils.CFormat;
-import utils.Utils.*;
+package src.main.com.scgraf;
+
+import src.main.com.scgraf.algorithms.dijkstra.Dijkstra;
+import src.main.com.scgraf.data_handling.FileWriterG;
+import src.main.com.scgraf.data_structures.graph.Graph;
+import src.main.com.scgraf.generator.GraphGenerator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 import java.util.regex.Matcher;

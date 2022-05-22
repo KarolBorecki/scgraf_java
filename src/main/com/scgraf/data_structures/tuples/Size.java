@@ -1,4 +1,4 @@
-package data_structures.tuples;
+package src.main.com.scgraf.data_structures.tuples;
 
 public class Size extends Pair<Integer, Integer>{
     public Size(){

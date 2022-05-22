@@ -1,8 +1,8 @@
-package generator;
+package src.main.com.scgraf.generator;
 
-import data_structures.graph.Path;
-import data_structures.graph.Graph;
-import data_structures.tuples.Size;
+import src.main.com.scgraf.data_structures.graph.Path;
+import src.main.com.scgraf.data_structures.graph.Graph;
+import src.main.com.scgraf.data_structures.tuples.Size;
 
 import java.util.Random;
 

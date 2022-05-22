@@ -1,14 +1,13 @@
-package data_handling;
+package src.main.com.scgraf.data_handling;
 
-import algorithms.dijkstra.Dijkstra;
-import data_structures.graph.Graph;
-import data_structures.graph.Node;
-import data_structures.graph.Path;
+import src.main.com.scgraf.algorithms.dijkstra.Dijkstra;
+import src.main.com.scgraf.data_structures.graph.Graph;
+import src.main.com.scgraf.data_structures.graph.Node;
+import src.main.com.scgraf.data_structures.graph.Path;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.Locale;
 
 public class FileWriterG{
     private PrintWriter printWriter;

@@ -1,8 +1,6 @@
-package data_structures.queue;
+package src.main.com.scgraf.data_structures.queue;
 
-import utils.Utils;
-
-import java.lang.reflect.Method;
+import src.main.com.scgraf.utils.Utils;
 
 public class PriorityQueue<T extends Comparable<T>> extends Queue<T>{
     @SuppressWarnings("unchecked")

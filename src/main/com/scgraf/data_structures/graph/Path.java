@@ -1,4 +1,4 @@
-package data_structures.graph;
+package src.main.com.scgraf.data_structures.graph;
 
 public record Path(double weight) {
 

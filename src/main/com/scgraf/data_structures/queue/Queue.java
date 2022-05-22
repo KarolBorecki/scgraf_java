@@ -1,4 +1,4 @@
-package data_structures.queue;
+package src.main.com.scgraf.data_structures.queue;
 
 import java.util.Arrays;
 

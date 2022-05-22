@@ -1,6 +1,6 @@
-package data_structures.graph;
+package src.main.com.scgraf.data_structures.graph;
 
-import data_structures.tuples.Size;
+import src.main.com.scgraf.data_structures.tuples.Size;
 
 import java.util.Iterator;
 
