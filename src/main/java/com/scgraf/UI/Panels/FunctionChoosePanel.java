@@ -14,7 +14,7 @@ public class FunctionChoosePanel extends HBox {
         setPrefWidth(UIConfig.functionsChoosePanelPrefWidth);
         setMinWidth(UIConfig.functionsChoosePanelMinWidth);
         setAlignment(Pos.CENTER);
-        setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        //setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
 
         FormattedButton shortestBtn = new FormattedButton("Find Shortest");
         FormattedButton divideBtn = new FormattedButton("Divide");

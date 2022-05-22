@@ -26,7 +26,7 @@ public class UILoader {
         }
 
         try{
-            regularFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Regular.ttf")).toExternalForm(), UIConfig.fontRegularSize);
+            regularFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Bold.ttf")).toExternalForm(), UIConfig.fontRegularSize);
         } catch (NullPointerException e){
             e.printStackTrace();
         }
