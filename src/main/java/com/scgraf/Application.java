@@ -1,0 +1,65 @@
+package com.scgraf;
+
+import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.Views.MainView;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class Application extends javafx.application.Application {
+    class ResizableCanvas extends Canvas {
+
+        public ResizableCanvas() {
+            // Redraw canvas when size changes.
+            widthProperty().addListener(evt -> draw());
+            heightProperty().addListener(evt -> draw());
+        }
+
+        private void draw() {
+            double width = getWidth();
+            double height = getHeight();
+
+            GraphicsContext gc = getGraphicsContext2D();
+            gc.clearRect(0, 0, width, height);
+
+            gc.setStroke(Color.RED);
+            gc.strokeLine(0, 0, width, height);
+            gc.strokeLine(0, height, width, 0);
+        }
+
+        @Override
+        public boolean isResizable() {
+            return true;
+        }
+
+        @Override
+        public double prefWidth(double height) {
+            return getWidth();
+        }
+
+        @Override
+        public double prefHeight(double width) {
+            return getHeight();
+        }
+    }
+    @Override
+    public void start(Stage stage) throws IOException {
+        Scene scene = new Scene(new MainView(), UIConfig.stageWidth, UIConfig.stageHeight);
+        stage.setMinHeight(UIConfig.minStageHeight);
+        stage.setMinWidth(UIConfig.minStageWidth);
+
+        stage.setTitle("scgraf");
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}

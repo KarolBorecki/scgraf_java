@@ -1,6 +1,6 @@
 package com.scgraf.UI;
 
-import com.scgraf.Main;
+import com.scgraf.Application;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -26,7 +26,7 @@ public class UILoader {
         }
 
         try{
-            regularFont = Font.loadFont(Objects.requireNonNull(Main.class.getResource("fonts/Lato/Lato-Regular.ttf")).toExternalForm(), 20);
+            regularFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Regular.ttf")).toExternalForm(), UIConfig.fontRegularSize);
         } catch (NullPointerException e){
             e.printStackTrace();
         }
