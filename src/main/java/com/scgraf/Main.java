@@ -1,8 +1,7 @@
 package com.scgraf;
 
-import com.scgraf.UI.MainView;
+import com.scgraf.UI.Views.MainView;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

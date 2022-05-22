@@ -1,4 +1,4 @@
-package com.scgraf.UI;
+package com.scgraf.UI.Views;
 
 import com.scgraf.UI.elements.FormattedButton;
 import javafx.scene.control.Button;
@@ -14,9 +14,8 @@ public class MainView extends VBox {
     public MainView() throws FileNotFoundException {
         super();
 
-        FormattedButton btn1 = new FormattedButton("Button 1");
-        FormattedButton btn2 = new FormattedButton("Button 2");
+        FunctionsView functionsView = new FunctionsView();
 
-        getChildren().addAll(btn1,btn2);
+        getChildren().addAll(functionsView);
     }
 }
