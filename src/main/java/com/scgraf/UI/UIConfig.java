@@ -25,8 +25,8 @@ public class UIConfig {
 
     public static int functionsViewMinHeight = 130;
 
-    public static int functionsChoosePanelPrefWidth = 600;
-    public static int functionsChoosePanelMinWidth = 510;
+    public static int functionsPanelPrefWidth = 600;
+    public static int functionsPanelMinWidth = 510;
 
     public static int filePanelPrefWidth = 220;
     public static int filePanelMinWidth = 160;
@@ -34,7 +34,7 @@ public class UIConfig {
     public static int borderHeight = 1;
 
     static {
-        stageWidth = functionsChoosePanelPrefWidth + filePanelPrefWidth;
-        minStageWidth = functionsChoosePanelMinWidth + filePanelMinWidth;
+        stageWidth = functionsPanelPrefWidth + filePanelPrefWidth;
+        minStageWidth = functionsPanelMinWidth + filePanelMinWidth;
     }
 }

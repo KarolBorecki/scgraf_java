@@ -1,17 +1,32 @@
 package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.FormattedButton;
-import javafx.geometry.Pos;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 
 public class FunctionPanel extends HBox {
+    AllFunctionsPanel allFunctionsPanel;
+    ShortestPathPanel shortestPathPanel;
+
+    public enum Functionality {
+        ALL,
+        SHORTEST
+    }
+
     public FunctionPanel(){
-        super(UIConfig.panelSpacing);
+        super();
+        setPrefWidth(UIConfig.functionsPanelPrefWidth);
+        setMinWidth(UIConfig.functionsPanelMinWidth);
         setPadding(UIConfig.panelPadding);
-        setPrefWidth(UIConfig.functionsChoosePanelPrefWidth);
-        setMinWidth(UIConfig.functionsChoosePanelMinWidth);
-        setAlignment(Pos.CENTER);
-        //setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        allFunctionsPanel = new AllFunctionsPanel(this);
+        shortestPathPanel = new ShortestPathPanel(this);
+
+        getChildren().add(allFunctionsPanel);
+    }
+
+    public void switchFunction(Functionality functionality){
+        getChildren().clear();
+        if(functionality == Functionality.ALL) getChildren().add(allFunctionsPanel);
+        if(functionality == Functionality.SHORTEST) getChildren().add(shortestPathPanel);
     }
 }
