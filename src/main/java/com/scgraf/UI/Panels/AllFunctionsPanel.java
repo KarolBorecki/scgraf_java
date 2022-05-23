@@ -2,6 +2,7 @@ package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.FormattedButton;
+import com.scgraf.UI.elements.RegularButton;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
@@ -11,10 +12,10 @@ public class AllFunctionsPanel  extends HBox {
         setSpacing(UIConfig.panelSpacing);
         setAlignment(Pos.CENTER);
 
-        FormattedButton shortestBtn = new FormattedButton("Find Shortest");
-        FormattedButton divideBtn = new FormattedButton("Divide");
-        FormattedButton consistencyCheckBtn = new FormattedButton("Check Consistency");
-        FormattedButton generateBtn = new FormattedButton("Generate");
+        RegularButton shortestBtn = new RegularButton("Find Shortest");
+        RegularButton divideBtn = new RegularButton("Divide");
+        RegularButton consistencyCheckBtn = new RegularButton("Check Consistency");
+        RegularButton generateBtn = new RegularButton("Generate");
 
         shortestBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanelManager.Functionality.SHORTEST));
         divideBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanelManager.Functionality.DIVIDE));

@@ -5,10 +5,19 @@ import javafx.scene.paint.Color;
 
 public class UIConfig {
     /* COLORS SETTINGS */
-    public static Color backgroundColor = Color.color(0.165, 0.176, 0.204);
-    public static Color btnColor = Color.color(0.996, 0.6, 0.125);
-    public static Color borderColor = Color.color(0.933, 0.957, 0.831);
-    public static Color textColor = Color.color(0.933, 0.957, 0.831);
+    public static Color backgroundColor = Color.web("2a2d34");
+
+    public static Color regularBtnColor = Color.web("6ea4bf");
+    public static Color subBtnColor = Color.web("6ea4bf");
+    public static Color cancelBtnColor = Color.web("ad343e");
+
+    public static Color borderColor = Color.web("f8f4e3");
+
+    public static Color textColor = Color.web("f8f4e3");
+
+    public static Color errorColor = Color.web("ad343e");
+    public static Color warningColor = Color.web("f2af29");
+    public static Color okColor = Color.web("4da167");
 
     /* FONT SETTINGS */
     public static int fontRegularSize = 15;
