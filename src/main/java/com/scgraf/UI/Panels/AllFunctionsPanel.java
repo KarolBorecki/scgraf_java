@@ -1,7 +1,6 @@
 package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.FormattedButton;
 import com.scgraf.UI.elements.RegularButton;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
@@ -9,7 +8,7 @@ import javafx.scene.layout.HBox;
 public class AllFunctionsPanel  extends HBox {
     public AllFunctionsPanel(FunctionPanelManager root){
         super();
-        setSpacing(UIConfig.panelSpacing);
+        setSpacing(UIConfig.panelRegularSpacing);
         setAlignment(Pos.CENTER);
 
         RegularButton shortestBtn = new RegularButton("Find Shortest");

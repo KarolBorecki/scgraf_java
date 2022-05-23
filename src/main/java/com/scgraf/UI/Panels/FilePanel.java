@@ -1,14 +1,13 @@
 package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.FormattedButton;
 import com.scgraf.UI.elements.SubfunctionButton;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 public class FilePanel extends VBox {
     public FilePanel(){
-        super(UIConfig.panelSpacing);
+        super(UIConfig.panelRegularSpacing);
         setPadding(UIConfig.panelPadding);
         setPrefWidth(UIConfig.filePanelPrefWidth);
         setMinWidth(UIConfig.filePanelMinWidth);

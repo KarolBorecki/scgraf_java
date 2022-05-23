@@ -14,6 +14,7 @@ public class UILoader {
     public static Image testIMG;
 
     public static Font regularFont;
+    public static Font regularSmallFont;
 
     public static Background buttonBck;
 
@@ -27,6 +28,7 @@ public class UILoader {
 
         try{
             regularFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Bold.ttf")).toExternalForm(), UIConfig.fontRegularSize);
+            regularSmallFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Bold.ttf")).toExternalForm(), UIConfig.fontSmallSize);
         } catch (NullPointerException e){
             e.printStackTrace();
         }

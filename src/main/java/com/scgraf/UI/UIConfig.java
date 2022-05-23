@@ -21,6 +21,7 @@ public class UIConfig {
 
     /* FONT SETTINGS */
     public static int fontRegularSize = 15;
+    public static int fontSmallSize = 13;
 
     /* STAGE SETTINGS */
     public static int stageWidth;
@@ -30,8 +31,9 @@ public class UIConfig {
     public static int minStageHeight = 500;
 
     /* OVERALL PANELS SETTINGS */
-    public static double panelSpacing = 20.0;
-    public static Insets panelPadding = new Insets(20, 20, 20, 20);
+    public static int panelRegularSpacing = 20;
+    public static int panelSmallSpacing = 2;
+    public static Insets panelPadding = new Insets(5, 10, 5, 10);
 
     /* BTN SETTINGS */
     public static int btnPrefWidth = 200;
@@ -49,6 +51,7 @@ public class UIConfig {
 
     /* BORDER SETTINGS */
     public static int borderHeight = 1;
+    public static int borderRadius = 5;
 
     static {
         stageWidth = functionsPanelPrefWidth + filePanelPrefWidth;
