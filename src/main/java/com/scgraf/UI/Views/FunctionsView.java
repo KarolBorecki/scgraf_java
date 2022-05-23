@@ -12,12 +12,15 @@ public class FunctionsView extends HBox {
         super();
         setAlignment(Pos.CENTER);
         setMinHeight(UIConfig.functionsViewMinHeight);
-        setBorder(new Border(new BorderStroke(UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor,
-                BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE,
-                CornerRadii.EMPTY, new BorderWidths(UIConfig.borderHeight), Insets.EMPTY)));
+        //        setBorder(new Border(new BorderStroke(UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor,
+//                BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE,
+//                CornerRadii.EMPTY, new BorderWidths(UIConfig.borderHeight), Insets.EMPTY)));
 
         FunctionPanelManager functionChoosePanel = new FunctionPanelManager();
         FilePanel filePanel = new FilePanel();
+
+        setMargin(functionChoosePanel, UIConfig.panelMargin);
+        setMargin(filePanel, UIConfig.panelMargin);
 
         getChildren().addAll(functionChoosePanel, filePanel);
     }

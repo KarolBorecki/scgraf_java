@@ -7,6 +7,7 @@ import javafx.scene.paint.Paint;
 public class UIConfig {
     /* COLORS SETTINGS */
     public static Color backgroundColor = Color.web("2a2d34");
+    public static Color functionsViewBckColor = Color.web("24272d");
 
     public static Color regularBtnColor = Color.web("6ea4bf");
     public static Color subBtnColor = Color.web("6ea4bf");
@@ -16,7 +17,7 @@ public class UIConfig {
 
     public static Color textColor = Color.web("f8f4e3");
 
-    public static Color textFieldBckColor = Color.web("3a3e47");
+    public static Color textFieldBckColor = Color.web("363b44");
 
     public static Color errorColor = Color.web("ad343e");
     public static Color warningColor = Color.web("f2af29");
@@ -25,6 +26,7 @@ public class UIConfig {
     /* FONT SETTINGS */
     public static int fontRegularSize = 15;
     public static int fontSmallSize = 13;
+    public static int fontBigSize = 22;
 
     /* STAGE SETTINGS */
     public static int stageWidth;
@@ -36,14 +38,15 @@ public class UIConfig {
     /* OVERALL PANELS SETTINGS */
     public static int panelRegularSpacing = 20;
     public static int panelSmallSpacing = 2;
-    public static Insets panelPadding = new Insets(5, 10, 5, 10);
+    public static Insets panelPadding = new Insets(5, 20, 5, 20);
+    public static Insets panelMargin = new Insets(10, 10, 10, 10);
 
     /* BTN SETTINGS */
     public static int btnPrefWidth = 200;
     public static int btnPrefHeight = 50;
 
     /* FUNCTIONS VIEW SETTINGS */
-    public static int functionsViewMinHeight = 140;
+    public static int functionsViewMinHeight = 180;
 
     public static int functionsPanelPrefWidth = 600;
     public static int functionsPanelMinWidth = 510;
