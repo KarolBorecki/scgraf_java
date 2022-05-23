@@ -68,7 +68,7 @@ public class Graph implements Iterable<Node>{
         return getNode(row, column);
     }
 
-    public Path.Side getPathForConnection(Node startNode, Node endNode){//TODO Should be throwing an error
+    public Path.Side getPathForConnection(Node startNode, Node endNode) throws InvalidMeshConnection{
         if(startNode.getGraphID() + 1 == endNode.getGraphID()){
             return Path.Side.RIGHT;
         }else if(startNode.getGraphID() - 1 == endNode.getGraphID()){
@@ -78,7 +78,7 @@ public class Graph implements Iterable<Node>{
         }else if(startNode.getGraphID() - this.getSize().width() == endNode.getGraphID()){
             return Path.Side.TOP;
         }
-        return null;
+        throw new InvalidMeshConnection(startNode, endNode);
     }
 
     public Node getNode(int row, int column){
@@ -116,6 +116,23 @@ public class Graph implements Iterable<Node>{
     @Override
     public Iterator<Node> iterator() {
         return new GraphIterator(this);
+    }
+
+    public class InvalidMeshConnection extends Throwable{
+        private String msg= "Invalid connection for a mesh graph!\n";
+
+        public InvalidMeshConnection(Node n1, Node n2){
+            this.msg += "Connection between nodes: " + n1.getGraphID() + " and " + n2.getGraphID() + " couldn' t have been established!\n";
+        }
+
+        public void printMessage(){
+            System.err.println(this.msg);
+        }
+
+        @Override
+        public String getMessage(){
+            return msg;
+        }
     }
 
     private static class GraphIterator implements Iterator<Node> {

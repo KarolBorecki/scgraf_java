@@ -3,6 +3,7 @@ package com.scgraf.data_handling;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 
+import javax.security.auth.callback.TextInputCallback;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -23,11 +24,11 @@ public class FileReaderG {
         this.handledFile = new File(filePath);
     }
 
-    public Graph readGraphFromFile(File file) throws IOException, FileFormatError{
+    public Graph readGraphFromFile(File file) throws IOException, FileFormatError, Graph.InvalidMeshConnection {
 
         int readLines = 0;
-        String firstLineRegex= "\\d\\s+\\d";
-        String nextLineRegex= "\\d:\\s+[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
+        String firstLineRegex= "\\d+\\s+\\d+";
+        String nextLineRegex= "\\d+:\\s+[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -71,6 +72,7 @@ public class FileReaderG {
 
                 Node finishNode = graph.getNode(finishNodeIndex / graph.getSize().width(), finishNodeIndex % graph.getSize().width());
                 Node currNode = graph.getNode(i / graph.getSize().width(), i % graph.getSize().width());
+
                 currNode.setupPath(graph.getPathForConnection(currNode, finishNode), weight);
 
                 oldEnd = matcher.end();
@@ -84,7 +86,7 @@ public class FileReaderG {
         return graph;
     }
 
-    public Graph readGraphFromFile() throws IOException, FileFormatError{
+    public Graph readGraphFromFile() throws IOException, FileFormatError, Graph.InvalidMeshConnection {
         return readGraphFromFile(this.handledFile);
     }
 
@@ -97,6 +99,10 @@ public class FileReaderG {
 
         public FileFormatError(int lineNumber, File file, String cause){
             errorMsg += lineNumber + " in file: \"" + file.getName() + "\"\n" + cause + "\n";
+        }
+
+        public void printMessage(){
+            System.err.println(this.errorMsg);
         }
 
         public String getErrorMsg() {
