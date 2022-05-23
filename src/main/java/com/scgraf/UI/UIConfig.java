@@ -2,6 +2,7 @@ package com.scgraf.UI;
 
 import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class UIConfig {
     /* COLORS SETTINGS */
@@ -14,6 +15,8 @@ public class UIConfig {
     public static Color borderColor = Color.web("f8f4e3");
 
     public static Color textColor = Color.web("f8f4e3");
+
+    public static Color textFieldBckColor = Color.web("3a3e47");
 
     public static Color errorColor = Color.web("ad343e");
     public static Color warningColor = Color.web("f2af29");
@@ -40,7 +43,7 @@ public class UIConfig {
     public static int btnPrefHeight = 50;
 
     /* FUNCTIONS VIEW SETTINGS */
-    public static int functionsViewMinHeight = 130;
+    public static int functionsViewMinHeight = 140;
 
     public static int functionsPanelPrefWidth = 600;
     public static int functionsPanelMinWidth = 510;

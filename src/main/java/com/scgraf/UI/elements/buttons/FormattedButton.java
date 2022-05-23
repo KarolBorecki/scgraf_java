@@ -15,6 +15,7 @@ public class FormattedButton extends Button {
 
         setPrefSize(UIConfig.btnPrefWidth * sizeFactor, UIConfig.btnPrefHeight * sizeFactor);
     }
+
     public FormattedButton(String label, Color bckColor, Color textColor, Font font){
         super(label);
 
