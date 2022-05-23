@@ -1,10 +1,9 @@
 package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.CancelButton;
-import com.scgraf.UI.elements.RegularButton;
+import com.scgraf.UI.elements.buttons.CancelButton;
+import com.scgraf.UI.elements.buttons.RegularButton;
 import javafx.geometry.Pos;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;

@@ -1,7 +1,7 @@
 package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.SubfunctionButton;
+import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 

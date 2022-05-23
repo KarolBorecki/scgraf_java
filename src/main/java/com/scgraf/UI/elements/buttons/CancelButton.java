@@ -1,9 +1,7 @@
-package com.scgraf.UI.elements;
+package com.scgraf.UI.elements.buttons;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.UILoader;
-import javafx.geometry.Insets;
-import javafx.scene.layout.*;
 
 public class CancelButton extends FormattedButton {
     public CancelButton(String label){

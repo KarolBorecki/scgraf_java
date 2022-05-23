@@ -1,7 +1,7 @@
 package com.scgraf.UI.Panels;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.RegularButton;
+import com.scgraf.UI.elements.buttons.RegularButton;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 

@@ -1,4 +1,4 @@
-package com.scgraf.UI.elements;
+package com.scgraf.UI.elements.buttons;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.UILoader;
