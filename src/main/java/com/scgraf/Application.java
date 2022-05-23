@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
@@ -64,13 +63,5 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) {
         launch();
-        try {
-            FileReaderG fileReaderG = new FileReaderG(new File("example"));
-            Graph g = fileReaderG.readGraphToFile();
-            System.out.println(g);
-        } catch (IOException | FileReaderG.FileFormatError e) {
-            e.printStackTrace();
-        }
-
     }
 }
