@@ -1,7 +1,7 @@
 package com.scgraf.UI.Views;
 
 import com.scgraf.UI.Panels.FilePanel;
-import com.scgraf.UI.Panels.FunctionPanel;
+import com.scgraf.UI.Panels.FunctionPanelManager;
 import com.scgraf.UI.UIConfig;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,7 +16,7 @@ public class FunctionsView extends HBox {
                 BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE,
                 CornerRadii.EMPTY, new BorderWidths(UIConfig.borderHeight), Insets.EMPTY)));
 
-        FunctionPanel functionChoosePanel = new FunctionPanel();
+        FunctionPanelManager functionChoosePanel = new FunctionPanelManager();
         FilePanel filePanel = new FilePanel();
 
         getChildren().addAll(functionChoosePanel, filePanel);

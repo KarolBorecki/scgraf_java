@@ -6,24 +6,22 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
 public class AllFunctionsPanel  extends HBox {
-    private FunctionPanel root;
-
-    public AllFunctionsPanel(FunctionPanel root){
+    public AllFunctionsPanel(FunctionPanelManager root){
         super();
         setSpacing(UIConfig.panelSpacing);
         setAlignment(Pos.CENTER);
 
-        this.root = root;
-
         FormattedButton shortestBtn = new FormattedButton("Find Shortest");
         FormattedButton divideBtn = new FormattedButton("Divide");
         FormattedButton consistencyCheckBtn = new FormattedButton("Check Consistency");
-        FormattedButton GenerateBtn = new FormattedButton("Generate");
+        FormattedButton generateBtn = new FormattedButton("Generate");
 
-        shortestBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanel.Functionality.SHORTEST));
-        //shortestBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanel.Functionality.SHORTEST));
+        shortestBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanelManager.Functionality.SHORTEST));
+        divideBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanelManager.Functionality.DIVIDE));
+        consistencyCheckBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanelManager.Functionality.CONSISTENCY));
+        generateBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanelManager.Functionality.GENERATE));
 
-        getChildren().addAll(shortestBtn, divideBtn, consistencyCheckBtn, GenerateBtn);
+        getChildren().addAll(shortestBtn, divideBtn, consistencyCheckBtn, generateBtn);
 
     }
 }

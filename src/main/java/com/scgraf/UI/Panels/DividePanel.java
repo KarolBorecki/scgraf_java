@@ -4,8 +4,8 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.FormattedButton;
 import javafx.scene.layout.BorderPane;
 
-public class ShortestPathPanel extends FunctionAbstractPanel {
-    public ShortestPathPanel(FunctionPanelManager root){
-        super(root, "Shortest");
+public class DividePanel extends FunctionAbstractPanel {
+    public DividePanel(FunctionPanelManager root){
+        super(root, "Divide");
     }
 }
