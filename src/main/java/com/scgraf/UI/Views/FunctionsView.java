@@ -1,9 +1,8 @@
 package com.scgraf.UI.Views;
 
-import com.scgraf.UI.Panels.FilePanel;
-import com.scgraf.UI.Panels.FunctionPanelManager;
+import com.scgraf.UI.Panels.FunctionView.FilePanel;
+import com.scgraf.UI.Panels.FunctionView.FunctionPanelManager;
 import com.scgraf.UI.UIConfig;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 

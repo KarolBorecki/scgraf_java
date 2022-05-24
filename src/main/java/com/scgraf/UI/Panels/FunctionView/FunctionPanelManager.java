@@ -1,10 +1,8 @@
-package com.scgraf.UI.Panels;
+package com.scgraf.UI.Panels.FunctionView;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.CaptionText;
-import com.scgraf.UI.elements.text.FormattedText;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 
 public class FunctionPanelManager extends BorderPane {

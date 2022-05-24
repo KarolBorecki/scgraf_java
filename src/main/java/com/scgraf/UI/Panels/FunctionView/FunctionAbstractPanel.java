@@ -1,4 +1,4 @@
-package com.scgraf.UI.Panels;
+package com.scgraf.UI.Panels.FunctionView;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.CancelButton;
@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 public abstract class FunctionAbstractPanel extends VBox {
     VBox btnPanel;

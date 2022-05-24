@@ -23,6 +23,8 @@ public class UIConfig {
     public static Color warningColor = Color.web("f2af29");
     public static Color okColor = Color.web("4da167");
 
+    public static Color graphNodeColor = Color.web("f8f4e3");
+
     /* FONT SETTINGS */
     public static int fontRegularSize = 15;
     public static int fontSmallSize = 13;
@@ -64,6 +66,8 @@ public class UIConfig {
     /* BORDER SETTINGS */
     public static int borderHeight = 1;
     public static int borderRadius = 5;
+
+    /* GRAPH SETTINGS */
 
     static {
         stageWidth = functionsPanelPrefWidth + filePanelPrefWidth;

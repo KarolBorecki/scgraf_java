@@ -1,9 +1,8 @@
-package com.scgraf.UI.Panels;
+package com.scgraf.UI.Panels.FunctionView;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import javafx.geometry.Pos;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class ShortestPathPanel extends FunctionAbstractPanel {

@@ -1,4 +1,4 @@
-package com.scgraf.UI.Panels;
+package com.scgraf.UI.Panels.FunctionView;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.RegularButton;

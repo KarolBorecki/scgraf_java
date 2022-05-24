@@ -1,24 +1,25 @@
 package com.scgraf.UI.Views;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.data_structures.graph.Graph;
+import com.scgraf.data_structures.tuples.Size;
+import com.scgraf.generator.GraphGenerator;
 import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 
 import java.io.FileNotFoundException;
 
-public class MainView extends BorderPane {
+public class MainView extends VBox {
 
     public MainView() throws FileNotFoundException {
         super();
         setBackground(new Background(new BackgroundFill(UIConfig.backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        GraphView graphView = new GraphView();
+        Graph graph = GraphGenerator.Generate(new Size(30, 30));
+
+        GraphView graphView = new GraphView(graph);
         FunctionsView functionsView = new FunctionsView();
 
-        setTop(graphView);
-        setBottom(functionsView);
+        getChildren().addAll(graphView, functionsView);
     }
 }
