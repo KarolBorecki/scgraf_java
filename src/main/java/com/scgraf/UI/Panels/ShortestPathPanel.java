@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 
 public class ShortestPathPanel extends FunctionAbstractPanel {
     public ShortestPathPanel(FunctionPanelManager root){
-        super(root, "Shortest", "SHORTEST INFO");
+        super(root, "Find path", "The path will be find from start node to end node:");
         HBox inputPane = new HBox();
         inputPane.setAlignment(Pos.CENTER);
         inputPane.setSpacing(UIConfig.panelRegularSpacing);

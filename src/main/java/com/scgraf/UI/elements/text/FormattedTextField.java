@@ -12,5 +12,9 @@ public class FormattedTextField extends TextField {
         super();
         setPromptText(info);
         setBackground(new Background(new BackgroundFill(UIConfig.textFieldBckColor, new CornerRadii(UIConfig.borderRadius), Insets.EMPTY)));
+        setPrefWidth(UIConfig.textFieldPrefWidth);
+        setMinWidth(UIConfig.textFieldMinWidth);
+        setMaxWidth(UIConfig.textFieldMaxWidth);
+        setFocusTraversable(false);
     }
 }

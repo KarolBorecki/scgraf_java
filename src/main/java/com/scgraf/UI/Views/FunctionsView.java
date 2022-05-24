@@ -12,6 +12,8 @@ public class FunctionsView extends HBox {
         super();
         setAlignment(Pos.CENTER);
         setMinHeight(UIConfig.functionsViewMinHeight);
+        setPrefWidth(UIConfig.stageWidth);
+        setMinWidth(UIConfig.minStageWidth);
         //        setBorder(new Border(new BorderStroke(UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor,
 //                BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE,
 //                CornerRadii.EMPTY, new BorderWidths(UIConfig.borderHeight), Insets.EMPTY)));

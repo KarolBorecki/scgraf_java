@@ -45,15 +45,21 @@ public class UIConfig {
     public static int btnPrefWidth = 200;
     public static int btnPrefHeight = 50;
 
+    /* TEXTFIELD SETTINGS */
+    public static int textFieldPrefWidth = 150;
+    public static int textFieldMinWidth = 60;
+    public static int textFieldMaxWidth = 200;
+
     /* FUNCTIONS VIEW SETTINGS */
     public static int functionsViewMinHeight = 180;
 
+    /* FUNCTIONS PANEL SETTINGS */
     public static int functionsPanelPrefWidth = 600;
-    public static int functionsPanelMinWidth = 510;
+    public static int functionsPanelMinWidth = 500;
 
-    /* FILE PANEL VIEW */
+    /* FILE PANEL SETTINGS */
     public static int filePanelPrefWidth = 220;
-    public static int filePanelMinWidth = 160;
+    public static int filePanelMinWidth = 150;
 
     /* BORDER SETTINGS */
     public static int borderHeight = 1;
@@ -61,6 +67,6 @@ public class UIConfig {
 
     static {
         stageWidth = functionsPanelPrefWidth + filePanelPrefWidth;
-        minStageWidth = functionsPanelMinWidth + filePanelMinWidth;
+        minStageWidth = functionsPanelMinWidth + filePanelMinWidth + ((int)panelMargin.getLeft()) + ((int)panelMargin.getRight()) + ((int)panelPadding.getLeft()) + ((int)panelPadding.getRight());
     }
 }
