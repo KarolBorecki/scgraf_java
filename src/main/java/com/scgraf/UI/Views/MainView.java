@@ -15,7 +15,7 @@ public class MainView extends VBox {
         super();
         setBackground(new Background(new BackgroundFill(UIConfig.backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Graph graph = GraphGenerator.Generate(new Size(30, 30));
+        Graph graph = GraphGenerator.GenerateDirected(new Size(10, 10));
 
         GraphView graphView = new GraphView(graph);
         FunctionsView functionsView = new FunctionsView();

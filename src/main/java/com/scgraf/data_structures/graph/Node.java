@@ -22,6 +22,8 @@ public class Node implements Comparable<Node>{
         paths[side.index] = path;
     }
 
+    public void deletePath(Path.Side side){paths[side.index] = null;}
+
     public boolean isConnected(Path.Side side){
         return paths[side.index] != null;
     }
