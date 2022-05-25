@@ -91,6 +91,11 @@ public class Graph implements Iterable<Node>{
         this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), pathWeight);
     }
 
+    public void deletePathBothWays(Node node, Path.Side side){
+        node.deletePath(side);
+        this.getNeighbourNode(node, side).deletePath(side.getOppositeSide());
+    }
+
     public Node getNode(int row, int column){
         return nodes[row][column];
     }

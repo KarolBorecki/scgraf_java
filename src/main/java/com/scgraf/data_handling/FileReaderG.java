@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class FileReaderG {
 
-    private File handledFile;
+    private final File handledFile;
 
     public FileReaderG(File file) throws java.io.FileNotFoundException{
         this.handledFile = file;

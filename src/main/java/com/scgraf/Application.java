@@ -3,6 +3,7 @@ package com.scgraf;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.Views.MainView;
 import com.scgraf.algorithms.dijkstra.BFS;
+import com.scgraf.algorithms.dijkstra.Divider;
 import com.scgraf.data_handling.FileReaderG;
 import com.scgraf.data_handling.FileWriterG;
 import com.scgraf.data_structures.graph.Graph;
@@ -72,8 +73,14 @@ public class Application extends javafx.application.Application {
         System.out.println("Do you want to launch an app?\n[y/n]: ");
         launch();
         Graph graph;
-        graph = GraphGenerator.GenerateNotDirected(new Size(10, 10));
+        graph = GraphGenerator.GenerateNotDirected(new Size(3, 3));
         System.out.println(graph);
+
+        Divider divider = new Divider(graph);
+        divider.divideGraph(2);
+
+        System.out.println(graph);
+
         BFS bfs = new BFS(graph);
         bfs.Solve();
         System.out.println(bfs.isGraphConsistent());
