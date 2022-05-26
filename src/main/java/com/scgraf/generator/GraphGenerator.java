@@ -9,7 +9,27 @@ import java.util.Random;
 public class GraphGenerator implements IGenerator<Graph> {
     private static final Random randomGenerator = new Random();
 
-    public static Graph Generate(Size size) { /* TODO REFACTOR */
+    public static Graph GenerateNotDirected(Size size) { /* TODO REFACTOR */
+        Graph g = new Graph();
+        g.setSize(size).build();
+
+        for(int y= 0; y<size.height(); y++){
+            for(int x = 0; x<size.width(); x++){
+                if(x != 0)
+                    g.setupPathBothWays(g.getNode(y, x), Path.Side.LEFT, randomGenerator.nextDouble());
+                if(x != size.width() - 1)
+                    g.setupPathBothWays(g.getNode(y, x), Path.Side.RIGHT, randomGenerator.nextDouble());
+                if(y != 0)
+                    g.setupPathBothWays(g.getNode(y, x), Path.Side.TOP, randomGenerator.nextDouble());
+                if(y != size.height() - 1)
+                    g.setupPathBothWays(g.getNode(y,x), Path.Side.BOTTOM, randomGenerator.nextDouble());
+            }
+        }
+
+        return g;
+    }
+
+    public static Graph GenerateDirected(Size size) { /* TODO REFACTOR */
         Graph g = new Graph();
         g.setSize(size).build();
 

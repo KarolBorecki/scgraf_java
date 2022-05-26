@@ -81,6 +81,21 @@ public class Graph implements Iterable<Node>{
         throw new InvalidMeshConnection(startNode, endNode);
     }
 
+    public void setupPathBothWays(Node node, Path.Side side, Path path){
+        node.setupPath(side, path);
+        this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), path);
+    }
+
+    public void setupPathBothWays(Node node, Path.Side side, double pathWeight){
+        node.setupPath(side, pathWeight);
+        this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), pathWeight);
+    }
+
+    public void deletePathBothWays(Node node, Path.Side side){
+        node.deletePath(side);
+        this.getNeighbourNode(node, side).deletePath(side.getOppositeSide());
+    }
+
     public Node getNode(int row, int column){
         return nodes[row][column];
     }

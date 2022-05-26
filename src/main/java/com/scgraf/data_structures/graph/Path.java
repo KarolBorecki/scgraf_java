@@ -24,6 +24,18 @@ public record Path(double weight) {
         public String toString() {
             return sideNames[index];
         }
+
+        public Side getOppositeSide(){
+            if(this.index == Side.TOP.index)
+                return Side.BOTTOM;
+            if(this.index == Side.BOTTOM.index)
+                return Side.TOP;
+            if(this.index == Side.LEFT.index)
+                return Side.RIGHT;
+            if(this.index == Side.RIGHT.index)
+                return Side.LEFT;
+            return null;
+        }
     }
 
     @Override
