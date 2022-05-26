@@ -17,10 +17,11 @@ public class GraphInfoPanel extends BorderPane {
     public GraphInfoPanel(Graph graph) {
         super();
         setPrefWidth(UIConfig.stageWidth);
+        setPadding(UIConfig.topPanelPadding);
 
         graphInfo = new FormattedText();
-        loggerInfo = new FormattedText("OK", TextAlignment.RIGHT);
-        loggerInfo.setText("OK", UIConfig.okColor);
+        loggerInfo = new FormattedText();
+        loggerInfo.setCaption("OK").setColor(UIConfig.okColor).setAlignment(TextAlignment.RIGHT).build();
 
         setLeft(graphInfo);
         setRight(loggerInfo);
