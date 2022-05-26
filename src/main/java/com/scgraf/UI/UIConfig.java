@@ -32,15 +32,16 @@ public class UIConfig {
 
     /* STAGE SETTINGS */
     public static int stageWidth;
-    public static int stageHeight = 800;
+    public static int stageHeight = 900;
 
     public static int minStageWidth;
-    public static int minStageHeight = 500;
+    public static int minStageHeight = 900;
 
     /* OVERALL PANELS SETTINGS */
     public static int panelRegularSpacing = 20;
     public static int panelSmallSpacing = 2;
     public static Insets panelPadding = new Insets(5, 20, 5, 20);
+    public static Insets topPanelPadding = new Insets(10, 0,0,0);
     public static Insets panelMargin = new Insets(10, 10, 10, 10);
 
     /* BTN SETTINGS */
@@ -68,6 +69,8 @@ public class UIConfig {
     public static int borderRadius = 5;
 
     /* GRAPH SETTINGS */
+    public static int graphNodeSizeCellFactor = 5;
+    public static double graphNodePathSizeFactor = 2;
 
     static {
         stageWidth = functionsPanelPrefWidth + filePanelPrefWidth;

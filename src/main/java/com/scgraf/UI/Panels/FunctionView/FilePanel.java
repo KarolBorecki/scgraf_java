@@ -18,8 +18,8 @@ public class FilePanel extends BorderPane {
         setPrefWidth(UIConfig.filePanelPrefWidth);
         setMinWidth(UIConfig.filePanelMinWidth);
         setPadding(UIConfig.panelPadding);
-
         setMargin(this, UIConfig.panelMargin);
+
         setBackground(new Background(new BackgroundFill(UIConfig.functionsViewBckColor, new CornerRadii(UIConfig.borderRadius), Insets.EMPTY)));
         //setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 

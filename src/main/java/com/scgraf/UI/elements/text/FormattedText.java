@@ -8,12 +8,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class FormattedText extends Text {
-
-    public FormattedText(String txt, TextAlignment alg){
-        this(txt);
-        setTextAlignment(alg);
-    }
-
     public FormattedText(String txt){
         super(txt);
         setFont(UILoader.regularFont);
@@ -24,8 +18,27 @@ public class FormattedText extends Text {
         this("");
     }
 
-    public void setText(String s, Color c){
+    public FormattedText setAlignment(TextAlignment alg){
+        setTextAlignment(alg);
+        return this;
+    }
+
+    public FormattedText setColor(Color c){
         setFill(c);
+        return this;
+    }
+
+    public FormattedText setFontSize(int fontSize){
+        setStyle("-fx-font: "+fontSize+" Lato;");
+        return this;
+    }
+
+    public FormattedText setCaption(String s){
         setText(s);
+        return this;
+    }
+
+    public void build(){
+        ;;
     }
 }

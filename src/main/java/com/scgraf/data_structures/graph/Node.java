@@ -36,6 +36,9 @@ public class Node implements Comparable<Node>{
         return paths[side.index].getWeight();
     }
 
+    public Path[] getPaths(){return paths;}
+    public Path getPath(Path.Side side){return paths[side.index];}
+
     @Override
     public int compareTo(Node o) {
         return this.ID - o.ID;
