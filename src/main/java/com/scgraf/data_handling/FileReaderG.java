@@ -14,17 +14,7 @@ import java.util.regex.Pattern;
 
 public class FileReaderG {
 
-    private final File handledFile;
-
-    public FileReaderG(File file) throws java.io.FileNotFoundException{
-        this.handledFile = file;
-    }
-
-    public FileReaderG(String filePath){
-        this.handledFile = new File(filePath);
-    }
-
-    public Graph readGraphFromFile(File file) throws IOException, FileFormatError, Graph.InvalidMeshConnection {
+    public static Graph readGraphFromFile(File file) throws IOException, FileFormatError, Graph.InvalidMeshConnection {
 
         int readLines = 0;
         String firstLineRegex= "\\d+\\s+\\d+";
@@ -86,11 +76,11 @@ public class FileReaderG {
         return graph;
     }
 
-    public Graph readGraphFromFile() throws IOException, FileFormatError, Graph.InvalidMeshConnection {
-        return readGraphFromFile(this.handledFile);
+    public static Graph readGraphFromFile(String filePath) throws IOException, FileFormatError, Graph.InvalidMeshConnection {
+        return readGraphFromFile(new File(filePath));
     }
 
-    public class FileFormatError extends Throwable {
+    public static class FileFormatError extends Throwable {
         private String errorMsg= "Wrong file format at line ";
 
         public FileFormatError(int lineNumber, File file){
