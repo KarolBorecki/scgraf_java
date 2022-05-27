@@ -1,27 +1,22 @@
 package com.scgraf.UI.Panels.GraphView;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.data_structures.graph.Graph;
-import javafx.geometry.HPos;
+import com.scgraf.utils.UIUtils;
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
-public class GraphPanel extends GridPane {
-    public GraphPanel(Graph graph) {
+public class GraphPanel extends AnchorPane {
+    Stage primaryStage;
+
+    public GraphPanel(Graph graph, Stage stage) {
         super();
-        setPrefHeight(UIConfig.stageHeight);
-        setPrefWidth(UIConfig.stageWidth);
+        primaryStage = stage;
+        setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
-        setVgap(UIConfig.panelSmallSpacing);
-        setHgap(UIConfig.panelSmallSpacing);
-
-        setGridLinesVisible(true);
+        //setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         updateGraph(graph);
     }
@@ -32,29 +27,39 @@ public class GraphPanel extends GridPane {
     }
 
     private void drawGraph(Graph graph){
-        final int numCols = graph.getSize().width() ;
-        final int numRows = graph.getSize().height() ;
-        final int nodeRadius = (UIConfig.stageWidth / numRows) / UIConfig.graphNodeSizeCellFactor;
+        final int numCols = graph.getSize().width();
+        final int numRows = graph.getSize().height();
 
-        for (int i = 0; i < numCols; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / numCols);
-            getColumnConstraints().add(colConst);
+        final double cellSizeWidth = ((getWidth()) / numCols);
+        final double cellSizeHeight = ((getHeight()) / numRows);
+
+        final double cellSize;
+        if(cellSizeWidth > cellSizeHeight){
+            cellSize = cellSizeHeight;
+            setSize(getHeight(), getHeight());
+        }else{
+            cellSize = cellSizeWidth;
+            setSize(getWidth(), getWidth());
         }
-        for (int i = 0; i < numRows; i++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / numRows);
-            getRowConstraints().add(rowConst);
-        }
 
-        for(int x=0; x<graph.getSize().width(); x++)
-            for(int y=0; y<graph.getSize().height(); y++){
-                NodeElement node = new NodeElement(nodeRadius, graph.getNode(y, x), (UIConfig.stageWidth / numRows));
+        System.out.println(numCols + " - " + numRows);
+        System.out.println(getWidth() + " x " + getHeight());
+        System.out.println("CELL = Width: " + cellSizeWidth + " Height: " + cellSizeHeight);
 
-                add(node, x, y);
-                setHalignment(node, HPos.CENTER);
-                setValignment(node, VPos.CENTER);
+        for(int y=0; y<numRows; y++)
+            for(int x=0; x<numCols; x++){
+                NodeElement node = new NodeElement(graph.getNode(y, x), cellSize);
+                setLeftAnchor(node, (double)( + cellSize * x));
+                setTopAnchor(node, (double)( + cellSize * y));
+                getChildren().add(node);
+
             }
 
+    }
+
+    private void setSize(double width, double height){
+        UIUtils.setStaticSize(this, width, height);
+        setWidth(width);
+        setHeight(height);
     }
 }

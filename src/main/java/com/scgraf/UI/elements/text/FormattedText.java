@@ -38,6 +38,12 @@ public class FormattedText extends Text {
         return this;
     }
 
+    public FormattedText setPos(int x, int y){
+        setX(x);
+        setY(y);
+        return this;
+    }
+
     public void build(){
         ;;
     }

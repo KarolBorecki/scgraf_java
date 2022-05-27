@@ -18,8 +18,7 @@ public abstract class FunctionAbstractPanel extends VBox {
         setSpacing(UIConfig.panelRegularSpacing);
         setAlignment(Pos.CENTER);
         setPadding(UIConfig.panelPadding);
-        setPrefWidth(UIConfig.functionsPanelPrefWidth);
-        setMinWidth(UIConfig.functionsPanelMinWidth);
+        setPrefWidth(UIConfig.functionsPanelWidth);
 
         this.infoText = new HBox();
         this.infoText.getChildren().addAll(new FormattedText(infoText));

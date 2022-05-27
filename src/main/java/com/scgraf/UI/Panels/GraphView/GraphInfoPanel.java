@@ -16,7 +16,7 @@ public class GraphInfoPanel extends BorderPane {
 
     public GraphInfoPanel(Graph graph) {
         super();
-        setPrefWidth(UIConfig.stageWidth);
+        setPrefWidth(UIConfig.graphPanelWidth);
         setPadding(UIConfig.topPanelPadding);
 
         graphInfo = new FormattedText();

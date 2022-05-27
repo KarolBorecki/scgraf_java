@@ -27,8 +27,7 @@ public class FunctionPanelManager extends BorderPane {
 
     public FunctionPanelManager(){
         super();
-        setPrefWidth(UIConfig.functionsPanelPrefWidth);
-        setMinWidth(UIConfig.functionsPanelMinWidth);
+        setPrefWidth(UIConfig.functionsPanelWidth);
         setPadding(UIConfig.panelPadding);
         setMargin(this, UIConfig.panelMargin);
         setBackground(new Background(new BackgroundFill(UIConfig.functionsViewBckColor, new CornerRadii(UIConfig.borderRadius), Insets.EMPTY)));

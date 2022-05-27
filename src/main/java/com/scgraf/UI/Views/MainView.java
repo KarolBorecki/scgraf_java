@@ -5,27 +5,26 @@ import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 
-public class MainView extends VBox {
-
-    public MainView() throws FileNotFoundException {
+public class MainView extends BorderPane {
+    public MainView(Stage stage) throws FileNotFoundException {
         super();
         setBackground(new Background(new BackgroundFill(UIConfig.backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Graph graph = GraphGenerator.GenerateNotDirected(new Size(10, 10));
-        Line line = new Line(0, 0, 40, 40);
-        line.setStroke(Color.RED);
-        line.setStrokeWidth(5);
+        Graph graph = GraphGenerator.GenerateNotDirected(new Size(20, 20));
 
-
-        GraphView graphView = new GraphView(graph);
+        GraphView graphView = new GraphView(graph, stage);
         FunctionsView functionsView = new FunctionsView();
 
-        getChildren().addAll(graphView, functionsView);
+//        getChildren().addAll(graphView, functionsView);
+        setCenter(graphView);
+        setBottom(functionsView);
     }
 }

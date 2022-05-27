@@ -2,7 +2,6 @@ package com.scgraf.UI;
 
 import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class UIConfig {
     /* COLORS SETTINGS */
@@ -31,17 +30,14 @@ public class UIConfig {
     public static int fontBigSize = 22;
 
     /* STAGE SETTINGS */
-    public static int stageWidth;
+    public static int stageWidth = 750;
     public static int stageHeight = 900;
-
-    public static int minStageWidth;
-    public static int minStageHeight = 900;
 
     /* OVERALL PANELS SETTINGS */
     public static int panelRegularSpacing = 20;
     public static int panelSmallSpacing = 2;
     public static Insets panelPadding = new Insets(5, 20, 5, 20);
-    public static Insets topPanelPadding = new Insets(10, 0,0,0);
+    public static Insets topPanelPadding = new Insets(20, 10, 10, 10);
     public static Insets panelMargin = new Insets(10, 10, 10, 10);
 
     /* BTN SETTINGS */
@@ -54,26 +50,38 @@ public class UIConfig {
     public static int textFieldMaxWidth = 200;
 
     /* FUNCTIONS VIEW SETTINGS */
-    public static int functionsViewMinHeight = 180;
+    public static int functionsViewHeight;
 
     /* FUNCTIONS PANEL SETTINGS */
-    public static int functionsPanelPrefWidth = 600;
-    public static int functionsPanelMinWidth = 500;
+    public static int functionsPanelWidth;
 
     /* FILE PANEL SETTINGS */
-    public static int filePanelPrefWidth = 220;
-    public static int filePanelMinWidth = 150;
+    public static int filePanelWidth;
 
     /* BORDER SETTINGS */
     public static int borderHeight = 1;
     public static int borderRadius = 5;
 
+    /* GRAPH INFO SETTINGS */
+    public static int graphInfoWidth;
+    public static int graphInfoHeight;
+
     /* GRAPH SETTINGS */
-    public static int graphNodeSizeCellFactor = 5;
-    public static double graphNodePathSizeFactor = 2;
+    public static int graphPanelWidth;
+    public static int graphPanelHeight;
+    public static int graphMargin = 10;
+    public static double graphCellSizeFactor = 1.1;
+    public static double graphNodePathSizeFactor = 1.5;
 
     static {
-        stageWidth = functionsPanelPrefWidth + filePanelPrefWidth;
-        minStageWidth = functionsPanelMinWidth + filePanelMinWidth + ((int)panelMargin.getLeft()) + ((int)panelMargin.getRight()) + ((int)panelPadding.getLeft()) + ((int)panelPadding.getRight());
+        functionsViewHeight = stageHeight / 5;
+        functionsPanelWidth = (int) (stageWidth / 4 * 5);
+        filePanelWidth = (int) (stageWidth / 5);
+
+        graphInfoWidth = stageWidth;
+        graphInfoHeight = stageHeight / 10;
+        graphPanelWidth = stageWidth;
+        graphPanelHeight = stageHeight - functionsViewHeight - graphInfoHeight;
+
     }
 }
