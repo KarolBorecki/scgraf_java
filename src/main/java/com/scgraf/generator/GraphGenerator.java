@@ -81,4 +81,55 @@ public class GraphGenerator implements IGenerator<Graph> {
         g.getNode(2,2).setupPath(Path.Side.LEFT, 1);
         return g;
     }
+
+    public static Graph GraphForDivision(){
+        Graph g = new Graph();
+        g.setWidth(4).setHeight(4).build();
+
+        g.setupPathBothWays(g.getNode(0,0), Path.Side.RIGHT, 1);
+        g.setupPathBothWays(g.getNode(0,0), Path.Side.BOTTOM, 1);
+
+        g.setupPathBothWays(g.getNode(0,1), Path.Side.RIGHT, 1);
+        g.setupPathBothWays(g.getNode(0,1), Path.Side.BOTTOM, 1);
+
+        g.setupPathBothWays(g.getNode(0,2), Path.Side.RIGHT, 1);
+        g.setupPathBothWays(g.getNode(0,2), Path.Side.BOTTOM, 1);
+
+        g.setupPathBothWays(g.getNode(0,3), Path.Side.BOTTOM, 1);
+
+        //ROW 2
+
+        g.setupPathBothWays(g.getNode(1,0), Path.Side.RIGHT, 0.01);
+        g.setupPathBothWays(g.getNode(1,0), Path.Side.BOTTOM, 1);
+
+        g.setupPathBothWays(g.getNode(1,1), Path.Side.RIGHT, 1);
+        g.setupPathBothWays(g.getNode(1,1), Path.Side.BOTTOM, 0.01);
+
+        g.setupPathBothWays(g.getNode(1,2), Path.Side.RIGHT, 1);
+        g.setupPathBothWays(g.getNode(1,2), Path.Side.BOTTOM, 1);
+
+        g.setupPathBothWays(g.getNode(1,3), Path.Side.BOTTOM, 0.01);
+
+        //ROW 3
+
+        g.setupPathBothWays(g.getNode(2,0), Path.Side.RIGHT, 1);
+        g.setupPathBothWays(g.getNode(2,0), Path.Side.BOTTOM, 1);
+
+        g.setupPathBothWays(g.getNode(2,1), Path.Side.RIGHT, 0.01);
+        g.setupPathBothWays(g.getNode(2,1), Path.Side.BOTTOM, 1);
+
+        g.setupPathBothWays(g.getNode(2,2), Path.Side.RIGHT, 1);
+        g.setupPathBothWays(g.getNode(2,2), Path.Side.BOTTOM, 0.01);
+
+        g.setupPathBothWays(g.getNode(2,3), Path.Side.BOTTOM, 0.01);
+
+        //ROW 4
+
+        g.setupPathBothWays(g.getNode(3,0), Path.Side.RIGHT, 1);
+
+        g.setupPathBothWays(g.getNode(3,1), Path.Side.RIGHT, 1);
+
+        g.setupPathBothWays(g.getNode(3,2), Path.Side.RIGHT, 0.01);
+        return g;
+    }
 }

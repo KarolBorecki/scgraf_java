@@ -29,16 +29,24 @@ public class FileWriterG {
             }
             printWriter.printf("\n");
         }
+        printWriter.close();
     }
 
-    public void writeDijkstraResultToFile(Dijkstra d, Node finishNode, File file) {
+    public static void writeGraphToFile(Graph g, String fileName){
+        File newFile = new File(fileName);
+        writeGraphToFile(g, newFile);
+    }
+
+    public void writeDijkstraResultToFile(Dijkstra d, Node startNode, Node finishNode, File file) {
         try {
             printWriter = new PrintWriter(new FileWriter(file));
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
 
-        printWriter.println(d.getDijkstraResult(finishNode));
+        printWriter.println(d.getDijkstraResult(startNode, finishNode));
+
+        printWriter.close();
     }
 
 }

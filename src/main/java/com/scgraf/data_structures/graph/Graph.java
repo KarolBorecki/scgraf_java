@@ -83,17 +83,30 @@ public class Graph implements Iterable<Node>{
 
     public void setupPathBothWays(Node node, Path.Side side, Path path){
         node.setupPath(side, path);
-        this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), path);
+        try {
+            this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setupPathBothWays(Node node, Path.Side side, double pathWeight){
         node.setupPath(side, pathWeight);
-        this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), pathWeight);
+        try {
+            this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), pathWeight);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void deletePathBothWays(Node node, Path.Side side){
         node.deletePath(side);
-        this.getNeighbourNode(node, side).deletePath(side.getOppositeSide());
+        if(this.getNeighbourNode(node, side) != null)
+        try {
+            this.getNeighbourNode(node, side).deletePath(side.getOppositeSide());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Node getNode(int row, int column){

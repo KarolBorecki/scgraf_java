@@ -3,11 +3,13 @@ package com.scgraf;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.Views.MainView;
 import com.scgraf.algorithms.dijkstra.BFS;
+import com.scgraf.algorithms.dijkstra.Dijkstra;
 import com.scgraf.algorithms.dijkstra.Divider;
 import com.scgraf.data_handling.FileReaderG;
 import com.scgraf.data_handling.FileWriterG;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
+import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.queue.Fifo;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
@@ -36,17 +38,44 @@ public class Application extends javafx.application.Application {
     public static void main(String[] args) {
         System.out.println("Do you want to launch an app?\n[y/n]: ");
         //launch();
-        Graph graph;
-        graph = GraphGenerator.GenerateNotDirected(new Size(3, 3));
-        System.out.println(graph);
 
-        Divider divider = new Divider(graph);
+        /*Divider divider = new Divider(graph);
         divider.divideGraphUsingDijkstra(1);
 
         System.out.println(graph);
 
-        /*BFS bfs = new BFS(graph);
+        BFS bfs = new BFS(graph);
         bfs.Solve();
         System.out.println(bfs.isGraphConsistent());*/
+
+        /*Graph g = GraphGenerator.GenerateNotDirected(new Size(5, 5));
+        System.out.println(g);
+
+        BFS bfs = new BFS(g);
+        bfs.Solve();
+        System.out.println(bfs.isGraphConsistent());
+
+        Divider divider = new Divider(g);
+        divider.divideGraphUsingDijkstra(1);
+
+        //System.out.println(g);
+
+        bfs.Solve();
+        System.out.println(bfs.isGraphConsistent());
+
+        FileWriterG.writeGraphToFile(g,"divided_graph");*/
+
+        try {
+            Graph graph = FileReaderG.readGraphFromFile("example");
+            System.out.println(graph);
+            System.out.println(BFS.Solve(graph));
+        } catch (IOException | Graph.InvalidMeshConnection | FileReaderG.FileFormatError e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
     }
 }
