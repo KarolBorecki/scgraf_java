@@ -66,17 +66,11 @@ public class Divider {
 
         Dijkstra d = new Dijkstra(dividedGraph);
         d.Solve(endNode, firstNode);
-        System.out.println(d.getShortestPathString(endNode, firstNode));
 
         Node[] nodesToVisit = d.getShortestPath(endNode, firstNode);
 
         Path.Side [] connectionsFromPrevToCurr = new Path.Side [nodesToVisit.length-1];
         initializeConnections(connectionsFromPrevToCurr, nodesToVisit);
-        System.out.println("lengths of arrays: Nodes[ " + nodesToVisit.length + "] | paths [" + connectionsFromPrevToCurr.length + "] ");
-        for(int i= 0; i<connectionsFromPrevToCurr.length; i++) {
-            System.out.println("i: " + i + " connection in array = " + connectionsFromPrevToCurr[i]);
-            System.out.println("i: " + i + " Prev Node = " + nodesToVisit[i].getGraphID() + " Next Node = " + nodesToVisit[i+1].getGraphID());
-        }
 
         int i = 0;
         int directionOfCutNodes= getCuttingDirection(y1, y2, connectionsFromPrevToCurr[i]);

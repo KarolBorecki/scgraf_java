@@ -36,46 +36,6 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        System.out.println("Do you want to launch an app?\n[y/n]: ");
-        //launch();
-
-        /*Divider divider = new Divider(graph);
-        divider.divideGraphUsingDijkstra(1);
-
-        System.out.println(graph);
-
-        BFS bfs = new BFS(graph);
-        bfs.Solve();
-        System.out.println(bfs.isGraphConsistent());*/
-
-        /*Graph g = GraphGenerator.GenerateNotDirected(new Size(5, 5));
-        System.out.println(g);
-
-        BFS bfs = new BFS(g);
-        bfs.Solve();
-        System.out.println(bfs.isGraphConsistent());
-
-        Divider divider = new Divider(g);
-        divider.divideGraphUsingDijkstra(1);
-
-        //System.out.println(g);
-
-        bfs.Solve();
-        System.out.println(bfs.isGraphConsistent());
-
-        FileWriterG.writeGraphToFile(g,"divided_graph");*/
-
-        try {
-            Graph graph = FileReaderG.readGraphFromFile("example");
-            System.out.println(graph);
-            System.out.println(BFS.Solve(graph));
-        } catch (IOException | Graph.InvalidMeshConnection | FileReaderG.FileFormatError e) {
-            e.printStackTrace();
-        }
-
-
-
-
-
+        launch();
     }
 }
