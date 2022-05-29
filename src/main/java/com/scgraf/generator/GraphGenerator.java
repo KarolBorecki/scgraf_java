@@ -89,7 +89,7 @@ public class GraphGenerator implements IGenerator<Graph> {
         g.getNode(1,2).setupPath(Path.Side.LEFT, 2);
 
         g.getNode(2,0).setupPath(Path.Side.TOP, 0.1);
-        g.getNode(2,0).setupPath(Path.Side.RIGHT, 0.2); //TODO Should throw exception
+        g.getNode(2,0).setupPath(Path.Side.RIGHT, 0.2);
 
         g.getNode(2,1).setupPath(Path.Side.TOP, 3);
         g.getNode(2,1).setupPath(Path.Side.RIGHT, 1);
@@ -98,7 +98,7 @@ public class GraphGenerator implements IGenerator<Graph> {
         g.getNode(2,2).setupPath(Path.Side.LEFT, 1);
         return g;
     }
-
+//TODO DELETE
     public static Graph GraphForDivision(){
         Graph g = new Graph();
         g.setWidth(4).setHeight(4).build();
