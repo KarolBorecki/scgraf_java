@@ -18,9 +18,7 @@ public class MainView extends BorderPane {
         super();
         setBackground(new Background(new BackgroundFill(UIConfig.backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Graph graph = GraphGenerator.GenerateNotDirected(new Size(8, 8));
-
-        GraphView graphView = new GraphView(graph, stage);
+        GraphView graphView = new GraphView(stage);
         FunctionsView functionsView = new FunctionsView();
 
         setCenter(graphView);

@@ -13,6 +13,7 @@ import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.queue.Fifo;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
+import com.scgraf.solver.Solver;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
