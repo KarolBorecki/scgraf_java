@@ -44,6 +44,10 @@ public class UIConfig {
     public static int btnPrefWidth = 200;
     public static int btnPrefHeight = 50;
 
+    /* DROP SHADOW SETTINGS */
+    public static int shadowRadius = 5;
+    public static Color shadowColor = Color.web("f8f4e3");
+
     /* TEXTFIELD SETTINGS */
     public static int textFieldPrefWidth = 150;
     public static int textFieldMinWidth = 60;

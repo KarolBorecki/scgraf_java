@@ -1,13 +1,9 @@
-package com.scgraf.UI.Panels.GraphView;
+package com.scgraf.UI.panels.graph_view;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.data_structures.graph.Graph;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 
 public class GraphInfoPanel extends BorderPane {

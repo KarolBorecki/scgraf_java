@@ -1,6 +1,8 @@
-package com.scgraf.UI.Panels.FunctionView;
+package com.scgraf.UI.panels.functions_view.functionalities_panel;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
+import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
@@ -11,5 +13,11 @@ public class ConsistencyPanel extends FunctionAbstractPanel {
         inputPane.setAlignment(Pos.CENTER);
         inputPane.setSpacing(UIConfig.panelRegularSpacing);
         buildFunctionView(inputPane);
+    }
+
+    @Override
+    public void solve() {
+        //TODO change
+        Solver.getInstance().checkConsistency();
     }
 }

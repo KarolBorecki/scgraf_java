@@ -1,13 +1,11 @@
 package com.scgraf.solver;
 
-import com.scgraf.UI.Views.GraphView;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.generator.GraphGenerator;
 import com.scgraf.utils.Observer;
 
-import java.util.List;
-import java.util.concurrent.Callable;
+import java.util.*;
 
 public class Solver {
     private Graph graph;
@@ -22,6 +20,7 @@ public class Solver {
 
     public Solver(){
         this(GraphGenerator.GenerateExample());
+        onGraphChangeNotify = new ArrayList<>();
     }
 
     public static Solver getInstance(Graph graph) {

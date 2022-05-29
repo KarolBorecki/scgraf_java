@@ -1,4 +1,4 @@
-package com.scgraf.UI.Panels.FunctionView;
+package com.scgraf.UI.panels.functions_view;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.SubfunctionButton;

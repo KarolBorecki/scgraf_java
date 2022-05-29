@@ -1,7 +1,10 @@
-package com.scgraf.UI.Panels.FunctionView;
+package com.scgraf.UI.panels.functions_view.functionalities_panel;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedTextField;
+import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
+import com.scgraf.UI.panels.functions_view.functionalities_panel.FunctionAbstractPanel;
+import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
@@ -15,5 +18,11 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
         FormattedTextField node2Input = new FormattedTextField("End node");
         inputPane.getChildren().addAll(node1Input, node2Input);
         buildFunctionView(inputPane);
+    }
+
+    @Override
+    public void solve() {
+        //TODO change
+        Solver.getInstance().findShortest(Solver.getInstance().getGraph().getNode(0,0), Solver.getInstance().getGraph().getNode(0,0));
     }
 }

@@ -1,7 +1,7 @@
-package com.scgraf.UI.Views;
+package com.scgraf.UI.views;
 
-import com.scgraf.UI.Panels.FunctionView.FilePanel;
-import com.scgraf.UI.Panels.FunctionView.FunctionPanelManager;
+import com.scgraf.UI.panels.functions_view.FilePanel;
+import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.utils.UIUtils;
 import javafx.geometry.Pos;

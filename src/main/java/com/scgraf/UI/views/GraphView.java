@@ -1,18 +1,14 @@
-package com.scgraf.UI.Views;
+package com.scgraf.UI.views;
 
-import com.scgraf.UI.Panels.GraphView.GraphInfoPanel;
-import com.scgraf.UI.Panels.GraphView.GraphPanel;
+import com.scgraf.UI.panels.graph_view.GraphInfoPanel;
+import com.scgraf.UI.panels.graph_view.GraphPanel;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.solver.Solver;
 import com.scgraf.utils.Observer;
 import com.scgraf.utils.UIUtils;
-import javafx.geometry.Insets;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.concurrent.Callable;
 
 public class GraphView extends BorderPane implements Observer<Graph> {
     private final Graph graph;

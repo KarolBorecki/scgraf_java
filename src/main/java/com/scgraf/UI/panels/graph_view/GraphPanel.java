@@ -1,11 +1,9 @@
-package com.scgraf.UI.Panels.GraphView;
+package com.scgraf.UI.panels.graph_view;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.utils.UIUtils;
-import javafx.geometry.Insets;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GraphPanel extends AnchorPane {
