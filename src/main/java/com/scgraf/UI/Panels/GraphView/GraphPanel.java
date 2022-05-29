@@ -54,7 +54,6 @@ public class GraphPanel extends AnchorPane {
                 getChildren().add(node);
 
             }
-
     }
 
     private void setSize(double width, double height){

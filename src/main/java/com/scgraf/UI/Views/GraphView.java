@@ -18,8 +18,6 @@ public class GraphView extends BorderPane {
         GraphInfoPanel infoPane = new GraphInfoPanel(graph);
         GraphPanel graphPanel = new GraphPanel(graph, stage);
 
-        //getChildren().addAll(infoPane, graphPanel);
-
         setCenter(graphPanel);
         setTop(infoPane);
     }

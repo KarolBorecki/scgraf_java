@@ -20,9 +20,8 @@ public class MainView extends BorderPane {
         setBackground(new Background(new BackgroundFill(UIConfig.backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Graph graph = GraphGenerator.GenerateNotDirected(new Size(10, 10));
-
-        //graph = GraphGenerator.GenerateNotDirected(new Size(10, 10));
         Divider divider = new Divider(graph);
+
         try {
             divider.divideGraphUsingDijkstra(5);
         } catch (Exception | Graph.InvalidMeshConnection e) {
