@@ -4,6 +4,7 @@ import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
+import com.scgraf.logger.Logger;
 import com.scgraf.utils.Observer;
 
 import java.util.*;
@@ -53,7 +54,9 @@ public class Solver {
     }
 
     public void generate(int width, int height, double maxWeight){
-        setGraph(GraphGenerator.Generate(new Size(width, height), maxWeight));
+        Logger.getInstance().log(Logger.StatusLog.CALCULATING);
+        setGraph(GraphGenerator.Generate(new Size(width, height), maxWeight));//TODO NEW THREAD!!!
+        Logger.getInstance().log(Logger.StatusLog.OK);
     }
 
     public void setGraph(Graph graph) {
