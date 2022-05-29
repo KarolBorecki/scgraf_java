@@ -58,9 +58,14 @@ public class Dijkstra implements Algorithm {
         isSolved = true;
     }
 
-    public Node[] getShortestPath(Node startNode, Node finishNode) {
-        if(!isSolved)//TODO Should throw an error
+    public Node[] getShortestPath(Node startNode, Node finishNode) throws DijkstraNotSolvedException, DijkstraCannotFindPathException {
+        if (!isSolved)//TODO Should throw an error
+            throw new DijkstraNotSolvedException();
+
+        if (startNode == null || finishNode == null)
             return null;
+
+
         Node[] t = new Node[STARTING_SIZE];
 
         Node helpNode = finishNode;
@@ -70,6 +75,8 @@ public class Dijkstra implements Algorithm {
             if (i >= t.length)
                 t = doubledT(t);
             t[i] = helpNode;
+            if (dijkstraTable[helpNode.getGraphID()].previousNode == null)
+                throw new DijkstraCannotFindPathException();
             helpNode = dijkstraTable[helpNode.getGraphID()].previousNode;
             i++;
         }
@@ -83,7 +90,7 @@ public class Dijkstra implements Algorithm {
     }
 
     public double getShortestPathLength(Node startNode, Node finishNode) {
-        if(!isSolved)//TODO Should throw an error
+        if (!isSolved)//TODO Should throw an error
             return -1;
         double shortestPath = 0;
         if (finishNode == startNode)
@@ -103,7 +110,7 @@ public class Dijkstra implements Algorithm {
     }
 
     public String getShortestPathString(Node startNode, Node finishNode) {
-        if(!isSolved)//TODO Should throw an error
+        if (!isSolved)//TODO Should throw an error
             return null;
         StringBuilder path = new StringBuilder();
         if (finishNode == startNode)
@@ -116,7 +123,7 @@ public class Dijkstra implements Algorithm {
     }
 
     public String getDijkstraResult(Node startNode, Node finishNode) {
-        if(!isSolved)//TODO Should throw an error
+        if (!isSolved)//TODO Should throw an error
             return null;
         String s = "";
         s += ("-----Dijkstra result-----\n");
@@ -141,7 +148,7 @@ public class Dijkstra implements Algorithm {
         return s.toString();
     }
 
-    private Node [] doubledT(Node [] t){
+    private Node[] doubledT(Node[] t) {
         Node[] oldt = new Node[t.length];
         System.arraycopy(t, 0, oldt, 0, t.length);
         t = new Node[t.length * 2];
@@ -149,11 +156,11 @@ public class Dijkstra implements Algorithm {
         return t;
     }
 
-    private Node [] removeNull(Node [] t){
+    private Node[] removeNull(Node[] t) {
         int ammountOfNotNull = 0;
-        for(; ammountOfNotNull < t.length && t[ammountOfNotNull] != null; ammountOfNotNull++)
+        for (; ammountOfNotNull < t.length && t[ammountOfNotNull] != null; ammountOfNotNull++)
             ;
-        Node [] tWithoutNulls = new Node [ammountOfNotNull];
+        Node[] tWithoutNulls = new Node[ammountOfNotNull];
         System.arraycopy(t, 0, tWithoutNulls, 0, ammountOfNotNull);
         return tWithoutNulls;
     }
@@ -184,5 +191,12 @@ public class Dijkstra implements Algorithm {
         public String toString() {
             return "\t" + length + "\t" + (previousNode == null ? "-" : previousNode.getGraphID());
         }
+    }
+
+    public class DijkstraNotSolvedException extends Throwable {
+    }
+
+    public class DijkstraCannotFindPathException extends Throwable {
+
     }
 }

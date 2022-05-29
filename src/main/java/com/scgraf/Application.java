@@ -9,10 +9,12 @@ import java.io.IOException;
 
 public class Application extends javafx.application.Application {
     public static Scene scene;
+    public static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(new MainView(stage), UIConfig.stageWidth, UIConfig.stageHeight);
+        Application.stage = stage;
+        scene = new Scene(new MainView(), UIConfig.stageWidth, UIConfig.stageHeight);
         stage.setResizable(false);
 
         stage.setTitle("scgraf");
@@ -22,5 +24,6 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) {
         launch();
+
     }
 }

@@ -70,7 +70,6 @@ public class FileReaderG {
 
             if(connectionsFound == 0 && !line.isBlank())
                 throw new FileFormatError(readLines, file, "Didnt find any connections in this line, but its not empty!");
-
         }
 
         return graph;
