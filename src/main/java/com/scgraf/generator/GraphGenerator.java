@@ -50,7 +50,7 @@ public class GraphGenerator implements IGenerator<Graph> {
 
     public static Graph GenerateExample() {
         Graph g = new Graph();
-        g.setWidth(3).setHeight(3).build();
+        g.setWidth(3).setHeight(3).setWeight(3).build();
 
         g.getNode(0,0).setupPath(Path.Side.RIGHT, 1.4);
 

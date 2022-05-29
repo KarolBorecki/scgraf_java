@@ -28,6 +28,11 @@ public class Graph implements Iterable<Node>{
         return this;
     }
 
+    public Graph setWeight(double weight){
+        this.maxConnectionWeight = weight;
+        return this;
+    }
+
     public void build(){
         nodes = new Node[size.height()][size.width()];
 

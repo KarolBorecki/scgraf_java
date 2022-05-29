@@ -20,7 +20,7 @@ public class MainView extends BorderPane {
     public MainView() {
         super();
         setBackground(new Background(new BackgroundFill(UIConfig.backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
-        
+
         GraphView graphView = new GraphView(Application.stage);
         FunctionsView functionsView = new FunctionsView();
 
