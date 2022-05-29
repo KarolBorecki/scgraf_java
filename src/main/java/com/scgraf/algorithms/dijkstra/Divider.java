@@ -44,36 +44,48 @@ public class Divider {
 
     }
 
-    public void divideGraphUsingDijkstra(int divideThisManyTimes) {
-        for (int i = 0; i < divideThisManyTimes; i++) {
-            int y1, y2;
-            y1 = random.nextInt(dividedGraph.getSize().height());
-            do {
-                y2 = random.nextInt(dividedGraph.getSize().height());
-            } while (y1 != y2);
+    public void divideGraphUsingDijkstra(int divideThisManyTimes) throws Exception, Graph.InvalidMeshConnection, TooManyDividesException {
+        if(divideThisManyTimes > dividedGraph.getSize().height())
+            throw new TooManyDividesException();
+        int y = getStartingHeight();
 
-            try {
-                singleDivisionDijkstra(y1, y2);
-            } catch (Graph.InvalidMeshConnection | Exception e) {
-                e.printStackTrace();
+        if(y == 0)
+            for(int i= 0; i<divideThisManyTimes && y < dividedGraph.getSize().height() - 1; i++) {
+                try {
+                    singleDivisionDijkstra(y++);
+                } catch (Dijkstra.DijkstraCannotFindPathException e){
+                    i--;
+                }
             }
-        }
+        else
+            for(int i= 0; i<divideThisManyTimes && y >= 0; i++) {
+                try {
+                    singleDivisionDijkstra(y--);
+                } catch (Dijkstra.DijkstraCannotFindPathException e) {
+                    i--;
+                }
+            }
     }
 
-    private void singleDivisionDijkstra(int y1, int y2) throws Graph.InvalidMeshConnection, Exception {
-        Node firstNode = dividedGraph.getNode(y1, 0);
-        Node endNode = dividedGraph.getNode(y2, dividedGraph.getSize().width() - 1);
+    private void singleDivisionDijkstra(int y) throws Graph.InvalidMeshConnection, Exception, Dijkstra.DijkstraCannotFindPathException {
+        Node firstNode = dividedGraph.getNode(y, 0);
+        Node endNode = dividedGraph.getNode(y, dividedGraph.getSize().width() - 1);
 
         Dijkstra d = new Dijkstra(dividedGraph);
         d.Solve(endNode, firstNode);
 
-        Node[] nodesToVisit = d.getShortestPath(endNode, firstNode);
+        Node[] nodesToVisit = new Node[0];
+        try {
+            nodesToVisit = d.getShortestPath(endNode, firstNode);
+        } catch (Dijkstra.DijkstraNotSolvedException e) {
+            e.printStackTrace();
+        }
 
         Path.Side [] connectionsFromPrevToCurr = new Path.Side [nodesToVisit.length-1];
         initializeConnections(connectionsFromPrevToCurr, nodesToVisit);
 
         int i = 0;
-        int directionOfCutNodes= getCuttingDirection(y1, y2, connectionsFromPrevToCurr[i]);
+        int directionOfCutNodes= getCuttingDirection(y, connectionsFromPrevToCurr[i]);
 
         Path.Side connectionToCut, secondConnectionToCut;
         //startNode
@@ -107,30 +119,23 @@ public class Divider {
         dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
     }
 
-    private void findEdgeNodes(boolean [] tab, Node [] Node, Path.Side [] Paths){
-        for(int i= 0; i < Paths.length - 1; i++){
-            if(Paths[i] != Paths[i+1])
-                tab[i] = true;
-        }
-    }
-
     private void initializeConnections(Path.Side [] tabPath, Node [] tabNode) throws Graph.InvalidMeshConnection {
         for(int i= 1; i< tabNode.length && tabNode[i] != null; i++){
             tabPath[i-1] = dividedGraph.getPathForConnection(tabNode[i-1], tabNode[i]);
         }
     }
 
-    private int getCuttingDirection(int y1, int y2, Path.Side connection){
+    private int getCuttingDirection(int y, Path.Side connection){
         int directionOfCutNodes;
-        if(y1 != 0 && y1 != dividedGraph.getSize().height() - 1) {
+        if(y != 0 && y != dividedGraph.getSize().height() - 1) {
             return directionOfCutNodes = -1;
         }
-        else if(y1 == 0){
+        else if(y == 0){
             if(connection.equals(Path.Side.RIGHT))
                 return directionOfCutNodes = 1;
             else
                 return directionOfCutNodes = -1;
-        }else if(y1 == dividedGraph.getSize().height() - 1){
+        }else if(y == dividedGraph.getSize().height() - 1){
             if(connection.equals(Path.Side.RIGHT))
                 return directionOfCutNodes = -1;
             else
@@ -164,5 +169,14 @@ public class Divider {
         return PathToNode != PathFromNode;
     }
 
+    private int getStartingHeight(){
+        int y = random.nextInt(0, 2);
+        return y == 0 ? 0 : dividedGraph.getSize().height() - 1;
+    }
 
+    public class TooManyDividesException extends Throwable{
+        public TooManyDividesException(){
+
+        }
+    }
 }
