@@ -5,7 +5,7 @@ import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.queue.PriorityQueue;
 
-public class Dijkstra implements Algorithm {
+public class Dijkstra {
 
     private final static int STARTING_SIZE = 4;
     private final Graph graph;
@@ -33,18 +33,12 @@ public class Dijkstra implements Algorithm {
         this.dijkstraTable[startNode.getGraphID()].previousNode = startNode;
     }
 
-    @Override
-    public void Solve() {
-
-    }
-
     public void Solve(Node startNode, Node finishNode) {
         initializeDijkstraTable(startNode);
-        while (!queToVisit.IsEmpty()) {
+        while (!queToVisit.isEmpty()) {
             Node currentNode = queToVisit.pop().getCurrentNode();
             for (Path.Side side : Path.Side.values()) {
                 if (currentNode.isConnected(side)) {
-
                     double valToCheck = currentNode.getConnectionWeight(side) + dijkstraTable[currentNode.getGraphID()].length;
                     Node Neighbour = graph.getNeighbourNode(currentNode, side);
 
@@ -100,13 +94,21 @@ public class Dijkstra implements Algorithm {
         return shortestPath;
     }
 
-    public String toStringDijkstraTable() {
-        StringBuilder s = new StringBuilder();
-        s.append("Node index\tPath Length\tPrev Node\n");
-        for (int i = 0; i < graph.getNodesCount(); i++)
-            s.append("\"Node ").append(i).append("\"").append(dijkstraTable[i]).append("\n");
+    //TODO use function from Utils
+    private Node[] doubledT(Node[] t) {
+        Node[] oldt = new Node[t.length];
+        System.arraycopy(t, 0, oldt, 0, t.length);
+        t = new Node[t.length * 2];
+        System.arraycopy(oldt, 0, t, 0, oldt.length);
+        return t;
+    }
 
-        return s.toString();
+    private Node[] removeNull(Node[] t) {
+        int ammountOfNotNull = 0;
+        while(ammountOfNotNull++ < t.length && t[ammountOfNotNull] != null);
+        Node[] tWithoutNulls = new Node[ammountOfNotNull];
+        System.arraycopy(t, 0, tWithoutNulls, 0, ammountOfNotNull);
+        return tWithoutNulls;
     }
 
     public String getShortestPathString(Node startNode, Node finishNode) {
@@ -148,23 +150,6 @@ public class Dijkstra implements Algorithm {
         return s.toString();
     }
 
-    private Node[] doubledT(Node[] t) {
-        Node[] oldt = new Node[t.length];
-        System.arraycopy(t, 0, oldt, 0, t.length);
-        t = new Node[t.length * 2];
-        System.arraycopy(oldt, 0, t, 0, oldt.length);
-        return t;
-    }
-
-    private Node[] removeNull(Node[] t) {
-        int ammountOfNotNull = 0;
-        for (; ammountOfNotNull < t.length && t[ammountOfNotNull] != null; ammountOfNotNull++)
-            ;
-        Node[] tWithoutNulls = new Node[ammountOfNotNull];
-        System.arraycopy(t, 0, tWithoutNulls, 0, ammountOfNotNull);
-        return tWithoutNulls;
-    }
-
     protected static class DijkstraData implements Comparable<DijkstraData> {
         public double length = Double.MAX_VALUE;
         public Node previousNode = null;
@@ -193,6 +178,7 @@ public class Dijkstra implements Algorithm {
         }
     }
 
+    //TODO DELETE AND USE LOGGER
     public class DijkstraNotSolvedException extends Throwable {
     }
 

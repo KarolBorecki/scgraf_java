@@ -50,4 +50,8 @@ public class Logger {
         logText.setCaption(status.text).setColor(status.color).build();
         this.status = status;
     }
+
+    public void popup(String info){
+        //TODO handle popup
+    }
 }

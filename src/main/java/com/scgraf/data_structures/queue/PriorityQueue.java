@@ -15,7 +15,7 @@ public class PriorityQueue<T extends Comparable<T>> extends Queue<T>{
             if (getAtIndex(greatest).compareTo(getAtIndex(i)) < 0)
                 greatest = i;
 
-        Utils.Swap(queue, greatest, head);
+        Utils.swap(queue, greatest, head);
         return getAtIndex(head++);
     }
 }

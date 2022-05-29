@@ -1,5 +1,7 @@
 package com.scgraf.data_structures.queue;
 
+import com.scgraf.utils.Utils;
+
 import java.util.Arrays;
 
 public abstract class Queue<T> implements IQueue<T>{
@@ -27,21 +29,30 @@ public abstract class Queue<T> implements IQueue<T>{
         return queue[index];
     }
 
+    public boolean containsInPopped(T obj){
+        return Utils.arrContains(queue, obj, 0, head);
+    }
+
+    public boolean containsInFilledElements(T obj){
+        return Utils.arrContains(queue, obj, 0, queue.length);
+    }
+
+    public int queueFilledSize(){
+        return tail + 1;
+    }
+
+    public int queueSize(){
+        return head-tail;
+    }
+
     @Override
-    public boolean IsEmpty(){
+    public boolean isEmpty(){
         return head == tail;
     }
 
     @Override
     public void resizeQueue(int resizeFactor){
-        queue = java.util.Arrays.copyOf(queue, queue.length * RESIZE_FACTOR);
-    }
-
-    @Override
-    public void swapElements(int index1, int index2) throws IndexOutOfBoundsException{
-        T temp = this.getAtIndex(index1);
-        queue[index1] = queue[index2];
-        queue[index2] = temp;
+        queue = Utils.resizeArray(queue, resizeFactor);
     }
 
     public int getLength(){

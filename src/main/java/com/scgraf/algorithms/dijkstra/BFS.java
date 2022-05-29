@@ -5,27 +5,21 @@ import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.queue.Fifo;
 
-public class BFS implements Algorithm{
-
-    @Override
-    public void Solve(){
-
-    }
-
+public class BFS {
     public static boolean Solve(Graph graph) {
         Fifo<Node> queToCheck = initializeQue(graph);
 
-        while(!queToCheck.IsEmpty()){
+        while(!queToCheck.isEmpty()){
             Node currentNode = queToCheck.pop();
-            for(Path.Side s : Path.Side.values()){
+            for(Path.Side s : Path.Side.values())
                 if(currentNode.isConnected(s)) {
                     Node checkedNode = graph.getNeighbourNode(currentNode, s);
-                    if (checkedNode != null && !queToCheck.doesWholeQueContain(checkedNode))
+                    if (checkedNode != null && !queToCheck.containsInFilledElements(checkedNode))
                         queToCheck.push(checkedNode);
                 }
-            }
+
         }
-        return queToCheck.howManyElements() == graph.getNodesCount();
+        return queToCheck.queueFilledSize() == graph.getNodesCount();
     }
 
     private static Fifo<Node> initializeQue(Graph graph){

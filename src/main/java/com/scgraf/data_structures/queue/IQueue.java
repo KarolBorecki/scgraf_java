@@ -11,9 +11,7 @@ public interface IQueue<T> {
 
     T getAtIndex(int index) throws IndexOutOfBoundsException;
 
-    void swapElements(int index1, int index2) throws IndexOutOfBoundsException;
-
-    boolean IsEmpty();
+    boolean isEmpty();
 
     void resizeQueue(int resizeFactor);
 
