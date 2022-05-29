@@ -34,19 +34,6 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        System.out.println("Do you want to launch an app?\n[y/n]: ");
-        //launch();
-        Graph graph;
-        graph = GraphGenerator.GenerateNotDirected(new Size(3, 3));
-        System.out.println(graph);
-
-        Divider divider = new Divider(graph);
-        divider.divideGraphUsingDijkstra(1);
-
-        System.out.println(graph);
-
-        /*BFS bfs = new BFS(graph);
-        bfs.Solve();
-        System.out.println(bfs.isGraphConsistent());*/
+        launch();
     }
 }

@@ -28,12 +28,19 @@ public class UILoader {
         }
 
         try{
-            regularFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Bold.ttf")).toExternalForm(), UIConfig.fontRegularSize);
-            regularSmallFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Bold.ttf")).toExternalForm(), UIConfig.fontSmallSize);
-            regularBigFont = Font.loadFont(Objects.requireNonNull(Application.class.getResource("fonts/Lato/Lato-Bold.ttf")).toExternalForm(), UIConfig.fontBigSize);
+            regularFont = Font.loadFont(Application.class.getResourceAsStream("fonts/Lato/Lato-Bold.ttf"), UIConfig.fontRegularSize);
+            regularSmallFont = Font.loadFont(Application.class.getResourceAsStream("fonts/Lato/Lato-Bold.ttf"), UIConfig.fontSmallSize);
+            regularBigFont = Font.loadFont(Application.class.getResourceAsStream("fonts/Lato/Lato-Bold.ttf"), UIConfig.fontBigSize);
         } catch (NullPointerException e){
             e.printStackTrace();
         }
+
+        if(regularFont == null)
+            throw new NullPointerException("Regular font could not be be loaded!");
+        if(regularSmallFont == null)
+            throw new NullPointerException("Small font could not be be loaded!");
+        if(regularBigFont == null)
+            throw new NullPointerException("Big font could not be be loaded!");
 
         buttonBck = new Background(new BackgroundImage(buttonBckImg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT));
     }
