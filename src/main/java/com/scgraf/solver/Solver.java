@@ -20,7 +20,7 @@ public class Solver {
     }
 
     public Solver(){
-        this(GraphGenerator.GenerateNotDirected(new Size(20, 20)));
+        this(GraphGenerator.GenerateExample());
         onGraphChangeNotify = new ArrayList<>();
     }
 

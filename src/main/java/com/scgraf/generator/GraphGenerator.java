@@ -60,6 +60,7 @@ public class GraphGenerator implements IGenerator<Graph> {
         g.getNode(0,1).setupPath(Path.Side.BOTTOM, 2.3);
 
         g.getNode(0,2).setupPath(Path.Side.LEFT, 0.1);
+        g.getNode(0,2).setupPath(Path.Side.BOTTOM, 0.1);
 
         g.getNode(1,0).setupPath(Path.Side.RIGHT, 1.3);
         g.getNode(1,0).setupPath(Path.Side.BOTTOM, 0.1);
@@ -73,7 +74,7 @@ public class GraphGenerator implements IGenerator<Graph> {
         g.getNode(1,2).setupPath(Path.Side.LEFT, 2);
 
         g.getNode(2,0).setupPath(Path.Side.TOP, 0.1);
-        //g.getNode(2,0).setupPath(Path.Side.BOTTOM, 0.2); //TODO Should throw exception
+        g.getNode(2,0).setupPath(Path.Side.RIGHT, 0.2); //TODO Should throw exception
 
         g.getNode(2,1).setupPath(Path.Side.TOP, 3);
         g.getNode(2,1).setupPath(Path.Side.RIGHT, 1);
