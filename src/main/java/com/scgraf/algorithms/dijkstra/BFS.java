@@ -7,21 +7,13 @@ import com.scgraf.data_structures.queue.Fifo;
 
 public class BFS implements Algorithm{
 
-    private Fifo<Node> queToCheck;
-    private boolean isGraphConsistent;
+    @Override
+    public void Solve(){
 
-    private final Graph graph;
-
-    public BFS(Graph graph){
-        this.queToCheck = new Fifo<>(graph.getNodesCount());
-        this.graph = graph;
     }
 
-    @Override
-    public void Solve() {
-        initializeQue();
-
-        System.out.println(queToCheck);
+    public static boolean Solve(Graph graph) {
+        Fifo<Node> queToCheck = initializeQue(graph);
 
         while(!queToCheck.IsEmpty()){
             Node currentNode = queToCheck.pop();
@@ -32,17 +24,12 @@ public class BFS implements Algorithm{
                         queToCheck.push(checkedNode);
                 }
             }
-            System.out.println("Node " + currentNode.getGraphID() + " checked!");
         }
-
-        isGraphConsistent = queToCheck.howManyElements() == graph.getNodesCount();
+        return queToCheck.howManyElements() == graph.getNodesCount();
     }
 
-    public boolean isGraphConsistent(){
-        return isGraphConsistent;
-    }
-
-    private void initializeQue(){
+    private static Fifo<Node> initializeQue(Graph graph){
+        Fifo <Node> queToCheck = new Fifo<>(graph.getNodesCount());
         Node startNode = graph.getNode(0,0);
         queToCheck.push(startNode);
         for(Path.Side s : Path.Side.values()){
@@ -53,5 +40,7 @@ public class BFS implements Algorithm{
             }
         }
         queToCheck.pop();
+
+        return queToCheck;
     }
 }

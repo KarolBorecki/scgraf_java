@@ -6,7 +6,7 @@ public record Path(double weight) {
         return weight;
     }
 
-    public enum Side {
+    public enum Side{
         TOP(0),
         RIGHT(1),
         BOTTOM(2),
@@ -25,7 +25,7 @@ public record Path(double weight) {
             return sideNames[index];
         }
 
-        public Side getOppositeSide(){
+        public Side getOppositeSide() throws Exception{
             if(this.index == Side.TOP.index)
                 return Side.BOTTOM;
             if(this.index == Side.BOTTOM.index)
@@ -34,7 +34,30 @@ public record Path(double weight) {
                 return Side.RIGHT;
             if(this.index == Side.RIGHT.index)
                 return Side.LEFT;
-            return null;
+
+            throw new Exception();
+        }
+
+        public Side getSideTurnedBy(int ammountOf90degreeTurns) throws Exception{
+            if(ammountOf90degreeTurns == 0)
+                return this;
+            int sideIndex;
+            if(ammountOf90degreeTurns>0){
+                ammountOf90degreeTurns %= 4;
+            }else{
+                ammountOf90degreeTurns = 4 + ammountOf90degreeTurns % 4;
+            }
+            sideIndex = (this.index + ammountOf90degreeTurns) % 4;
+
+            if(sideIndex == Side.TOP.index)
+                return Side.TOP;
+            if(sideIndex == Side.BOTTOM.index)
+                return Side.BOTTOM;
+            if(sideIndex == Side.LEFT.index)
+                return Side.LEFT;
+            if(sideIndex == Side.RIGHT.index)
+                return Side.RIGHT;
+            throw new Exception();
         }
     }
 

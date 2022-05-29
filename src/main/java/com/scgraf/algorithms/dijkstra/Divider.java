@@ -3,7 +3,10 @@ package com.scgraf.algorithms.dijkstra;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
+import javafx.geometry.Side;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Divider {
@@ -43,58 +46,97 @@ public class Divider {
 
     public void divideGraphUsingDijkstra(int divideThisManyTimes) {
         for (int i = 0; i < divideThisManyTimes; i++) {
+            int y1, y2;
+            y1 = random.nextInt(dividedGraph.getSize().height());
+            do {
+                y2 = random.nextInt(dividedGraph.getSize().height());
+            } while (y1 != y2);
+
             try {
-                singleDivisionDijkstra();
-            } catch (Graph.InvalidMeshConnection e) {
+                singleDivisionDijkstra(y1, y2);
+            } catch (Graph.InvalidMeshConnection | Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void singleDivisionDijkstra() throws Graph.InvalidMeshConnection {
-        int y1, y2;
-
-        y1 = random.nextInt(dividedGraph.getSize().height());
-        do {
-            y2 = random.nextInt(dividedGraph.getSize().height());
-        } while (y1 != y2);
-
+    private void singleDivisionDijkstra(int y1, int y2) throws Graph.InvalidMeshConnection, Exception {
         Node firstNode = dividedGraph.getNode(y1, 0);
-        Node secondNode = dividedGraph.getNode(y2, dividedGraph.getSize().width() - 1);
+        Node endNode = dividedGraph.getNode(y2, dividedGraph.getSize().width() - 1);
 
-        Dijkstra d = new Dijkstra(dividedGraph, firstNode);
-        d.Solve(secondNode);
-        System.out.println(d.getShortestPathString(secondNode));
+        Dijkstra d = new Dijkstra(dividedGraph);
+        d.Solve(endNode, firstNode);
 
-        Node[] t = d.getShortestPath(secondNode);
-        /*System.out.print("|     |");
-        for(int i= 0; i<t.length && t[i] != null; i++){
-            System.out.print(" Node " + t[i].getGraphID() + " ---> ");
-        }System.out.println("|     |");*/
+        Node[] nodesToVisit = d.getShortestPath(endNode, firstNode);
+
+        Path.Side [] connectionsFromPrevToCurr = new Path.Side [nodesToVisit.length-1];
+        initializeConnections(connectionsFromPrevToCurr, nodesToVisit);
 
         int i = 0;
-        Node prevNode = t[i];
+        int directionOfCutNodes= getCuttingDirection(y1, y2, connectionsFromPrevToCurr[i]);
 
-        Path.Side verticalConnectionToCut;
-        Path.Side parallelConnectionToCut;
+        Path.Side connectionToCut, secondConnectionToCut;
+        //startNode
+        connectionToCut = connectionsFromPrevToCurr[i].getSideTurnedBy(directionOfCutNodes);
+        dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
+        secondConnectionToCut = connectionsFromPrevToCurr[i].getOppositeSide();
+        dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
 
-        if(secondNode.isConnected(Path.Side.TOP) && dividedGraph.getPathForConnection(secondNode, t[1]) != Path.Side.TOP)
-            verticalConnectionToCut = Path.Side.TOP;
-        else
-            verticalConnectionToCut = Path.Side.BOTTOM;
+        for(i = 1; i<nodesToVisit.length && nodesToVisit[i] != endNode && nodesToVisit[i] != null; i++){
+            if(isNodeAnEdge(connectionsFromPrevToCurr[i-1], connectionsFromPrevToCurr[i])){
 
-        if(secondNode.isConnected(Path.Side.LEFT) && dividedGraph.getPathForConnection(secondNode, t[1]) != Path.Side.LEFT)
-            parallelConnectionToCut = Path.Side.LEFT;
-        else
-            parallelConnectionToCut = Path.Side.RIGHT;
+                connectionToCut = connectionsFromPrevToCurr[i-1].getSideTurnedBy(directionOfCutNodes);
+                if(connectionToCut != connectionsFromPrevToCurr[i])
+                    dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
 
-        for (i = 1; i < t.length && t[i] != null; i++) {
-            if( dividedGraph.getPathForConnection(prevNode, t[i]) != parallelConnectionToCut && dividedGraph.getPathForConnection(prevNode, t[i]) != verticalConnectionToCut)
-                dividedGraph.deletePathBothWays(prevNode, parallelConnectionToCut);
-                dividedGraph.deletePathBothWays(prevNode, verticalConnectionToCut);
-
-            prevNode = t[i];
+                secondConnectionToCut = connectionsFromPrevToCurr[i].getSideTurnedBy(directionOfCutNodes);
+                if(secondConnectionToCut != connectionsFromPrevToCurr[i-1].getOppositeSide())
+                    dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
+            }else{
+                connectionToCut = connectionsFromPrevToCurr[i-1].getSideTurnedBy(directionOfCutNodes);
+                dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
+            }
         }
+        //EndNode
+        if(nodesToVisit[i] == null)
+            return;
+        connectionToCut = connectionsFromPrevToCurr[i-1].getSideTurnedBy(directionOfCutNodes);
+        dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
+
+        secondConnectionToCut = connectionsFromPrevToCurr[i-2];
+        dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
+    }
+
+    private void findEdgeNodes(boolean [] tab, Node [] Node, Path.Side [] Paths){
+        for(int i= 0; i < Paths.length - 1; i++){
+            if(Paths[i] != Paths[i+1])
+                tab[i] = true;
+        }
+    }
+
+    private void initializeConnections(Path.Side [] tabPath, Node [] tabNode) throws Graph.InvalidMeshConnection {
+        for(int i= 1; i< tabNode.length && tabNode[i] != null; i++){
+            tabPath[i-1] = dividedGraph.getPathForConnection(tabNode[i-1], tabNode[i]);
+        }
+    }
+
+    private int getCuttingDirection(int y1, int y2, Path.Side connection){
+        int directionOfCutNodes;
+        if(y1 != 0 && y1 != dividedGraph.getSize().height() - 1) {
+            return directionOfCutNodes = -1;
+        }
+        else if(y1 == 0){
+            if(connection.equals(Path.Side.RIGHT))
+                return directionOfCutNodes = 1;
+            else
+                return directionOfCutNodes = -1;
+        }else if(y1 == dividedGraph.getSize().height() - 1){
+            if(connection.equals(Path.Side.RIGHT))
+                return directionOfCutNodes = -1;
+            else
+                return directionOfCutNodes = 1;
+        }
+        return 0;
     }
 
     private void singleDivisionParallel(int parallel_division_point) {
@@ -116,6 +158,10 @@ public class Divider {
             Node currNode = dividedGraph.getNode(i, perpendicular_division_point);
             dividedGraph.deletePathBothWays(currNode, Path.Side.RIGHT);
         }
+    }
+
+    private boolean isNodeAnEdge (Path.Side PathToNode, Path.Side PathFromNode){
+        return PathToNode != PathFromNode;
     }
 
 
