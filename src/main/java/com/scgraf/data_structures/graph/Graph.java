@@ -134,6 +134,10 @@ public class Graph implements Iterable<Node>{
         //TODO maybe we should update this value depended by analysing the graph connections?
         maxConnectionWeight = newMaxConnectionWeight;
     }
+//todo delete
+    public void setWeight2(double weight){
+        maxConnectionWeight = weight;
+    }
 
     @Override
     public String toString(){

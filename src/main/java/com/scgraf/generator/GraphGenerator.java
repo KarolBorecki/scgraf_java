@@ -11,7 +11,7 @@ public class GraphGenerator implements IGenerator<Graph> {
 
     public static Graph GenerateNotDirected(Size size) { /* TODO REFACTOR */
         Graph g = new Graph();
-        g.setSize(size).build();
+        g.setSize(size).setWeight(1).build();
 
         for(int y= 0; y<size.height(); y++){
             for(int x = 0; x<size.width(); x++){
@@ -31,7 +31,7 @@ public class GraphGenerator implements IGenerator<Graph> {
 
     public static Graph GenerateDirected(Size size) { /* TODO REFACTOR */
         Graph g = new Graph();
-        g.setSize(size).build();
+        g.setSize(size).setWeight(1).build();
 
         for(int y= 0; y<size.height(); y++){
             for(int x = 0; x<size.width(); x++){
@@ -45,6 +45,7 @@ public class GraphGenerator implements IGenerator<Graph> {
                     g.getNode(y, x).setupPath(Path.Side.BOTTOM, randomGenerator.nextDouble());
             }
         }
+
         return g;
     }
 

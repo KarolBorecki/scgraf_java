@@ -2,6 +2,7 @@ package com.scgraf.solver;
 
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
+import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import com.scgraf.utils.Observer;
 
@@ -19,7 +20,7 @@ public class Solver {
     }
 
     public Solver(){
-        this(GraphGenerator.GenerateExample());
+        this(GraphGenerator.GenerateNotDirected(new Size(20, 20)));
         onGraphChangeNotify = new ArrayList<>();
     }
 

@@ -23,6 +23,9 @@ public class UIConfig {
     public static Color okColor = Color.web("4da167");
 
     public static Color graphNodeColor = Color.web("f8f4e3");
+    public static Color graphLightPathColor = Color.web("4da167");
+    public static Color graphMediumPathColor = Color.web("f2af29");
+    public static Color graphHeavyPathColor = Color.web("ad343e");
 
     /* FONT SETTINGS */
     public static int fontRegularSize = 15;

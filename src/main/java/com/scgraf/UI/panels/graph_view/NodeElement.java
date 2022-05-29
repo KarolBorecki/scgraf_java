@@ -9,7 +9,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class NodeElement extends StackPane {
-    public NodeElement(Node node, double size) {
+    public NodeElement(Node node, double size, double lightLimit, double mediumLimit) {
         super();
         double center = size/2;
 
@@ -37,7 +37,12 @@ public class NodeElement extends StackPane {
                     case LEFT -> x = -center * UIConfig.graphNodePathSizeFactor;
                 }
                 Line line = new Line(center, center , center + x, center + y);
-                line.setStroke(UIConfig.graphNodeColor);
+                if(p.getWeight() < lightLimit)
+                    line.setStroke(UIConfig.graphLightPathColor);
+                else if(p.getWeight() < mediumLimit)
+                    line.setStroke(UIConfig.graphMediumPathColor);
+                else line.setStroke(UIConfig.graphHeavyPathColor);
+                
                 line.setStrokeWidth(size/30 > 1 ? size/30 : 1);
                 paths.getChildren().add(line);
             }

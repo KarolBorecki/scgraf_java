@@ -31,6 +31,9 @@ public class GraphPanel extends AnchorPane {
         final double cellSizeWidth = ((getWidth()) / numCols);
         final double cellSizeHeight = ((getHeight()) / numRows);
 
+        final double lightPathLimit = graph.getMaxConnectionWeight() / 3;
+        final double mediumPathLimit = graph.getMaxConnectionWeight() *  2 / 3;
+
         final double cellSize;
         if(cellSizeWidth > cellSizeHeight){
             cellSize = cellSizeHeight;
@@ -46,7 +49,7 @@ public class GraphPanel extends AnchorPane {
 
         for(int y=0; y<numRows; y++)
             for(int x=0; x<numCols; x++){
-                NodeElement node = new NodeElement(graph.getNode(y, x), cellSize);
+                NodeElement node = new NodeElement(graph.getNode(y, x), cellSize, lightPathLimit, mediumPathLimit);
                 setLeftAnchor(node, (double)( + cellSize * x));
                 setTopAnchor(node, (double)( + cellSize * y));
                 getChildren().add(node);
