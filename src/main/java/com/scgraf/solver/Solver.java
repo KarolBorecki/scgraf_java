@@ -25,9 +25,9 @@ public class Solver {
     }
 
     public static Solver getInstance(Graph graph) {
-        if (instance == null) {
+        if (instance == null)
             instance = new Solver(graph);
-        }
+
         return instance;
     }
 
