@@ -8,16 +8,20 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
 public class GeneratePanel extends FunctionAbstractPanel implements SolverCaller {
-    public GeneratePanel(FunctionPanelManager root){
+    FormattedTextField widthInput;
+    FormattedTextField heightInput;
+    FormattedTextField maxPathWeightInput;
+
+    public GeneratePanel(FunctionPanelManager root) {
         super(root, "Generate", "Pass the parameters of generated graph:");
         HBox inputPane = new HBox();
 
         inputPane.setAlignment(Pos.CENTER);
         inputPane.setSpacing(UIConfig.panelRegularSpacing);
 
-        FormattedTextField widthInput = new FormattedTextField("Width");
-        FormattedTextField heightInput = new FormattedTextField("Height");
-        FormattedTextField maxPathWeightInput = new FormattedTextField("Maximum path weight");
+        widthInput = new FormattedTextField("Width");
+        heightInput = new FormattedTextField("Height");
+        maxPathWeightInput = new FormattedTextField("Maximum path weight");
 
         inputPane.getChildren().addAll(widthInput, heightInput, maxPathWeightInput);
         buildFunctionView(inputPane);
@@ -25,6 +29,10 @@ public class GeneratePanel extends FunctionAbstractPanel implements SolverCaller
 
     @Override
     public void solve() {
-        Solver.getInstance().generate(10, 10, 10);
+        //TODO Handle wrong data
+        final int width = Integer.parseInt(widthInput.getText());
+        final int height = Integer.parseInt(heightInput.getText());
+        final double maxWeight = Double.parseDouble(maxPathWeightInput.getText());
+        Solver.getInstance().generate(width, height, maxWeight);
     }
 }

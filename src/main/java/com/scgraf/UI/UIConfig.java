@@ -76,8 +76,6 @@ public class UIConfig {
     /* GRAPH SETTINGS */
     public static int graphPanelWidth;
     public static int graphPanelHeight;
-    public static int graphMargin = 10;
-    public static double graphCellSizeFactor = 1.1;
     public static double graphNodePathSizeFactor = 1.1;
 
     static {

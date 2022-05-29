@@ -15,6 +15,7 @@ public class FormattedTextField extends TextField {
         setPrefWidth(UIConfig.textFieldPrefWidth);
         setMinWidth(UIConfig.textFieldMinWidth);
         setMaxWidth(UIConfig.textFieldMaxWidth);
+        setStyle("-fx-text-inner-color: #f8f4e3");
         setFocusTraversable(false);
     }
 }

@@ -41,9 +41,4 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
     public void buildFunctionView(Pane inputPane){
         getChildren().addAll(infoText, inputPane, btnPanel);
     }
-
-    @Override
-    public void solve() {
-        //TODO LOGGER ERR
-    }
 }

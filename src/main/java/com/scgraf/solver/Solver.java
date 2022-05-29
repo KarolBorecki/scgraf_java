@@ -53,8 +53,7 @@ public class Solver {
     }
 
     public void generate(int width, int height, double maxWeight){
-        //TODO implent
-        System.out.println("GENERATING: " + width + " " + height + " " + maxWeight);
+        setGraph(GraphGenerator.Generate(new Size(width, height), maxWeight));
     }
 
     public void setGraph(Graph graph) {

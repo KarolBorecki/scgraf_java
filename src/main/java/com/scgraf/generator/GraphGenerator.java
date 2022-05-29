@@ -9,40 +9,55 @@ import java.util.Random;
 public class GraphGenerator implements IGenerator<Graph> {
     private static final Random randomGenerator = new Random();
 
-    public static Graph GenerateNotDirected(Size size) { /* TODO REFACTOR */
+    public enum GeneratingType {
+        DIRECTED,
+        NOT_DIRECTED,
+    }
+
+    public static  Graph Generate(Size size, double maxPathWeight){
+        return Generate(size, maxPathWeight, GeneratingType.NOT_DIRECTED);
+    }
+
+    public static  Graph Generate(Size size, double maxPathWeight, GeneratingType type){
+        if(type==GeneratingType.NOT_DIRECTED) return GenerateNotDirected(size, maxPathWeight);
+        else if(type==GeneratingType.DIRECTED) return GenerateDirected(size, maxPathWeight);
+        else return null;
+    }
+
+    public static Graph GenerateNotDirected(Size size, double maxWeight) { /* TODO REFACTOR */
         Graph g = new Graph();
-        g.setSize(size).setWeight(1).build();
+        g.setSize(size).setWeight(maxWeight).build();
 
         for(int y= 0; y<size.height(); y++){
             for(int x = 0; x<size.width(); x++){
                 if(x != 0)
-                    g.setupPathBothWays(g.getNode(y, x), Path.Side.LEFT, randomGenerator.nextDouble());
+                    g.setupPathBothWays(g.getNode(y, x), Path.Side.LEFT, maxWeight * randomGenerator.nextDouble());
                 if(x != size.width() - 1)
-                    g.setupPathBothWays(g.getNode(y, x), Path.Side.RIGHT, randomGenerator.nextDouble());
+                    g.setupPathBothWays(g.getNode(y, x), Path.Side.RIGHT, maxWeight * randomGenerator.nextDouble());
                 if(y != 0)
-                    g.setupPathBothWays(g.getNode(y, x), Path.Side.TOP, randomGenerator.nextDouble());
+                    g.setupPathBothWays(g.getNode(y, x), Path.Side.TOP, maxWeight * randomGenerator.nextDouble());
                 if(y != size.height() - 1)
-                    g.setupPathBothWays(g.getNode(y,x), Path.Side.BOTTOM, randomGenerator.nextDouble());
+                    g.setupPathBothWays(g.getNode(y,x), Path.Side.BOTTOM, maxWeight * randomGenerator.nextDouble());
             }
         }
 
         return g;
     }
 
-    public static Graph GenerateDirected(Size size) { /* TODO REFACTOR */
+    public static Graph GenerateDirected(Size size, double maxWeight) { /* TODO REFACTOR */
         Graph g = new Graph();
-        g.setSize(size).setWeight(1).build();
+        g.setSize(size).setWeight(maxWeight).build();
 
         for(int y= 0; y<size.height(); y++){
             for(int x = 0; x<size.width(); x++){
                 if(x != 0)
-                    g.getNode(y, x).setupPath(Path.Side.LEFT, randomGenerator.nextDouble());
+                    g.getNode(y, x).setupPath(Path.Side.LEFT, maxWeight * randomGenerator.nextDouble());
                 if(x != size.width() - 1)
-                    g.getNode(y, x).setupPath(Path.Side.RIGHT, randomGenerator.nextDouble());
+                    g.getNode(y, x).setupPath(Path.Side.RIGHT, maxWeight * randomGenerator.nextDouble());
                 if(y != 0)
-                    g.getNode(y, x).setupPath(Path.Side.TOP, randomGenerator.nextDouble());
+                    g.getNode(y, x).setupPath(Path.Side.TOP, maxWeight * randomGenerator.nextDouble());
                 if(y != size.height() - 1)
-                    g.getNode(y, x).setupPath(Path.Side.BOTTOM, randomGenerator.nextDouble());
+                    g.getNode(y, x).setupPath(Path.Side.BOTTOM, maxWeight * randomGenerator.nextDouble());
             }
         }
 
