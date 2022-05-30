@@ -1,6 +1,7 @@
 package com.scgraf.solver;
 
 import com.scgraf.algorithms.Dijkstra;
+import com.scgraf.algorithms.DijkstraDivider;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.tuples.Size;
@@ -49,8 +50,16 @@ public class Solver {
     }
 
     public void divide(int n){
-        //TODO implent
-        System.out.println("DIVIDING: " + n);
+        try {
+            DijkstraDivider.divideGraphThisManyTimes(graph, n);
+        } catch (DijkstraDivider.TooManyDividesException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } catch (Dijkstra.DijkstraNotSolvedException e) {
+            e.printStackTrace();
+        }
+        setGraph(graph);
     }
 
     public void checkConsistency(){
@@ -60,7 +69,7 @@ public class Solver {
 
     public void generate(int width, int height, double maxWeight){
         graph = GraphGenerator.Generate(new Size(width, height), maxWeight);
-        //setGraph(graph);
+        //setGraph(graph); //TODO Should be done here or should return graph or even maybe delete Solver?
     }
 
     public void setGraph(Graph graph) {

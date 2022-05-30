@@ -19,5 +19,6 @@ public class ConsistencyPanel extends FunctionAbstractPanel {
     public void solve() {
         //TODO change
         Solver.getInstance().checkConsistency();
+        //TODO ADD LOGGER POPUP IS CONSISTENT?IS NOT CONSISTENMT
     }
 }

@@ -118,6 +118,12 @@ public class Graph implements Iterable<Node>{
         return nodes[row][column];
     }
 
+    public Node getNode(int graphID){
+        for (Node node : this)
+            if(node.getGraphID() == graphID) return node;
+        return null;
+    }
+
     public int getNodesCount(){
         return size.getTotalSize();
     }

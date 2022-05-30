@@ -24,14 +24,7 @@ public class GraphView extends BorderPane implements Observer<Graph> {
         super();
         UIUtils.setStaticSize(this, UIConfig.graphPanelWidth, 0);
 
-        //graph = Solver.getInstance().getGraph();
-        graph = GraphGenerator.GenerateNotDirected(new Size(10, 10), 100);
-        try {
-            DijkstraDivider.divideGraphThisManyTimes(graph, 6);
-            System.out.println(graph);
-        } catch (DijkstraDivider.TooManyDividesException | Exception | Dijkstra.DijkstraNotSolvedException e) {
-            e.printStackTrace();
-        }
+        graph = Solver.getInstance().getGraph();
         Solver.getInstance().addGraphChangeObserver(this);
 
         infoPane = new GraphInfoPanel(graph);

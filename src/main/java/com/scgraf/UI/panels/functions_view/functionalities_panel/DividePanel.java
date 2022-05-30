@@ -8,19 +8,23 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 public class DividePanel extends FunctionAbstractPanel {
+    FormattedTextField divideNumberInput;
+
     public DividePanel(FunctionPanelManager root) {
         super(root, "Divide", "Pass into how many sub graphs You want to divide:");
         VBox inputPane = new VBox();
         inputPane.setAlignment(Pos.CENTER);
         inputPane.setSpacing(UIConfig.panelRegularSpacing);
-        FormattedTextField divideNumberInput = new FormattedTextField("Number of sub graphs");
+
+        divideNumberInput = new FormattedTextField("Number of sub graphs");
         inputPane.getChildren().addAll(divideNumberInput);
+
         buildFunctionView(inputPane);
     }
 
     @Override
     public void solve() {
-        //TODO change
-        Solver.getInstance().divide(2);
+        final int n = Integer.parseInt(divideNumberInput.getText());
+        Solver.getInstance().divide(n);
     }
 }
