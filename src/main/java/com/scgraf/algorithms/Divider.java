@@ -1,12 +1,9 @@
-package com.scgraf.algorithms.dijkstra;
+package com.scgraf.algorithms;
 
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
-import javafx.geometry.Side;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Divider {
@@ -72,11 +69,11 @@ public class Divider {
         Node endNode = dividedGraph.getNode(y, dividedGraph.getSize().width() - 1);
 
         Dijkstra d = new Dijkstra(dividedGraph);
-        d.Solve(endNode, firstNode);
+        d.Solve(endNode);
 
         Node[] nodesToVisit = new Node[0];
         try {
-            nodesToVisit = d.getShortestPath(endNode, firstNode);
+            nodesToVisit = d.getShortestPath(firstNode);
         } catch (Dijkstra.DijkstraNotSolvedException e) {
             e.printStackTrace();
         }
