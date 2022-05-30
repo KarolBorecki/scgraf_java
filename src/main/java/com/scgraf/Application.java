@@ -28,11 +28,6 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args){
-        //launch();
-
-        Graph graph = GraphGenerator.GenerateNotDirected(new Size(1000, 10), 3);
-        Dijkstra dijkstra = new Dijkstra(graph);
-        dijkstra.Solve(graph.getNode(0, 0));
-        System.out.println(dijkstra.getShortestPathString(graph.getNode(9, 848)) + "\n == " + dijkstra.getShortestPathLength(graph.getNode(9, 848)));
+        launch();
     }
 }
