@@ -42,9 +42,6 @@ public class Solver {
     public void findShortest(Node startNode, Node endNode){
         Logger.getInstance().log(Logger.StatusLog.CALCULATING);
         System.out.println("FINDING SHORTEST: " + startNode + " " + endNode);
-        Dijkstra dijkstra = new Dijkstra(graph);
-        dijkstra.Solve(startNode);
-        System.out.println(dijkstra.getShortestPathString(endNode));
         Logger.getInstance().log(Logger.StatusLog.OK);
     }
 
