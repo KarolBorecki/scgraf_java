@@ -1,4 +1,4 @@
-package com.scgraf.algorithms.dijkstra;
+package com.scgraf.algorithms;
 
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;

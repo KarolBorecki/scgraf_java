@@ -1,6 +1,6 @@
 package com.scgraf.data_handling;
 
-import com.scgraf.algorithms.dijkstra.Dijkstra;
+import com.scgraf.algorithms.Dijkstra;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
@@ -37,14 +37,16 @@ public class FileWriterG {
         writeGraphToFile(g, newFile);
     }
 
-    public void writeDijkstraResultToFile(Dijkstra d, Node startNode, Node finishNode, File file) {
+    public void writeDijkstraResultToFile(Dijkstra d, Node finishNode, File file) throws Dijkstra.DijkstraNotSolvedException {
         try {
             printWriter = new PrintWriter(new FileWriter(file));
+            printWriter.printf(d.getDijkstraResult(finishNode));
+            printWriter.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
 
-        printWriter.println(d.getDijkstraResult(startNode, finishNode));
+        printWriter.println(d.getDijkstraResult(finishNode));
 
         printWriter.close();
     }

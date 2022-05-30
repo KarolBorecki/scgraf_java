@@ -11,6 +11,10 @@ public class Utils {
         return java.util.Arrays.copyOf(arr, arr.length * resizeFactor);
     }
 
+    public static <T> T[] resizeArrayTo(T[] arr, int Size) {
+        return java.util.Arrays.copyOf(arr, Size);
+    }
+
     public static <T> boolean arrContains(T[] arr, T wanted, int start, int end){
         for(int i=start; i<=end; i++)
             if(arr[i] == wanted) return true;

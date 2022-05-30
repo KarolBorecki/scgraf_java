@@ -1,5 +1,6 @@
 package com.scgraf.solver;
 
+import com.scgraf.algorithms.Dijkstra;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.tuples.Size;
@@ -42,8 +43,12 @@ public class Solver {
     }
 
     public void findShortest(Node startNode, Node endNode){
-        //TODO implent
+        Logger.getInstance().log(Logger.StatusLog.CALCULATING);
         System.out.println("FINDING SHORTEST: " + startNode + " " + endNode);
+        Dijkstra dijkstra = new Dijkstra(graph);
+        dijkstra.Solve(startNode);
+        System.out.println(dijkstra.getShortestPathString(endNode));
+        Logger.getInstance().log(Logger.StatusLog.OK);
     }
 
     public void divide(int n){
