@@ -2,9 +2,9 @@ package com.scgraf;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.views.MainView;
-import com.scgraf.algorithms.Dijkstra;
+import com.scgraf.algorithms.DijkstraDivider;
+import com.scgraf.algorithms.SimpleDivider;
 import com.scgraf.data_structures.graph.Graph;
-import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import javafx.scene.Scene;

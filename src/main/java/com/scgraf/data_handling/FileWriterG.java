@@ -37,16 +37,15 @@ public class FileWriterG {
         writeGraphToFile(g, newFile);
     }
 
-    public void writeDijkstraResultToFile(Dijkstra d, Node finishNode, File file) throws Dijkstra.DijkstraNotSolvedException {
+    public void writeDijkstraResultToFile(Graph graph, Node startNode, Node finishNode, File file) throws Dijkstra.DijkstraNotSolvedException {
         try {
             printWriter = new PrintWriter(new FileWriter(file));
-            printWriter.printf(d.getDijkstraResult(finishNode));
-            printWriter.close();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
 
-        printWriter.println(d.getDijkstraResult(finishNode));
+        printWriter.println("Path: " + Dijkstra.getShortestPathString(graph, startNode, finishNode));
+        printWriter.println("Length: " + Dijkstra.getShortestPathString(graph, startNode, finishNode));
 
         printWriter.close();
     }
