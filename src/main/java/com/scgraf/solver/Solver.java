@@ -6,8 +6,11 @@ import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import com.scgraf.logger.Logger;
 import com.scgraf.utils.Observer;
+import javafx.application.Platform;
 
+import java.security.Timestamp;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Solver {
     private Graph graph;
@@ -54,16 +57,14 @@ public class Solver {
     }
 
     public void generate(int width, int height, double maxWeight){
-        Logger.getInstance().log(Logger.StatusLog.CALCULATING);
-        setGraph(GraphGenerator.Generate(new Size(width, height), maxWeight));//TODO NEW THREAD!!!
-        Logger.getInstance().log(Logger.StatusLog.OK);
+        graph = GraphGenerator.Generate(new Size(width, height), maxWeight);
+        //setGraph(graph);
     }
 
     public void setGraph(Graph graph) {
         this.graph = graph;
         for (Observer<Graph> c: onGraphChangeNotify)
             c.call(graph);
-
     }
 
     public Graph getGraph(){

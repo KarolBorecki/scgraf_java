@@ -2,6 +2,7 @@ package com.scgraf.UI.panels.graph_view;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.data_structures.graph.Graph;
+import com.scgraf.logger.Logger;
 import com.scgraf.utils.UIUtils;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -20,11 +21,15 @@ public class GraphPanel extends AnchorPane {
     }
 
     public void updateGraph(Graph graph){
+        System.out.println("UPDATING GRAPH"); //TODO DELETE
         getChildren().clear();
+        System.out.println("CHIKLDREN CLEARED"); //TODO DELETE
         drawGraph(graph);
     }
 
     private void drawGraph(Graph graph){
+        System.out.println("DRAWING"); //TODO DELETE
+        setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
         final int numCols = graph.getSize().width();
         final int numRows = graph.getSize().height();
 
@@ -51,6 +56,7 @@ public class GraphPanel extends AnchorPane {
                 getChildren().add(node);
             }
         setSize(cellSize * numCols, cellSize * numRows);
+        System.out.println("DRAWING DONE"); //TODO DELETE
     }
 
     private void setSize(double width, double height){

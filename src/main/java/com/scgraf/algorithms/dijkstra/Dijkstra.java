@@ -5,7 +5,7 @@ import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.queue.PriorityQueue;
 
-public class Dijkstra {
+public class Dijkstra extends Thread{
 
     private final static int STARTING_SIZE = 4;
     private final Graph graph;

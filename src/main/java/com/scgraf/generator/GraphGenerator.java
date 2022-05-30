@@ -3,10 +3,11 @@ package com.scgraf.generator;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.tuples.Size;
+import com.scgraf.logger.Logger;
 
 import java.util.Random;
 
-public class GraphGenerator implements IGenerator<Graph> {
+public class GraphGenerator extends Thread implements IGenerator<Graph> {
     private static final Random randomGenerator = new Random();
 
     public enum GeneratingType {
@@ -15,6 +16,7 @@ public class GraphGenerator implements IGenerator<Graph> {
     }
 
     public static  Graph Generate(Size size, double maxPathWeight){
+        System.out.println("GENERATING"); //TODO DELETE
         return Generate(size, maxPathWeight, GeneratingType.NOT_DIRECTED);
     }
 
@@ -40,7 +42,7 @@ public class GraphGenerator implements IGenerator<Graph> {
                     g.setupPathBothWays(g.getNode(y,x), Path.Side.BOTTOM, maxWeight * randomGenerator.nextDouble());
             }
         }
-
+        System.out.println("GENERATING DONE"); //TODO DELETE
         return g;
     }
 

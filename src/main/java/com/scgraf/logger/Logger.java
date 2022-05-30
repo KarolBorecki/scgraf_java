@@ -18,7 +18,8 @@ public class Logger {
         OK("OK", UIConfig.okColor),
         WARNING("WARNING", UIConfig.warningColor),
         ERROR("ERROR", UIConfig.errorColor),
-        CALCULATING("CALCULATING...", UIConfig.textColor);
+        CALCULATING("CALCULATING...", UIConfig.textColor),
+        DRAWING("DRAWING...", UIConfig.textColor);
 
         final String text;
         final Color color;
@@ -47,11 +48,16 @@ public class Logger {
     }
 
     public void log(StatusLog status){
+        System.out.println("Changing to: " + status.text);
         logText.setCaption(status.text).setColor(status.color).build();
         this.status = status;
     }
 
     public void popup(String info){
         //TODO handle popup
+    }
+
+    public StatusLog getStatus(){
+        return status;
     }
 }

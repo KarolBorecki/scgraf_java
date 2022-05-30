@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Divider {
+public class Divider extends Thread{
     private final Random random = new Random();
 
     private final Graph dividedGraph;

@@ -77,6 +77,7 @@ public class UIConfig {
     public static int graphPanelWidth;
     public static int graphPanelHeight;
     public static double graphNodePathSizeFactor = 1.1;
+    public static double minPathWidth = 0.5;
 
     static {
         functionsViewHeight = stageHeight / 5;

@@ -29,6 +29,7 @@ public class GraphInfoPanel extends BorderPane {
     }
 
     public void updateGraph(Graph graph){
+        System.out.println("UPDATING GRAPHINFO"); //TODO DELETE
         graphInfo.setText("Width: " + graph.getSize().width() +" Height: " + graph.getSize().height() +" Weight: " + graph.getMaxConnectionWeight());
     }
 

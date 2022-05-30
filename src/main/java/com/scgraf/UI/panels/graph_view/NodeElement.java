@@ -43,7 +43,7 @@ public class NodeElement extends StackPane {
                     line.setStroke(UIConfig.graphMediumPathColor);
                 else line.setStroke(UIConfig.graphHeavyPathColor);
                 
-                line.setStrokeWidth(size/30 > 1 ? size/30 : 1);
+                line.setStrokeWidth(size/30 > UIConfig.minPathWidth ? size/30 : UIConfig.minPathWidth);
                 paths.getChildren().add(line);
             }
         }

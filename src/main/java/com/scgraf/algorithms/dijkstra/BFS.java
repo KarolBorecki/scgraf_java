@@ -5,7 +5,7 @@ import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.queue.Fifo;
 
-public class BFS {
+public class BFS extends Thread{
     public static boolean Solve(Graph graph) {
         Fifo<Node> queToCheck = initializeQue(graph);
 
