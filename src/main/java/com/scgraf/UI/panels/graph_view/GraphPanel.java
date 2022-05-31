@@ -30,7 +30,6 @@ public class GraphPanel extends AnchorPane {
     }
 
     private void drawGraph(Graph graph, Node[] path){
-        System.out.println("DRAWING"); //TODO DELETE
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
         final int numCols = graph.getSize().width();
         final int numRows = graph.getSize().height();
@@ -58,7 +57,6 @@ public class GraphPanel extends AnchorPane {
                 getChildren().add(node);
             }
         setSize(cellSize * numCols, cellSize * numRows);
-        System.out.println("DRAWING DONE"); //TODO DELETE
     }
 
     private void setSize(double width, double height){

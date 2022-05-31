@@ -3,6 +3,11 @@ package com.scgraf.UI.elements.buttons;
 import com.scgraf.Application;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.UILoader;
+import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -17,6 +22,8 @@ import javafx.scene.text.TextAlignment;
 
 public class FormattedButton extends Button {
     DropShadow shadow = new DropShadow(UIConfig.shadowRadius, UIConfig.shadowColor);
+
+    private static boolean isAllDisabled = false;
 
     public FormattedButton(String label, Color bckColor, Color textColor, Font font, double sizeFactor) {
         this(label, bckColor, textColor, font);
@@ -54,5 +61,14 @@ public class FormattedButton extends Button {
                         Application.scene.setCursor(Cursor.DEFAULT);
                     }
                 });
+        disableProperty().bind(Bindings.createBooleanBinding(() -> FormattedButton.isAllDisabled));
+    }
+
+    public static void DisableAll(){
+        isAllDisabled = true;
+    }
+
+    public static void EnableAll(){
+        isAllDisabled = false;
     }
 }

@@ -36,6 +36,10 @@ public class UIConfig {
     public static int stageWidth = 750;
     public static int stageHeight = 900;
 
+    /* POPUP SETTINGS */
+    public static int popupWidth;
+    public static int popupHeight;
+
     /* OVERALL PANELS SETTINGS */
     public static int panelRegularSpacing = 20;
     public static int panelSmallSpacing = 2;
@@ -83,6 +87,9 @@ public class UIConfig {
         functionsViewHeight = stageHeight / 5;
         functionsPanelWidth = (int) (stageWidth / 4 * 5);
         filePanelWidth = (int) (stageWidth / 5);
+
+        popupWidth = stageWidth / 2;
+        popupHeight = stageHeight / 6;
 
         graphInfoWidth = stageWidth;
         graphInfoHeight = stageHeight / 10;
