@@ -16,7 +16,7 @@ public class Utils {
     }
 
     public static <T> boolean arrContains(T[] arr, T wanted, int start, int end){
-        for(int i=start; i<=end; i++)
+        for(int i=start; i<end; i++)
             if(arr[i] == wanted) return true;
         return false;
     }

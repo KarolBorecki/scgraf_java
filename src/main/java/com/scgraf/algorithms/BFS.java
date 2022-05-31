@@ -19,7 +19,7 @@ public class BFS extends Thread{
                 }
 
         }
-        return queToCheck.queueFilledSize() == graph.getNodesCount();
+        return (queToCheck.queueFilledSize() - 1) == graph.getNodesCount();
     }
 
     private static Fifo<Node> initializeQue(Graph graph){

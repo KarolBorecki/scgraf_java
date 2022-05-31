@@ -51,6 +51,8 @@ public class FilePanel extends BorderPane {
         loadBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent actionEvent) {
+                loadBtn.setDisable(true);
+                saveBtn.setDisable(true);
                 configureFileChooser(fileChooser);
                 File file = fileChooser.showOpenDialog(new Popup());
                 if (file != null) {
@@ -67,18 +69,23 @@ public class FilePanel extends BorderPane {
                         errorAlert.showAndWait();
                     }
                 }
+                loadBtn.setDisable(false);
+                saveBtn.setDisable(false);
             }
         });
 
         saveBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                loadBtn.setDisable(true);
+                saveBtn.setDisable(true);
                 configureFileChooser(fileChooser);
                 File file = fileChooser.showSaveDialog(new Popup());
                 if (file != null) {
-                    System.out.println(Solver.getInstance().getGraph());
                     FileWriterG.writeGraphToFile(Solver.getInstance().getGraph(), file);
                 }
+                loadBtn.setDisable(false);
+                saveBtn.setDisable(false);
             }
         });
     }
