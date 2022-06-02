@@ -32,7 +32,7 @@ public class UIConfig {
     /* FONT SETTINGS */
     public static int fontRegularSize = 15;
     public static int fontSmallSize = 13;
-    public static int fontBigSize = 22;
+    public static int fontBigSize = 19;
 
     /* STAGE SETTINGS */
     public static int stageWidth;
@@ -88,7 +88,7 @@ public class UIConfig {
     static {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         stageHeight = (int)(screenBounds.getHeight() * 0.9);
-        stageWidth = (int)(stageHeight/1.2);
+        stageWidth = (int)(stageHeight/1.15);
 
         functionsViewHeight = stageHeight / 5;
         functionsPanelWidth = (int) (stageWidth / 4 * 5);

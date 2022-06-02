@@ -20,10 +20,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class FormattedButton extends Button {
     DropShadow shadow = new DropShadow(UIConfig.shadowRadius, UIConfig.shadowColor);
 
-    private static boolean isAllDisabled = false;
+    protected static ArrayList<FormattedButton> instances = new ArrayList();
 
     public FormattedButton(String label, Color bckColor, Color textColor, Font font, double sizeFactor) {
         this(label, bckColor, textColor, font);
@@ -33,7 +37,7 @@ public class FormattedButton extends Button {
 
     public FormattedButton(String label, Color bckColor, Color textColor, Font font) {
         super(label);
-
+        instances.add(this);
         setPrefSize(UIConfig.btnPrefWidth, UIConfig.btnPrefHeight);
 
         //setBackground(UILoader.buttonBck);
@@ -61,16 +65,17 @@ public class FormattedButton extends Button {
                         Application.scene.setCursor(Cursor.DEFAULT);
                     }
                 });
-        disableProperty().bind(Bindings.createBooleanBinding(() -> FormattedButton.isAllDisabled));
     }
 
 
 
     public static void DisableAll() {
-        isAllDisabled = true;
+        for (FormattedButton btn : instances)
+            btn.setDisable(true);
     }
 
     public static void EnableAll() {
-        isAllDisabled = false;
+        for (FormattedButton btn : instances)
+            btn.setDisable(false);
     }
 }

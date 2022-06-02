@@ -1,6 +1,7 @@
 package com.scgraf.UI.panels.functions_view.functionalities_panel;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.UI.elements.buttons.RegularButton;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import javafx.geometry.Pos;
@@ -23,6 +24,5 @@ public class AllFunctionsPanel  extends HBox {
         generateBtn.setOnAction(actionEvent -> root.switchFunction(FunctionPanelManager.Functionality.GENERATE));
 
         getChildren().addAll(shortestBtn, divideBtn, consistencyCheckBtn, generateBtn);
-
     }
 }

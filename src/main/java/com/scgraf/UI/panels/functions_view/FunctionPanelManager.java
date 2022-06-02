@@ -1,6 +1,7 @@
 package com.scgraf.UI.panels.functions_view;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.UI.elements.text.CaptionText;
 import com.scgraf.UI.panels.functions_view.functionalities_panel.*;
 import javafx.geometry.Insets;

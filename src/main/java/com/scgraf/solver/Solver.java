@@ -11,11 +11,15 @@ import com.scgraf.generator.GraphGenerator;
 import com.scgraf.logger.Logger;
 import com.scgraf.utils.Observer;
 import javafx.application.Platform;
+import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.security.Timestamp;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class Solver {
@@ -70,8 +74,7 @@ public class Solver {
                 return null;
             }
         };
-        dividingTask.setOnRunning( event -> OnSolverTaskStart(dividingTask));
-        dividingTask.setOnSucceeded( event -> OnSolverTaskEnd(dividingTask));
+
 
         Thread dividingThread = new Thread(dividingTask);
         dividingThread.start();
@@ -83,13 +86,14 @@ public class Solver {
     }
 
     public void generate(int width, int height, double maxWeight){
+
         Task<Graph> generatingTask = new Task<>() {
             @Override
             public Graph call() {
                 return GraphGenerator.Generate(new Size(width, height), maxWeight);
             }
         };
-        generatingTask.setOnRunning( event -> OnSolverTaskStart(generatingTask));
+        generatingTask.setOnRunning( event -> OnSolverTaskStart());
         generatingTask.setOnSucceeded( event -> OnSolverTaskEnd(generatingTask));
 
         Thread generatorThread = new Thread(generatingTask);
@@ -106,9 +110,10 @@ public class Solver {
         return graph;
     }
 
-    private void OnSolverTaskStart(Task<Graph> task){
-        Logger.getInstance().log(Logger.StatusLog.CALCULATING);
+    private void OnSolverTaskStart(){
         FormattedButton.DisableAll();
+        Logger.getInstance().log(Logger.StatusLog.CALCULATING);
+
     }
 
     private void OnSolverTaskEnd(Task<Graph> task){
