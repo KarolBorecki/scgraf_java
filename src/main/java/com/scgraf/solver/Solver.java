@@ -83,9 +83,9 @@ public class Solver {
     }
 
     public void generate(int width, int height, double maxWeight){
-        Task<Graph> generatingTask = new Task<Graph>() {
+        Task<Graph> generatingTask = new Task<>() {
             @Override
-            public Graph call(){
+            public Graph call() {
                 return GraphGenerator.Generate(new Size(width, height), maxWeight);
             }
         };

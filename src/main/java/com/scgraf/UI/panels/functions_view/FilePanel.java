@@ -1,6 +1,7 @@
 package com.scgraf.UI.panels.functions_view;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import com.scgraf.UI.elements.text.CaptionText;
 import com.scgraf.data_handling.FileReaderG;
@@ -51,8 +52,7 @@ public class FilePanel extends BorderPane {
         loadBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent actionEvent) {
-                loadBtn.setDisable(true);
-                saveBtn.setDisable(true);
+                //FormattedButton.DisableAll();
                 configureFileChooser(fileChooser);
                 File file = fileChooser.showOpenDialog(new Popup());
                 if (file != null) {
@@ -69,23 +69,20 @@ public class FilePanel extends BorderPane {
                         errorAlert.showAndWait();
                     }
                 }
-                loadBtn.setDisable(false);
-                saveBtn.setDisable(false);
+               // FormattedButton.EnableAll();
             }
         });
 
         saveBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                loadBtn.setDisable(true);
-                saveBtn.setDisable(true);
+                //FormattedButton.DisableAll();
                 configureFileChooser(fileChooser);
                 File file = fileChooser.showSaveDialog(new Popup());
                 if (file != null) {
                     FileWriterG.writeGraphToFile(Solver.getInstance().getGraph(), file);
                 }
-                loadBtn.setDisable(false);
-                saveBtn.setDisable(false);
+                //FormattedButton.EnableAll();
             }
         });
     }

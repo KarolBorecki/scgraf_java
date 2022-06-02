@@ -1,7 +1,9 @@
 package com.scgraf.UI;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 
 public class UIConfig {
     /* COLORS SETTINGS */
@@ -33,8 +35,8 @@ public class UIConfig {
     public static int fontBigSize = 22;
 
     /* STAGE SETTINGS */
-    public static int stageWidth = 750;
-    public static int stageHeight = 900;
+    public static int stageWidth;
+    public static int stageHeight;
 
     /* POPUP SETTINGS */
     public static int popupWidth;
@@ -84,6 +86,10 @@ public class UIConfig {
     public static double minPathWidth = 0.5;
 
     static {
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+        stageHeight = (int)(screenBounds.getHeight() * 0.9);
+        stageWidth = (int)(stageHeight/1.2);
+
         functionsViewHeight = stageHeight / 5;
         functionsPanelWidth = (int) (stageWidth / 4 * 5);
         filePanelWidth = (int) (stageWidth / 5);

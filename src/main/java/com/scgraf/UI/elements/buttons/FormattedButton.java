@@ -64,11 +64,13 @@ public class FormattedButton extends Button {
         disableProperty().bind(Bindings.createBooleanBinding(() -> FormattedButton.isAllDisabled));
     }
 
-    public static void DisableAll(){
+
+
+    public static void DisableAll() {
         isAllDisabled = true;
     }
 
-    public static void EnableAll(){
+    public static void EnableAll() {
         isAllDisabled = false;
     }
 }
