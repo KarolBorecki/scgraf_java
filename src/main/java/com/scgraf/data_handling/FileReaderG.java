@@ -17,6 +17,7 @@ public class FileReaderG {
     public static Graph readGraphFromFile(File file) throws IOException, FileFormatError, Graph.InvalidMeshConnection {
 
         int readLines = 0;
+        double maxWeightRead= 0.;
         String firstLineRegex= "\\d+\\s+\\d+";
         String nextLineRegex= "\\d+:\\s+[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?";
 
@@ -59,6 +60,8 @@ public class FileReaderG {
                 lines = matcher.group().split(":");
                 int finishNodeIndex = Integer.parseInt(lines[0].strip());
                 double weight = Double.parseDouble(lines[1].strip());
+                if(weight > maxWeightRead)
+                    maxWeightRead = weight;
 
                 Node finishNode = graph.getNode(finishNodeIndex / graph.getSize().width(), finishNodeIndex % graph.getSize().width());
                 Node currNode = graph.getNode(i / graph.getSize().width(), i % graph.getSize().width());
@@ -71,6 +74,8 @@ public class FileReaderG {
             if(connectionsFound == 0 && !line.isBlank())
                 throw new FileFormatError(readLines, file, "Didnt find any connections in this line, but its not empty!");
         }
+
+        graph.setWeight(maxWeightRead);
 
         return graph;
     }

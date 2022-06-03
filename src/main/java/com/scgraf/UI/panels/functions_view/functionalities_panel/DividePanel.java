@@ -26,6 +26,6 @@ public class DividePanel extends FunctionAbstractPanel {
     @Override
     public void solve() {
         final int n = Integer.parseInt(divideNumberInput.getText());
-        Solver.getInstance().divide(n);
+        Solver.getInstance().divide(n-1);
     }
 }
