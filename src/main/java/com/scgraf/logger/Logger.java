@@ -1,21 +1,11 @@
 package com.scgraf.logger;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.Popup;
+import com.scgraf.UI.elements.popup.ErrorPopup;
+import com.scgraf.UI.elements.popup.InfoPopup;
+import com.scgraf.UI.elements.popup.Popup;
 import com.scgraf.UI.elements.text.FormattedText;
-import com.scgraf.data_structures.graph.Graph;
-import com.scgraf.generator.GraphGenerator;
-import com.scgraf.solver.Solver;
-import com.scgraf.utils.Observer;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Logger {
     public enum StatusLog{
@@ -58,8 +48,13 @@ public class Logger {
     }
 
     public void popup(String info){
-        Popup popup = new Popup("Popup", info, "OK");
-        popup.show();
+        Popup popup = new InfoPopup(info);
+        popup.pop();
+    }
+
+    public void errPopup(String info){
+        Popup errPopup = new ErrorPopup(info);
+        errPopup.pop();
     }
 
     public StatusLog getStatus(){

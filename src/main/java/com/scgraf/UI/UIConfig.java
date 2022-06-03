@@ -20,14 +20,14 @@ public class UIConfig {
 
     public static Color textFieldBckColor = Color.web("363b44");
 
-    public static Color errorColor = Color.web("ad343e");
+    public static Color errorColor = Color.web("e04f5f");
     public static Color warningColor = Color.web("f2af29");
     public static Color okColor = Color.web("4da167");
 
     public static Color graphNodeColor = Color.web("f8f4e3");
     public static Color graphLightPathColor = Color.web("4da167");
     public static Color graphMediumPathColor = Color.web("f2af29");
-    public static Color graphHeavyPathColor = Color.web("ad343e");
+    public static Color graphHeavyPathColor = Color.web("e04f5f");
     public static Color graphShortestPathColor = Color.web("ff8c00");
 
     /* FONT SETTINGS */
@@ -42,6 +42,7 @@ public class UIConfig {
     /* POPUP SETTINGS */
     public static int popupWidth;
     public static int popupHeight;
+    public static int popupImgSize;
 
     /* OVERALL PANELS SETTINGS */
     public static int panelRegularSpacing = 20;
@@ -97,6 +98,7 @@ public class UIConfig {
 
         popupWidth = stageWidth / 2;
         popupHeight = stageHeight / 6;
+        popupImgSize = (int)(popupHeight / 1.5);
 
         graphInfoWidth = stageWidth;
         graphInfoHeight = stageHeight / 10;

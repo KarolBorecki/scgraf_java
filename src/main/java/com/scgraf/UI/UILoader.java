@@ -11,7 +11,9 @@ import java.util.Objects;
 
 public class UILoader {
     public static Image buttonBckImg;
-    public static Image testIMG;
+
+    public static Image infoImg;
+    public static Image errImg;
 
     public static Font regularFont;
     public static Font regularSmallFont;
@@ -22,6 +24,8 @@ public class UILoader {
     static {
         try {
             buttonBckImg = new Image(new FileInputStream("src/main/resources/com/scgraf/img/btn_back.jpg"));
+            infoImg = new Image(new FileInputStream("src/main/resources/com/scgraf/img/info_img.png"));
+            errImg = new Image(new FileInputStream("src/main/resources/com/scgraf/img/err_img.png"));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
