@@ -9,9 +9,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class NodeElement extends StackPane {
-    public NodeElement(Node node, double size, double lightLimit, double mediumLimit) {
+    public NodeElement(Node node, double size, double lightLimit, double mediumLimit, boolean drawCaption) {
         super();
-        double center = size/2;
+        double center = size / 2;
 
         setWidth(size);
         setMinWidth(size);
@@ -20,40 +20,30 @@ public class NodeElement extends StackPane {
         setMinHeight(size);
         setMaxHeight(size);
 
-//        setBorder(new Border(new BorderStroke(UIConfig.okColor,
-//        BorderStrokeStyle.SOLID,
-//        CornerRadii.EMPTY, new BorderWidths(UIConfig.borderHeight), Insets.EMPTY)));
-//        setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET, CornerRadii.EMPTY, Insets.EMPTY)));
-
         Pane paths = new Pane();
-        for (Path.Side side : Path.Side.values()) {
-            Path p = node.getPath(side);
+        for (int i=Path.Side.RIGHT.index; i<=Path.Side.BOTTOM.index; i++) {
+            Path p = node.getPath(i);
             if (p != null) {
-                double x = 0, y = 0;
-                switch (side) {
-                    case TOP -> y = -center * UIConfig.graphNodePathSizeFactor;
-                    case RIGHT -> x = center * UIConfig.graphNodePathSizeFactor;
-                    case BOTTOM -> y = center * UIConfig.graphNodePathSizeFactor;
-                    case LEFT -> x = -center * UIConfig.graphNodePathSizeFactor;
-                }
+                double x = i==Path.Side.RIGHT.index ? center * UIConfig.graphNodePathSizeFactor : 0;
+                double y = i==Path.Side.BOTTOM.index ? center * UIConfig.graphNodePathSizeFactor : 0;
+
                 Line line = new Line(center, center , center + x, center + y);
-                if(p.getWeight() < lightLimit)
-                    line.setStroke(UIConfig.graphLightPathColor);
-                else if(p.getWeight() < mediumLimit)
-                    line.setStroke(UIConfig.graphMediumPathColor);
+                if(p.getWeight() < lightLimit) line.setStroke(UIConfig.graphLightPathColor);
+                else if(p.getWeight() < mediumLimit) line.setStroke(UIConfig.graphMediumPathColor);
                 else line.setStroke(UIConfig.graphHeavyPathColor);
-                
-                line.setStrokeWidth(size/30 > UIConfig.minPathWidth ? size/30 : UIConfig.minPathWidth);
+                line.setStrokeWidth(Math.max(size / 30, UIConfig.minPathWidth));
                 paths.getChildren().add(line);
             }
         }
 
-        Circle circle = new Circle(size/4);
+        Circle circle = new Circle(size / 4);
         circle.setFill(UIConfig.graphNodeColor);
+        getChildren().addAll(paths, circle);
 
-        FormattedText caption = new FormattedText(node.getGraphID()+"");
-        caption.setColor(UIConfig.functionsViewBckColor).setFontSize((int)(size/4)).build();
-
-        getChildren().addAll(paths, circle, caption);
+        if (drawCaption){
+            FormattedText caption = new FormattedText(node.getGraphID() + "");
+            caption.setColor(UIConfig.functionsViewBckColor).setFontSize((int) (size / 4)).build();
+            getChildren().add(caption);
+        }
     }
 }

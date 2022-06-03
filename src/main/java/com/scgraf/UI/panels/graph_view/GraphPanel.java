@@ -17,15 +17,11 @@ public class GraphPanel extends AnchorPane {
         primaryStage = stage;
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
-        //setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-
         updateGraph(graph);
     }
 
     public void updateGraph(Graph graph){
-        System.out.println("UPDATING GRAPH"); //TODO DELETE
         getChildren().clear();
-        System.out.println("CHIKLDREN CLEARED"); //TODO DELETE
         drawGraph(graph, null);
     }
 
@@ -37,9 +33,6 @@ public class GraphPanel extends AnchorPane {
         final double cellSizeWidth = ((getWidth()) / numCols);
         final double cellSizeHeight = ((getHeight()) / numRows);
 
-        final double lightPathLimit = graph.getMaxConnectionWeight() / 3;
-        final double mediumPathLimit = graph.getMaxConnectionWeight() *  2 / 3;
-
         final double cellSize;
         if(cellSizeWidth > cellSizeHeight){
             cellSize = cellSizeHeight;
@@ -49,11 +42,16 @@ public class GraphPanel extends AnchorPane {
             setSize(getWidth(), getWidth());
         }
 
+        final double lightPathLimit = graph.getMaxConnectionWeight() / 3;
+        final double mediumPathLimit = graph.getMaxConnectionWeight() *  2 / 3;
+
+        boolean drawCaptions = graph.getNodesCount() < UIConfig.maxGraphNodesCountToDrawCaptions;
         for(int y=0; y<numRows; y++)
             for(int x=0; x<numCols; x++){
-                NodeElement node = new NodeElement(graph.getNode(y, x), cellSize, lightPathLimit, mediumPathLimit);
+                NodeElement node = new NodeElement(graph.getNode(y, x), cellSize, lightPathLimit, mediumPathLimit, drawCaptions);
                 setLeftAnchor(node, cellSize * x);
                 setTopAnchor(node, cellSize * y);
+
                 getChildren().add(node);
             }
         setSize(cellSize * numCols, cellSize * numRows);

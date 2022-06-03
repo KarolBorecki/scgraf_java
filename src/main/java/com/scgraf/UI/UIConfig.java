@@ -84,8 +84,9 @@ public class UIConfig {
     /* GRAPH SETTINGS */
     public static int graphPanelWidth;
     public static int graphPanelHeight;
-    public static double graphNodePathSizeFactor = 1.1;
+    public static double graphNodePathSizeFactor = 2;
     public static double minPathWidth = 0.5;
+    public static int maxGraphNodesCountToDrawCaptions = 500;
 
     static {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();

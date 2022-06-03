@@ -14,7 +14,7 @@ public record Path(double weight) {
 
         static final String[] sideNames = new String[]{"TOP", "RIGHT", "BOTTOM", "LEFT"};
 
-        final int index;
+        public final int index;
 
         Side(int index){
             this.index = index;
@@ -25,6 +25,7 @@ public record Path(double weight) {
             return sideNames[index];
         }
 
+        //Można wykorzystać fakt, że jest to (Side.index + 2) % 4
         public Side getOppositeSide() throws Exception{
             if(this.index == Side.TOP.index)
                 return Side.BOTTOM;

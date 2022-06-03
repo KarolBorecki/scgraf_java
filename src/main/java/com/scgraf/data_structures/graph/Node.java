@@ -9,7 +9,6 @@ public class Node implements Comparable<Node>{
     private static int nodeIDCounter = 0;
 
     public Node(Graph parentGraph){
-
         this.ID = nodeIDCounter++;
         this.graphID = parentGraph.getNextGraphID();
     }
@@ -32,12 +31,15 @@ public class Node implements Comparable<Node>{
 
     public int getGraphID(){return graphID;}
 
+    public Path[] getPaths(){return paths;}
+
+    public Path getPath(Path.Side side){return getPath(side.index);}
+
+    public Path getPath(int sideIndex){return paths[sideIndex];}
+
     public double getConnectionWeight(Path.Side side){
         return paths[side.index].getWeight();
     }
-
-    public Path[] getPaths(){return paths;}
-    public Path getPath(Path.Side side){return paths[side.index];}
 
     @Override
     public int compareTo(Node o) {
