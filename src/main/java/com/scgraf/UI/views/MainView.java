@@ -19,6 +19,5 @@ public class MainView extends BorderPane {
 
         setCenter(graphView);
         setBottom(functionsView);
-
     }
 }

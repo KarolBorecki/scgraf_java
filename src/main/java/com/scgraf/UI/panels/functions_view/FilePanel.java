@@ -23,7 +23,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FilePanel extends BorderPane {
-    final FileChooser fileChooser = new FileChooser();
     CaptionText captionText;
     VBox optionsPane;
 
@@ -38,58 +37,19 @@ public class FilePanel extends BorderPane {
 
         captionText = new CaptionText("Save/Load:");
 
-        SubfunctionButton saveBtn = new SubfunctionButton("Save");
-        SubfunctionButton loadBtn = new SubfunctionButton("Load");
-
         optionsPane = new VBox();
         optionsPane.setSpacing(UIConfig.panelRegularSpacing);
         optionsPane.setAlignment(Pos.CENTER);
+
+        SubfunctionButton saveBtn = new SubfunctionButton("Save");
+        SubfunctionButton loadBtn = new SubfunctionButton("Load");
+
+        loadBtn.setOnAction(event -> Solver.getInstance().LoadGraph());
+        saveBtn.setOnAction(event -> Solver.getInstance().SaveGraph());
 
         optionsPane.getChildren().addAll(saveBtn, loadBtn);
 
         setTop(captionText);
         setCenter(optionsPane);
-
-        loadBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent actionEvent) {
-                FormattedButton.DisableAll();
-                configureFileChooser(fileChooser);
-                File file = fileChooser.showOpenDialog(new Popup());
-                if (file != null) {
-                    try {
-                        Graph graph = FileReaderG.readGraphFromFile(file);
-                        Solver.getInstance().setGraph(graph);
-                    } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
-                        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                        errorAlert.setHeaderText("File Read Error");
-                        if(e instanceof FileReaderG.FileFormatError)
-                            errorAlert.setContentText(((FileReaderG.FileFormatError) e).getErrorMsg());
-                        else
-                            errorAlert.setContentText(e.getMessage());
-                        errorAlert.showAndWait();
-                    }
-                }
-                FormattedButton.EnableAll();
-            }
-        });
-
-        saveBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                FormattedButton.DisableAll();
-                configureFileChooser(fileChooser);
-                File file = fileChooser.showSaveDialog(new Popup());
-                if (file != null) {
-                    FileWriterG.writeGraphToFile(Solver.getInstance().getGraph(), file);
-                }
-                FormattedButton.EnableAll();
-            }
-        });
-    }
-
-    private static void configureFileChooser(FileChooser fileChooser){
-        fileChooser.setTitle("Choose Graph File");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
     }
 }
