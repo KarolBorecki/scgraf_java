@@ -5,6 +5,7 @@ import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.UI.elements.buttons.RegularButton;
 import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import com.scgraf.UI.elements.text.FormattedText;
+import com.scgraf.logger.Logger;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -40,7 +41,7 @@ public abstract class Popup extends Stage implements Popupable{
         FormattedText infoText = new FormattedText(infoTxt);
 
         FormattedButton okBtn = new SubfunctionButton(okBtnTxt);
-        okBtn.setOnAction(event -> close());
+        okBtn.setOnAction(event -> onBtnClicked());
 
         content.getChildren().addAll(infoText, okBtn);
         main.getChildren().addAll(imgPane, content);
@@ -52,5 +53,11 @@ public abstract class Popup extends Stage implements Popupable{
 
     public void pop(){
         show();
+    }
+
+    public void onBtnClicked(){
+        close();
+        FormattedButton.EnableAll();
+        Logger.getInstance().log(Logger.StatusLog.OK);
     }
 }

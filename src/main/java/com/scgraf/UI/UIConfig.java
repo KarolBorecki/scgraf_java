@@ -45,15 +45,14 @@ public class UIConfig {
     public static int popupImgSize;
 
     /* OVERALL PANELS SETTINGS */
-    public static int panelRegularSpacing = 20;
+    public static int panelRegularSpacing = 15;
     public static int panelSmallSpacing = 2;
     public static Insets panelPadding = new Insets(5, 20, 5, 20);
-    public static Insets topPanelPadding = new Insets(20, 10, 10, 10);
     public static Insets panelMargin = new Insets(10, 10, 10, 10);
 
     /* BTN SETTINGS */
     public static int btnPrefWidth = 200;
-    public static int btnPrefHeight = 50;
+    public static int btnPrefHeight;
 
     /* DROP SHADOW SETTINGS */
     public static int shadowRadius = 5;
@@ -80,6 +79,7 @@ public class UIConfig {
     /* GRAPH INFO SETTINGS */
     public static int graphInfoWidth;
     public static int graphInfoHeight;
+    public static Insets graphInfoMargin = new Insets(10, 20, 5, 20);
 
     /* GRAPH SETTINGS */
     public static int graphPanelWidth;
@@ -89,10 +89,12 @@ public class UIConfig {
 
     static {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        stageHeight = (int)(screenBounds.getHeight() * 0.9);
+        stageHeight = (int)(screenBounds.getHeight() * 0.93);
         stageWidth = (int)(stageHeight/1.15);
 
-        functionsViewHeight = stageHeight / 5;
+        btnPrefHeight = (int)(stageHeight/15);
+
+        functionsViewHeight = (int)(stageHeight / 4.5);
         functionsPanelWidth = (int) (stageWidth / 4 * 5);
         filePanelWidth = (int) (stageWidth / 5);
 
@@ -101,7 +103,7 @@ public class UIConfig {
         popupImgSize = (int)(popupHeight / 1.5);
 
         graphInfoWidth = stageWidth;
-        graphInfoHeight = stageHeight / 10;
+        graphInfoHeight = stageHeight / 15;
         graphPanelWidth = stageWidth;
         graphPanelHeight = stageHeight - functionsViewHeight - graphInfoHeight;
 

@@ -3,6 +3,7 @@ package com.scgraf.UI.panels.functions_view.functionalities_panel;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.CancelButton;
 import com.scgraf.UI.elements.buttons.RegularButton;
+import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import com.scgraf.UI.panels.functions_view.functionalities_panel.SolverCaller;
@@ -16,7 +17,7 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
     protected VBox btnPanel;
     protected HBox infoText;
 
-    protected RegularButton execBtn;
+    protected SubfunctionButton execBtn;
     protected CancelButton cancelBtn;
 
     public FunctionAbstractPanel(FunctionPanelManager root, String execBtnCaption, String infoText){
@@ -33,7 +34,7 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
         btnPanel.setSpacing(UIConfig.panelSmallSpacing);
         btnPanel.setAlignment(Pos.CENTER);
 
-        execBtn = new RegularButton(execBtnCaption);
+        execBtn = new SubfunctionButton(execBtnCaption);
         execBtn.setOnAction(actionEvent -> solve());
 
         cancelBtn = new CancelButton("Cancel");
