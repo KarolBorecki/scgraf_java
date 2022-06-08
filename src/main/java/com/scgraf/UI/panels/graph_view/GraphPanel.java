@@ -24,6 +24,7 @@ public class GraphPanel extends AnchorPane {
         primaryStage = stage;
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
+        Solver.getInstance().addGraphChangeObserver(this::updateGraph);
         Solver.getInstance().addPathDrawObserver(this::drawPath);
 
         updateGraph(graph);

@@ -4,6 +4,7 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.logger.Logger;
+import com.scgraf.solver.Solver;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 
@@ -24,6 +25,8 @@ public class GraphInfoPanel extends BorderPane {
         setRight(loggerInfo);
 
         Logger.getInstance(loggerInfo).log(Logger.StatusLog.OK);
+
+        Solver.getInstance().addGraphChangeObserver(this::updateGraph);
 
         updateGraph(graph);
     }

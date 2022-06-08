@@ -10,33 +10,17 @@ import com.scgraf.utils.UIUtils;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class GraphView extends BorderPane implements Observer<Graph> {
-    private final Graph graph;
-
-    private final GraphPanel graphPanel;
-    private final GraphInfoPanel infoPane;
-
+public class GraphView extends BorderPane {
     public GraphView(Stage stage){
         super();
         UIUtils.setStaticSize(this, UIConfig.graphPanelWidth, 0);
 
-        graph = Solver.getInstance().getGraph();
-        Solver.getInstance().addGraphChangeObserver(this);
+        Graph startGraph = Solver.getInstance().getGraph();
 
-        infoPane = new GraphInfoPanel(graph);
-        graphPanel = new GraphPanel(graph, stage);
+        GraphInfoPanel infoPane = new GraphInfoPanel(startGraph);
+        GraphPanel graphPanel = new GraphPanel(startGraph, stage);
 
         setCenter(graphPanel);
         setTop(infoPane);
-    }
-
-    @Override
-    public void call(Graph graph){
-        updateGraph(graph);
-    }
-
-    private void updateGraph(Graph graph){
-        infoPane.updateGraph(graph);
-        graphPanel.updateGraph(graph);
     }
 }
