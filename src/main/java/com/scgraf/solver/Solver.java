@@ -35,6 +35,7 @@ public class Solver {
     private Graph graph;
 
     public List<Observer<Graph>> onGraphChangeNotify;
+    public List<Observer<Node[]>> onPathDrawNotify;
 
     public static Solver instance;
 
@@ -45,6 +46,7 @@ public class Solver {
     public Solver(){
         this(GraphGenerator.GenerateExample());
         onGraphChangeNotify = new ArrayList<>();
+        onPathDrawNotify = new ArrayList<>();
     }
 
     public static Solver getInstance(Graph graph) {
@@ -61,32 +63,32 @@ public class Solver {
     }
 
     public void findShortest(Node startNode, Node endNode){
-        Logger.getInstance().log(Logger.StatusLog.CALCULATING);
-        System.out.println("FINDING SHORTEST: " + startNode + " " + endNode);
-        Logger.getInstance().log(Logger.StatusLog.OK);
+        startBackgroundSolverTask(()->{
+            try {
+                return Dijkstra.getShortestPathArray(graph, startNode, endNode);
+            } catch (Dijkstra.DijkstraNotSolvedException e) {
+                e.printStackTrace();
+            } catch (Dijkstra.DijkstraCannotFindPathException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
     }
 
     public void divide(int n){
-        Task<Graph> dividingTask = new Task<Graph>() {
-            @Override
-            public Graph call(){
-                try {
-                    DijkstraDivider.divideGraphThisManyTimes(graph, n);
-                    return graph;
-                } catch (DijkstraDivider.TooManyDividesException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } catch (Dijkstra.DijkstraNotSolvedException e) {
-                    e.printStackTrace();
-                }
-                return null;
+        startBackgroundSolverTask(()->{
+            try {
+                DijkstraDivider.divideGraphThisManyTimes(graph, n);
+                return graph;
+            } catch (DijkstraDivider.TooManyDividesException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (Dijkstra.DijkstraNotSolvedException e) {
+                e.printStackTrace();
             }
-        };
-
-
-        Thread dividingThread = new Thread(dividingTask);
-        dividingThread.start();
+            return null;
+        });
     }
 
     public void checkConsistency(){
@@ -153,6 +155,8 @@ public class Solver {
     private <T> void OnSolverTaskEnd(Task<T> task){
         if(task.getValue() instanceof Graph)
             setGraph((Graph) task.getValue());
+        else if(task.getValue() instanceof Node[])
+            setPath((Node[]) task.getValue());
         else if(task.getValue() instanceof String)
             Logger.getInstance().popup((String) task.getValue());
 
@@ -171,6 +175,11 @@ public class Solver {
             c.call(graph);
     }
 
+    public void setPath(Node[] path){
+        for (Observer<Node[]> c: onPathDrawNotify)
+            c.call(path);
+    }
+
     public Graph getGraph(){
         return graph;
     }
@@ -181,5 +190,13 @@ public class Solver {
 
     public void removeGraphChangeObserver(Observer<Graph> obs){
         onGraphChangeNotify.remove(obs);
+    }
+
+    public void addPathDrawObserver(Observer<Node[]> obs){
+        onPathDrawNotify.add(obs);
+    }
+
+    public void removePathDrawObserver(Observer<Node[]> obs){
+        onPathDrawNotify.remove(obs);
     }
 }

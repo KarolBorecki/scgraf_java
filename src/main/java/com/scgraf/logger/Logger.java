@@ -42,7 +42,6 @@ public class Logger {
     }
 
     public void log(StatusLog status){
-        System.out.println("Changing to: " + status.text);
         logText.setCaption(status.text).setColor(status.color).build();
         this.status = status;
     }

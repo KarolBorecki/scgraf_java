@@ -3,7 +3,6 @@ package com.scgraf.data_handling;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 
-import javax.security.auth.callback.TextInputCallback;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -66,7 +65,7 @@ public class FileReaderG {
                 Node finishNode = graph.getNode(finishNodeIndex / graph.getSize().width(), finishNodeIndex % graph.getSize().width());
                 Node currNode = graph.getNode(i / graph.getSize().width(), i % graph.getSize().width());
 
-                currNode.setupPath(graph.getPathForConnection(currNode, finishNode), weight);
+                currNode.setupPath(graph.getPathSideForConnection(currNode, finishNode), weight);
 
                 oldEnd = matcher.end();
             }

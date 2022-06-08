@@ -50,8 +50,8 @@ public class Graph implements Iterable<Node>{
     }
 */
     public Node getNeighbourNode(Node node, Path.Side side){
-        int row = node.graphID / size.width();
-        int column = node.graphID % size.width();
+        int row = getNodeX(node);
+        int column = getNodeY(node);
 
         if(side == Path.Side.LEFT)
             if(column <= 0) return null;
@@ -73,7 +73,7 @@ public class Graph implements Iterable<Node>{
         return getNode(row, column);
     }
 
-    public Path.Side getPathForConnection(Node startNode, Node endNode) throws InvalidMeshConnection{
+    public Path.Side getPathSideForConnection(Node startNode, Node endNode) throws InvalidMeshConnection{
         if(startNode.getGraphID() + 1 == endNode.getGraphID()){
             return Path.Side.RIGHT;
         }else if(startNode.getGraphID() - 1 == endNode.getGraphID()){
@@ -122,6 +122,14 @@ public class Graph implements Iterable<Node>{
         for (Node node : this)
             if(node.getGraphID() == graphID) return node;
         return null;
+    }
+
+    public int getNodeX(Node node){
+        return node.getGraphID() / size.width();
+    }
+
+    public int getNodeY(Node node){
+        return node.getGraphID() % size.width();
     }
 
     public int getNodesCount(){

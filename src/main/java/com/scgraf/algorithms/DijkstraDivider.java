@@ -91,7 +91,7 @@ public class DijkstraDivider{
     private static Path.Side [] initializeConnections(Graph dividedGraph, Node[] tabNode) throws Graph.InvalidMeshConnection {
         Path.Side [] tabPath = new Path.Side [tabNode.length - 1];
         for (int i = 1; i < tabNode.length && tabNode[i] != null; i++) {
-            tabPath[i - 1] = dividedGraph.getPathForConnection(tabNode[i - 1], tabNode[i]);
+            tabPath[i - 1] = dividedGraph.getPathSideForConnection(tabNode[i - 1], tabNode[i]);
         }
         return tabPath;
     }
