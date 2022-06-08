@@ -61,7 +61,7 @@ public class GraphPanel extends AnchorPane {
         boolean drawCaptions = graph.getNodesCount() <= UIConfig.maxGraphNodesCountToDrawCaptions;
         for(int y=0; y<numRows; y++)
             for(int x=0; x<numCols; x++){
-                nodeElements[y][x] = new NodeElement(graph.getNode(y, x), cellSize, lightPathLimit, mediumPathLimit, drawCaptions);
+                nodeElements[y][x] = new NodeElement(graph.getNode(y, x), cellSize, graph.getMaxConnectionWeight(), drawCaptions);
                 setLeftAnchor(nodeElements[y][x], cellSize * x);
                 setTopAnchor(nodeElements[y][x], cellSize * y);
 

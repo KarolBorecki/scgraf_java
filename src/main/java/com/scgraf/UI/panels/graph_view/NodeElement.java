@@ -14,7 +14,7 @@ public class NodeElement extends StackPane {
     private Line rightPathLine;
     private Line bottomPathLine;
 
-    public NodeElement(Node node, double size, double lightLimit, double mediumLimit, boolean drawCaption) {
+    public NodeElement(Node node, double size, double maxWeight, boolean drawCaption) {
         super();
         double center = size / 2;
 
@@ -33,16 +33,12 @@ public class NodeElement extends StackPane {
                 double y = i==Path.Side.BOTTOM.index ? center * UIConfig.graphNodePathSizeFactor : 0;
                 if(i == Path.Side.RIGHT.index){
                     rightPathLine = new Line(center, center , center + x, center + y);
-                    if(p.getWeight() < lightLimit) rightPathLine.setStroke(UIConfig.graphLightPathColor);
-                    else if(p.getWeight() < mediumLimit) rightPathLine.setStroke(UIConfig.graphMediumPathColor);
-                    else rightPathLine.setStroke(UIConfig.graphHeavyPathColor);
                     rightPathLine.setStrokeWidth(Math.max(size / 30, UIConfig.minPathWidth));
+                    rightPathLine.setStroke(getPathColor(p.getWeight(), maxWeight));
                     paths.getChildren().add(rightPathLine);
                 }else if(i == Path.Side.BOTTOM.index){
                     bottomPathLine = new Line(center, center , center + x, center + y);
-                    if(p.getWeight() < lightLimit) bottomPathLine.setStroke(UIConfig.graphLightPathColor);
-                    else if(p.getWeight() < mediumLimit) bottomPathLine.setStroke(UIConfig.graphMediumPathColor);
-                    else bottomPathLine.setStroke(UIConfig.graphHeavyPathColor);
+                    bottomPathLine.setStroke(getPathColor(p.getWeight(), maxWeight));
                     bottomPathLine.setStrokeWidth(Math.max(size / 30, UIConfig.minPathWidth));
                     paths.getChildren().add(bottomPathLine);
                 }
@@ -61,14 +57,21 @@ public class NodeElement extends StackPane {
     }
 
     public void highlightRight(){
-        if(rightPathLine != null) rightPathLine.setStroke(Color.VIOLET);
+        if(rightPathLine != null) rightPathLine.setStroke(UIConfig.graphShortestPathColor);
     }
 
     public void highlightBottom(){
-        if(bottomPathLine != null) bottomPathLine.setStroke(Color.VIOLET);
+        if(bottomPathLine != null) bottomPathLine.setStroke(UIConfig.graphShortestPathColor);
     }
 
     public void highlight(){
-        circle.setFill(Color.VIOLET);
+        circle.setFill(UIConfig.graphShortestPathColor);
+    }
+
+    private static Color getPathColor(double weight, double maxWeight){
+        final double lightHUE = Color.GREEN.getHue();
+        final double heavyHUE = Color.RED.getHue();
+        double hue = lightHUE + (heavyHUE-lightHUE)*weight/maxWeight;
+        return Color.hsb(hue, 0.8, 0.9);
     }
 }
