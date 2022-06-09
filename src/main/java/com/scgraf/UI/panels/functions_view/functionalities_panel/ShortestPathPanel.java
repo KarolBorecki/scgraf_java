@@ -33,4 +33,10 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
             Logger.getInstance().errPopup("Provided wrong input data!");
         }
     }
+
+    @Override
+    protected void cancel() {
+        super.cancel();
+        Solver.getInstance().cleanPath();
+    }
 }

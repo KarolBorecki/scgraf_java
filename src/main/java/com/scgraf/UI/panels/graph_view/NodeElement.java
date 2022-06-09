@@ -11,12 +11,18 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class NodeElement extends StackPane {
+    Node node;
+    double maxWeight;
+
     Circle circle;
     private Line rightPathLine;
     private Line bottomPathLine;
 
     public NodeElement(Node node, double size, double maxWeight, boolean drawCaption) {
         super();
+        this.node = node;
+        this.maxWeight = maxWeight;
+
         double center = size / 2;
 
         setWidth(size);
@@ -63,6 +69,12 @@ public class NodeElement extends StackPane {
 
     public void highlight() {
         circle.setFill(UIConfig.graphShortestPathColor);
+    }
+
+    public void stopHighlight(){
+        circle.setFill(UIConfig.graphNodeColor);
+        if(rightPathLine != null) rightPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.RIGHT), maxWeight));
+        if(bottomPathLine != null) bottomPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.BOTTOM), maxWeight));
     }
 
     private static Color getPathColor(double weight, double maxWeight) {

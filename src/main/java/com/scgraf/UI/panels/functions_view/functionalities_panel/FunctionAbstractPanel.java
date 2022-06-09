@@ -12,14 +12,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public abstract class FunctionAbstractPanel extends VBox implements SolverCaller {
+    protected FunctionPanelManager panelManager;
+
     protected VBox btnPanel;
     protected HBox infoText;
 
     protected SubfunctionButton execBtn;
     protected CancelButton cancelBtn;
 
-    public FunctionAbstractPanel(FunctionPanelManager root, String execBtnCaption, String infoText) {
+    public FunctionAbstractPanel(FunctionPanelManager panelManager, String execBtnCaption, String infoText) {
         super();
+        this.panelManager = panelManager;
+
         setSpacing(UIConfig.panelRegularSpacing);
         setAlignment(Pos.CENTER);
         setPadding(UIConfig.panelPadding);
@@ -36,15 +40,17 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
         execBtn.setOnAction(actionEvent -> solve());
 
         cancelBtn = new CancelButton("Cancel");
-        cancelBtn.setOnAction(actionEvent -> {
-            root.switchFunction(FunctionPanelManager.Functionality.ALL);
-            Logger.getInstance().log(Logger.StatusLog.OK); //TODO not sure about it
-        });
+        cancelBtn.setOnAction(event->cancel());
 
         btnPanel.getChildren().addAll(execBtn, cancelBtn);
     }
 
     public void buildFunctionView(Pane inputPane) {
         getChildren().addAll(infoText, inputPane, btnPanel);
+    }
+
+    protected void cancel(){
+        panelManager.switchFunction(FunctionPanelManager.Functionality.ALL);
+        Logger.getInstance().log(Logger.StatusLog.OK); //TODO not sure about it
     }
 }

@@ -4,7 +4,6 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
-import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.solver.Solver;
 import com.scgraf.utils.UIUtils;
 import javafx.scene.layout.AnchorPane;
@@ -14,7 +13,8 @@ public class GraphPanel extends AnchorPane {
     Stage primaryStage;
 
     private Graph graph;
-    private NodeElement[][] nodeElements;
+    private NodeElement[][] drawNodes;
+    private NodeElement[] drawPath;
 
     public GraphPanel(Graph graph, Stage stage) {
         super();
@@ -23,6 +23,7 @@ public class GraphPanel extends AnchorPane {
 
         Solver.getInstance().addGraphChangeObserver(this::updateGraph);
         Solver.getInstance().addPathDrawObserver(this::drawPath);
+        Solver.getInstance().addPathCleanObserver(this::cleanPath);
 
         updateGraph(graph);
     }
@@ -51,24 +52,25 @@ public class GraphPanel extends AnchorPane {
             setSize(getWidth(), getWidth());
         }
 
-        nodeElements = new NodeElement[numRows][numCols];
+        drawNodes = new NodeElement[numRows][numCols];
 
         boolean drawCaptions = graph.getNodesCount() <= UIConfig.maxGraphNodesCountToDrawCaptions;
         for (int y = 0; y < numRows; y++)
             for (int x = 0; x < numCols; x++) {
-                nodeElements[y][x] = new NodeElement(graph.getNode(y, x), cellSize, graph.getMaxConnectionWeight(), drawCaptions);
-                setLeftAnchor(nodeElements[y][x], cellSize * x);
-                setTopAnchor(nodeElements[y][x], cellSize * y);
+                drawNodes[y][x] = new NodeElement(graph.getNode(y, x), cellSize, graph.getMaxConnectionWeight(), drawCaptions);
+                setLeftAnchor(drawNodes[y][x], cellSize * x);
+                setTopAnchor(drawNodes[y][x], cellSize * y);
 
-                getChildren().add(nodeElements[y][x]);
+                getChildren().add(drawNodes[y][x]);
             }
         setSize(cellSize * numCols, cellSize * numRows);
     }
 
     public void drawPath(Node[] pathNodes) {
+        drawPath = new NodeElement[pathNodes.length];
         for (int i = 0; i < pathNodes.length - 1; i++) {
-            NodeElement actualNode = nodeElements[graph.getNodeX(pathNodes[i])][graph.getNodeY(pathNodes[i])];
-            NodeElement nextNode = nodeElements[graph.getNodeX(pathNodes[i + 1])][graph.getNodeY(pathNodes[i + 1])];
+            NodeElement actualNode = drawNodes[graph.getNodeX(pathNodes[i])][graph.getNodeY(pathNodes[i])];
+            NodeElement nextNode = drawNodes[graph.getNodeX(pathNodes[i + 1])][graph.getNodeY(pathNodes[i + 1])];
             actualNode.highlight();
             nextNode.highlight();
             try {
@@ -80,7 +82,16 @@ public class GraphPanel extends AnchorPane {
             } catch (Graph.InvalidMeshConnection e) {
                 e.printStackTrace();
             }
+            drawPath[i] = actualNode;
+            drawPath[i+1] = nextNode;
         }
+    }
+
+    public void cleanPath(Node[] path){
+        if(drawPath == null) return;
+
+        for (NodeElement nodeElement : drawPath)
+            nodeElement.stopHighlight();
     }
 
     private void setSize(double width, double height) {

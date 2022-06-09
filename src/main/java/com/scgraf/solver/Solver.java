@@ -28,6 +28,7 @@ public class Solver {
 
     public List<Observer<Graph>> onGraphChangeNotify;
     public List<Observer<Node[]>> onPathDrawNotify;
+    public List<Observer<Node[]>> onPathCleanNotify;
 
     public static Solver instance;
 
@@ -39,6 +40,7 @@ public class Solver {
         this(GraphGenerator.GenerateExample());
         onGraphChangeNotify = new ArrayList<>();
         onPathDrawNotify = new ArrayList<>();
+        onPathCleanNotify = new ArrayList<>();
     }
 
     public static Solver getInstance(Graph graph) {
@@ -88,6 +90,7 @@ public class Solver {
     }
 
     public void SaveGraph() {
+        //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -97,10 +100,10 @@ public class Solver {
                 FileWriterG.writeGraphToFile(graph, file);
                 return null;
             });
-        else Logger.getInstance().errPopup("Could not open the file.");
     }
 
     public void LoadGraph() {
+        //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -114,7 +117,6 @@ public class Solver {
             }
             return null;
         });
-        else Logger.getInstance().errPopup("Could not open the file.");
     }
 
     private <T> void startBackgroundSolverTask(Callable<T> method) {
@@ -170,6 +172,11 @@ public class Solver {
             c.call(path);
     }
 
+    public void cleanPath(){
+        for (Observer<Node[]> c : onPathCleanNotify)
+            c.call(null);
+    }
+
     public Graph getGraph() {
         return graph;
     }
@@ -188,5 +195,13 @@ public class Solver {
 
     public void removePathDrawObserver(Observer<Node[]> obs) {
         onPathDrawNotify.remove(obs);
+    }
+
+    public void addPathCleanObserver(Observer<Node[]> obs) {
+        onPathCleanNotify.add(obs);
+    }
+
+    public void removePathCleanObserver(Observer<Node[]> obs) {
+        onPathCleanNotify.remove(obs);
     }
 }

@@ -119,6 +119,7 @@ public class Graph implements Iterable<Node> {
         return nodes[row][column];
     }
 
+    //TODO change - we can calculate row and column for this
     public Node getNode(int graphID) {
         for (Node node : this)
             if (node.getGraphID() == graphID) return node;
@@ -208,4 +209,10 @@ public class Graph implements Iterable<Node> {
         }
     }
 
+    public static class NodeNotFoundException extends Throwable {
+        @Override
+        public String toString(){
+            return "Could not found node!";
+        }
+    }
 }
