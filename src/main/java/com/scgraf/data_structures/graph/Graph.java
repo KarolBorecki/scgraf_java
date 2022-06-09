@@ -169,7 +169,7 @@ public class Graph implements Iterable<Node>{
         return new GraphIterator(this);
     }
 
-    public class InvalidMeshConnection extends Throwable{
+    public static class InvalidMeshConnection extends Throwable{
         private String msg= "Invalid connection for a mesh graph!\n";
 
         public InvalidMeshConnection(Node n1, Node n2){
@@ -187,7 +187,6 @@ public class Graph implements Iterable<Node>{
     }
 
     private static class GraphIterator implements Iterator<Node> {
-
         private Node [][] t;
         int x, y;
         int lgt;

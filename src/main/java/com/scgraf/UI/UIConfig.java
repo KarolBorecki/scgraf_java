@@ -6,27 +6,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 
 public class UIConfig {
-    /* COLORS SETTINGS */
-    public static Color backgroundColor = Color.web("2a2d34");
-    public static Color functionsViewBckColor = Color.web("24272d");
-
-    public static Color regularBtnColor = Color.web("6ea4bf");
-    public static Color subBtnColor = Color.web("6ea4bf");
-    public static Color cancelBtnColor = Color.web("ad343e");
-
-    public static Color borderColor = Color.web("f8f4e3");
-
-    public static Color textColor = Color.web("f8f4e3");
-
-    public static Color textFieldBckColor = Color.web("363b44");
-
-    public static Color errorColor = Color.web("e04f5f");
-    public static Color warningColor = Color.web("f2af29");
-    public static Color okColor = Color.web("4da167");
-
-    public static Color graphNodeColor = Color.web("f8f4e3");
-    public static Color graphShortestPathColor = Color.web("6d73b0");
-
     /* FONT SETTINGS */
     public static int fontRegularSize = 15;
     public static int fontSmallSize = 13;
@@ -35,6 +14,12 @@ public class UIConfig {
     /* STAGE SETTINGS */
     public static int stageWidth;
     public static int stageHeight;
+    public static Color backgroundColor = Color.web("2a2d34");
+    public static Color textColor = Color.web("f8f4e3");
+
+    public static Color errorColor = Color.web("e04f5f");
+    public static Color warningColor = Color.web("f2af29");
+    public static Color okColor = Color.web("4da167");
 
     /* POPUP SETTINGS */
     public static int popupWidth;
@@ -50,6 +35,9 @@ public class UIConfig {
     /* BTN SETTINGS */
     public static int btnPrefWidth = 200;
     public static int btnPrefHeight;
+    public static Color regularBtnColor = Color.web("6ea4bf");
+    public static Color subBtnColor = Color.web("6ea4bf");
+    public static Color cancelBtnColor = Color.web("ad343e");
 
     /* DROP SHADOW SETTINGS */
     public static int shadowRadius = 5;
@@ -59,19 +47,22 @@ public class UIConfig {
     public static int textFieldPrefWidth = 150;
     public static int textFieldMinWidth = 60;
     public static int textFieldMaxWidth = 200;
+    public static Color textFieldBckColor = Color.web("363b44");
+
+    /* BORDER SETTINGS */
+    public static int borderHeight = 1;
+    public static int borderRadius = 5;
+    public static Color borderColor = Color.web("f8f4e3");
 
     /* FUNCTIONS VIEW SETTINGS */
     public static int functionsViewHeight;
+    public static Color functionsViewBckColor = Color.web("24272d");
 
     /* FUNCTIONS PANEL SETTINGS */
     public static int functionsPanelWidth;
 
     /* FILE PANEL SETTINGS */
     public static int filePanelWidth;
-
-    /* BORDER SETTINGS */
-    public static int borderHeight = 1;
-    public static int borderRadius = 5;
 
     /* GRAPH INFO SETTINGS */
     public static int graphInfoWidth;
@@ -84,6 +75,8 @@ public class UIConfig {
     public static double graphNodePathSizeFactor = 2;
     public static double minPathWidth = 0.5;
     public static int maxGraphNodesCountToDrawCaptions = 1000;
+    public static Color graphNodeColor = Color.web("f8f4e3");
+    public static Color graphShortestPathColor = Color.web("b74f6f");
 
     static {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
@@ -93,8 +86,8 @@ public class UIConfig {
         btnPrefHeight = (int)(stageHeight/15);
 
         functionsViewHeight = (int)(stageHeight / 4.5);
-        functionsPanelWidth = (int) (stageWidth / 4 * 5);
-        filePanelWidth = (int) (stageWidth / 5);
+        functionsPanelWidth = (int) (stageWidth * 0.75);
+        filePanelWidth = (int) (stageWidth - functionsPanelWidth);
 
         popupWidth = stageWidth / 2;
         popupHeight = stageHeight / 6;

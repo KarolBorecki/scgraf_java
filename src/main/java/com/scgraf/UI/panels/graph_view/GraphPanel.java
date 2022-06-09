@@ -14,10 +14,7 @@ public class GraphPanel extends AnchorPane {
     Stage primaryStage;
 
     private Graph graph;
-
     private NodeElement[][] nodeElements;
-    private Size graphSize;
-    private double cellSize;
 
     public GraphPanel(Graph graph, Stage stage) {
         super();
@@ -33,19 +30,20 @@ public class GraphPanel extends AnchorPane {
     public void updateGraph(Graph graph){
         getChildren().clear();
         this.graph = graph;
-        drawGraph(graph, null);
+        drawGraph(graph);
     }
 
-    private void drawGraph(Graph graph, Node[] path){
+    private void drawGraph(Graph graph){
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
-        graphSize = graph.getSize();
+        Size graphSize = graph.getSize();
         final int numCols = graph.getSize().width();
         final int numRows = graph.getSize().height();
 
         final double cellSizeWidth = ((getWidth()) / numCols);
         final double cellSizeHeight = ((getHeight()) / numRows);
 
+        double cellSize;
         if(cellSizeWidth > cellSizeHeight){
             cellSize = cellSizeHeight;
             setSize(getHeight(), getHeight());
@@ -71,15 +69,14 @@ public class GraphPanel extends AnchorPane {
         setSize(cellSize * numCols, cellSize * numRows);
     }
 
-    public void drawPath(Node[] nodes){
-        System.out.println("Drawinf path");
-        for(int i=0; i<nodes.length-1; i++){
-            NodeElement actualNode = nodeElements[graph.getNodeX(nodes[i])][graph.getNodeY(nodes[i])];
-            NodeElement nextNode = nodeElements[graph.getNodeX(nodes[i+1])][graph.getNodeY(nodes[i+1])];
+    public void drawPath(Node[] pathNodes){
+        for(int i=0; i<pathNodes.length-1; i++){
+            NodeElement actualNode = nodeElements[graph.getNodeX(pathNodes[i])][graph.getNodeY(pathNodes[i])];
+            NodeElement nextNode = nodeElements[graph.getNodeX(pathNodes[i+1])][graph.getNodeY(pathNodes[i+1])];
             actualNode.highlight();
             nextNode.highlight();
             try {
-                Path.Side side = graph.getPathSideForConnection(nodes[i], nodes[i+1]);
+                Path.Side side = graph.getPathSideForConnection(pathNodes[i], pathNodes[i+1]);
                 if(side == Path.Side.RIGHT) actualNode.highlightRight();
                 else if(side == Path.Side.BOTTOM) actualNode.highlightBottom();
                 else if(side == Path.Side.TOP) nextNode.highlightBottom();

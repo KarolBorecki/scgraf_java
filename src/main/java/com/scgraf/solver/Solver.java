@@ -117,7 +117,6 @@ public class Solver {
     }
 
     public void SaveGraph(){
-        FormattedButton.DisableAll();
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
