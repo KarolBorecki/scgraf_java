@@ -2,6 +2,7 @@ package com.scgraf;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.views.MainView;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -14,6 +15,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         Application.stage = stage;
+        Platform.setImplicitExit(false);
         scene = new Scene(new MainView(), UIConfig.stageWidth, UIConfig.stageHeight);
         stage.setResizable(false);
 

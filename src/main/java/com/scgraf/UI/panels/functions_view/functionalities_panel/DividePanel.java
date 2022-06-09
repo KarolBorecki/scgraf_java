@@ -3,6 +3,7 @@ package com.scgraf.UI.panels.functions_view.functionalities_panel;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
+import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
@@ -24,7 +25,11 @@ public class DividePanel extends FunctionAbstractPanel {
 
     @Override
     public void solve() {
-        final int n = Integer.parseInt(divideNumberInput.getText());
-        Solver.getInstance().divide(n - 1);
+        try {
+            final int n = Integer.parseInt(divideNumberInput.getText());
+            Solver.getInstance().divide(n);
+        } catch (NumberFormatException e) {
+            Logger.getInstance().errPopup("Provided wrong input data!");
+        }
     }
 }

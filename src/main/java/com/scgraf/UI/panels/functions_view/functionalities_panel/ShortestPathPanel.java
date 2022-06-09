@@ -3,6 +3,7 @@ package com.scgraf.UI.panels.functions_view.functionalities_panel;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
+import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
@@ -24,9 +25,12 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
 
     @Override
     public void solve() {
-        //TODO HANDLE WRONG DATA
-        final int startNodeID = Integer.parseInt(startNodeIDIInput.getText());
-        final int endNodeID = Integer.parseInt(endNodeIDInput.getText());
-        Solver.getInstance().findShortest(Solver.getInstance().getGraph().getNode(startNodeID), Solver.getInstance().getGraph().getNode(endNodeID));
+        try {
+            final int startNodeID = Integer.parseInt(startNodeIDIInput.getText());
+            final int endNodeID = Integer.parseInt(endNodeIDInput.getText());
+            Solver.getInstance().findShortest(Solver.getInstance().getGraph().getNode(startNodeID), Solver.getInstance().getGraph().getNode(endNodeID));
+        } catch (NumberFormatException e) {
+            Logger.getInstance().errPopup("Provided wrong input data!");
+        }
     }
 }

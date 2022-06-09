@@ -3,6 +3,7 @@ package com.scgraf.algorithms;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
+import com.scgraf.logger.Logger;
 
 import java.util.Random;
 
@@ -65,9 +66,9 @@ public class DijkstraDivider {
         dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
     }
 
-    public static void divideGraphThisManyTimes(Graph dividedGraph, int divisionNumber) throws TooManyDividesException, Exception, Dijkstra.DijkstraNotSolvedException {
-        if (divisionNumber > dividedGraph.getSize().height())
-            throw new TooManyDividesException();
+    public static void divideGraphThisManyTimes(Graph dividedGraph, int divisionNumber) throws WrongDivisionsNumber, Exception, Dijkstra.DijkstraNotSolvedException {
+        if (divisionNumber > dividedGraph.getSize().height() || divisionNumber < 2)
+            throw new WrongDivisionsNumber(divisionNumber);
         int divisionPoint = getStartingHeight(dividedGraph);
 
         if (divisionPoint == 0)
@@ -124,7 +125,17 @@ public class DijkstraDivider {
         return PathToNode != PathFromNode;
     }
 
-    public static class TooManyDividesException extends Throwable {
+    public static class WrongDivisionsNumber extends Throwable {
+        private String errMsg = "Wrong division number: ";
 
+        public WrongDivisionsNumber(int n){
+            super();
+            errMsg += n;
+        }
+
+        @Override
+        public String getMessage() {
+            return errMsg;
+        }
     }
 }

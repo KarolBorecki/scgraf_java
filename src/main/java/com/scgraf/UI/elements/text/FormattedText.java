@@ -43,6 +43,11 @@ public class FormattedText extends Text {
         return this;
     }
 
+    public FormattedText setWrapping(int wrapWidth){
+        setWrappingWidth(wrapWidth);
+        return this;
+    }
+
     public void build() {
     }
 }

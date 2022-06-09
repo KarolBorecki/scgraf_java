@@ -12,6 +12,7 @@ import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import com.scgraf.logger.Logger;
 import com.scgraf.utils.Observer;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.FileChooser;
 import javafx.stage.Popup;
@@ -57,10 +58,8 @@ public class Solver {
         startBackgroundSolverTask(() -> {
             try {
                 return Dijkstra.getShortestPathArray(graph, startNode, endNode);
-            } catch (Dijkstra.DijkstraNotSolvedException e) {
-                Logger.getInstance().errPopup("Could solve the problem.");
-            } catch (Dijkstra.DijkstraCannotFindPathException e) {
-                Logger.getInstance().popup("Could not find the path.");
+            } catch (Dijkstra.DijkstraNotSolvedException | Dijkstra.DijkstraCannotFindPathException e) {
+                Platform.runLater(()->Logger.getInstance().errPopup(e.getMessage()));
             }
             return null;
         });
@@ -70,15 +69,10 @@ public class Solver {
         startBackgroundSolverTask(() -> {
             try {
                 DijkstraDivider.divideGraphThisManyTimes(graph, n);
-                return graph;
-            } catch (DijkstraDivider.TooManyDividesException e) {
-                Logger.getInstance().errPopup("Too many divisions for graph of size " + graph.getSize() + "!");
-            } catch (Dijkstra.DijkstraNotSolvedException e) {
-                Logger.getInstance().errPopup("Could not solve the problem.");
-            } catch (Exception e) {
-                Logger.getInstance().errPopup("Unknown error.");
+            } catch (DijkstraDivider.WrongDivisionsNumber | Dijkstra.DijkstraNotSolvedException | Exception e) {
+                Platform.runLater(()->Logger.getInstance().errPopup(e.getMessage()));
             }
-            return null;
+            return graph;
         });
     }
 
@@ -130,7 +124,7 @@ public class Solver {
                 try {
                     return method.call();
                 } catch (Exception e) {
-                    Logger.getInstance().errPopup("Cannot start the task!");
+                    Logger.getInstance().errPopup("Method failed: " + e.getMessage());
                 }
                 return null;
             }
@@ -149,19 +143,19 @@ public class Solver {
     }
 
     private <T> void OnSolverTaskEnd(Task<T> task) {
+        FormattedButton.EnableAll();
+        Logger.getInstance().log(Logger.StatusLog.OK);
+
         if (task.getValue() instanceof Graph)
             setGraph((Graph) task.getValue());
         else if (task.getValue() instanceof Node[])
             setPath((Node[]) task.getValue());
         else if (task.getValue() instanceof String)
             Logger.getInstance().popup((String) task.getValue());
-
-        FormattedButton.EnableAll();
-        Logger.getInstance().log(Logger.StatusLog.OK);
     }
 
     private <T> void OnSolverTaskFailed(Task<T> task) {
-        Logger.getInstance().errPopup("The task failed.");
+        Logger.getInstance().errPopup("Task failed: " + task.getException().getMessage());
         Logger.getInstance().log(Logger.StatusLog.ERROR);
     }
 

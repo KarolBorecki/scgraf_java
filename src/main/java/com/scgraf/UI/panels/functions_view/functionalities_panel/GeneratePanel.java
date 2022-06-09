@@ -3,6 +3,7 @@ package com.scgraf.UI.panels.functions_view.functionalities_panel;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
+import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -29,13 +30,15 @@ public class GeneratePanel extends FunctionAbstractPanel implements SolverCaller
     }
 
     @Override
-    @FXML //TODO REFACTOR OMFG
     public void solve() {
-        //TODO Handle wrong data
-        final int width = Integer.parseInt(widthInput.getText());
-        final int height = Integer.parseInt(heightInput.getText());
-        final double maxWeight = Double.parseDouble(maxPathWeightInput.getText());
+        try {
+            final int width = Integer.parseInt(widthInput.getText());
+            final int height = Integer.parseInt(heightInput.getText());
+            final double maxWeight = Double.parseDouble(maxPathWeightInput.getText());
+            Solver.getInstance().generate(width, height, maxWeight);
+        }catch (NumberFormatException e) {
+            Logger.getInstance().errPopup("Provided wrong input data!");
+        }
 
-        Solver.getInstance().generate(width, height, maxWeight);
     }
 }

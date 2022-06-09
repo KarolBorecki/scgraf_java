@@ -36,7 +36,6 @@ public class GraphPanel extends AnchorPane {
     private void drawGraph(Graph graph) {
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
-        Size graphSize = graph.getSize();
         final int numCols = graph.getSize().width();
         final int numRows = graph.getSize().height();
 
@@ -53,9 +52,6 @@ public class GraphPanel extends AnchorPane {
         }
 
         nodeElements = new NodeElement[numRows][numCols];
-
-        final double lightPathLimit = graph.getMaxConnectionWeight() / 3;
-        final double mediumPathLimit = graph.getMaxConnectionWeight() * 2 / 3;
 
         boolean drawCaptions = graph.getNodesCount() <= UIConfig.maxGraphNodesCountToDrawCaptions;
         for (int y = 0; y < numRows; y++)

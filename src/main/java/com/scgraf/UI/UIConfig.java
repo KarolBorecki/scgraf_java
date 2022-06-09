@@ -25,6 +25,7 @@ public class UIConfig {
     public static int popupWidth;
     public static int popupHeight;
     public static int popupImgSize;
+    public static int popupTextWrapWidth;
 
     /* OVERALL PANELS SETTINGS */
     public static int panelRegularSpacing = 15;
@@ -92,6 +93,7 @@ public class UIConfig {
         popupWidth = stageWidth / 2;
         popupHeight = stageHeight / 6;
         popupImgSize = (int) (popupHeight / 1.5);
+        popupTextWrapWidth = popupWidth - popupImgSize * 2;
 
         graphInfoWidth = stageWidth;
         graphInfoHeight = stageHeight / 15;
