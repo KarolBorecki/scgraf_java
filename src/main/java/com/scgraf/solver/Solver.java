@@ -93,27 +93,33 @@ public class Solver {
         startBackgroundSolverTask(() -> GraphGenerator.Generate(new Size(width, height), maxWeight));
     }
 
-    public void LoadGraph() {
-        final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Graph File");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        File file = fileChooser.showOpenDialog(new Popup());
-        if (file != null)
-            try {
-                setGraph(FileReaderG.readGraphFromFile(file));
-            } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
-                Logger.getInstance().errPopup("File read error.");
-            }
-        else Logger.getInstance().errPopup("Could not open the file.");
-    }
-
     public void SaveGraph() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         File file = fileChooser.showSaveDialog(new Popup());
         if (file != null)
-            FileWriterG.writeGraphToFile(graph, file);
+            startBackgroundSolverTask(()->{
+                FileWriterG.writeGraphToFile(graph, file);
+                return null;
+            });
+        else Logger.getInstance().errPopup("Could not open the file.");
+    }
+
+    public void LoadGraph() {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Graph File");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        File file = fileChooser.showOpenDialog(new Popup());
+        if (file != null)
+        startBackgroundSolverTask(()->{
+            try {
+                return FileReaderG.readGraphFromFile(file);
+            } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
+                Logger.getInstance().errPopup("File read error.");
+            }
+            return null;
+        });
         else Logger.getInstance().errPopup("Could not open the file.");
     }
 
