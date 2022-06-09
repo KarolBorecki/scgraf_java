@@ -1,14 +1,14 @@
 package com.scgraf.utils;
 
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 
 public class UIUtils {
-    public static void setStaticSize(Pane pane, double width, double height){
-        if(width != 0) {
+    public static void setStaticSize(Pane pane, double width, double height) {
+        if (width != 0) {
             pane.setMinWidth(width);
             pane.setMaxWidth(width);
         }
-        if(height != 0) {
+        if (height != 0) {
             pane.setMinHeight(height);
             pane.setMaxHeight(height);
         }

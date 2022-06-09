@@ -5,7 +5,7 @@ import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextAlignment;
 
 public class GraphInfoPanel extends BorderPane {
@@ -31,8 +31,8 @@ public class GraphInfoPanel extends BorderPane {
         updateGraph(graph);
     }
 
-    public void updateGraph(Graph graph){
-        graphInfo.setText("Width: " + graph.getSize().width() +"     Height: " + graph.getSize().height() +"     Weight: " + String.format("%.2f", graph.getMaxConnectionWeight()));
+    public void updateGraph(Graph graph) {
+        graphInfo.setText("Width: " + graph.getSize().width() + "     Height: " + graph.getSize().height() + "     Weight: " + String.format("%.2f", graph.getMaxConnectionWeight()));
     }
 
 }

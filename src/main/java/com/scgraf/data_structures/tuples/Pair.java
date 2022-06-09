@@ -1,6 +1,6 @@
 package com.scgraf.data_structures.tuples;
 
-public abstract class Pair<T, E> implements ITuple{
+public abstract class Pair<T, E> implements ITuple {
     public T first;
     public E second;
 

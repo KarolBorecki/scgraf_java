@@ -7,7 +7,6 @@ import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Objects;
 
 public class UILoader {
     public static Image buttonBckImg;
@@ -31,19 +30,19 @@ public class UILoader {
             e.printStackTrace();
         }
 
-        try{
+        try {
             regularFont = Font.loadFont(Application.class.getResourceAsStream("fonts/Lato/Lato-Bold.ttf"), UIConfig.fontRegularSize);
             regularSmallFont = Font.loadFont(Application.class.getResourceAsStream("fonts/Lato/Lato-Bold.ttf"), UIConfig.fontSmallSize);
             regularBigFont = Font.loadFont(Application.class.getResourceAsStream("fonts/Lato/Lato-Bold.ttf"), UIConfig.fontBigSize);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
-        if(regularFont == null)
+        if (regularFont == null)
             throw new NullPointerException("Regular font could not be be loaded!");
-        if(regularSmallFont == null)
+        if (regularSmallFont == null)
             throw new NullPointerException("Small font could not be be loaded!");
-        if(regularBigFont == null)
+        if (regularBigFont == null)
             throw new NullPointerException("Big font could not be be loaded!");
 
         buttonBck = new Background(new BackgroundImage(buttonBckImg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT));

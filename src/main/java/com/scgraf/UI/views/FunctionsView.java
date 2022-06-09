@@ -1,20 +1,17 @@
 package com.scgraf.UI.views;
 
+import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.panels.functions_view.FilePanel;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
-import com.scgraf.UI.UIConfig;
 import com.scgraf.utils.UIUtils;
 import javafx.geometry.Pos;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
 
 public class FunctionsView extends HBox {
-    public FunctionsView(){
+    public FunctionsView() {
         super();
         setAlignment(Pos.CENTER);
         UIUtils.setStaticSize(this, UIConfig.stageWidth, UIConfig.functionsViewHeight);
-        //        setBorder(new Border(new BorderStroke(UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor, UIConfig.borderColor,
-//                BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.NONE,
-//                CornerRadii.EMPTY, new BorderWidths(UIConfig.borderHeight), Insets.EMPTY)));
 
         FunctionPanelManager functionChoosePanel = new FunctionPanelManager();
         FilePanel filePanel = new FilePanel();

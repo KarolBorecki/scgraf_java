@@ -8,30 +8,31 @@ import com.scgraf.UI.elements.text.FormattedText;
 import javafx.scene.paint.Color;
 
 public class Logger {
-    public enum StatusLog{
+    public enum StatusLog {
         OK("OK", UIConfig.okColor),
         WARNING("WARNING", UIConfig.warningColor),
         ERROR("ERROR", UIConfig.errorColor),
-        CALCULATING("CALCULATING...", UIConfig.textColor),
-        DRAWING("DRAWING...", UIConfig.textColor);
+        CALCULATING("CALCULATING...", UIConfig.textColor);
 
         final String text;
         final Color color;
 
-        StatusLog(String text, Color color){
-            this.text = text; this.color = color;
+        StatusLog(String text, Color color) {
+            this.text = text;
+            this.color = color;
         }
     }
+
     public static Logger instance;
 
     public FormattedText logText;
     public StatusLog status;
 
-    public Logger(FormattedText text){
+    public Logger(FormattedText text) {
         this.logText = text;
     }
 
-    public static Logger getInstance(){
+    public static Logger getInstance() {
         return instance;
     }
 
@@ -41,22 +42,22 @@ public class Logger {
         return instance;
     }
 
-    public void log(StatusLog status){
+    public void log(StatusLog status) {
         logText.setCaption(status.text).setColor(status.color).build();
         this.status = status;
     }
 
-    public void popup(String info){
+    public void popup(String info) {
         Popup popup = new InfoPopup(info);
         popup.pop();
     }
 
-    public void errPopup(String info){
+    public void errPopup(String info) {
         Popup errPopup = new ErrorPopup(info);
         errPopup.pop();
     }
 
-    public StatusLog getStatus(){
+    public StatusLog getStatus() {
         return status;
     }
 }

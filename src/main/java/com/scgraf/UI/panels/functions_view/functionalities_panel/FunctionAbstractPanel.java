@@ -2,11 +2,9 @@ package com.scgraf.UI.panels.functions_view.functionalities_panel;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.CancelButton;
-import com.scgraf.UI.elements.buttons.RegularButton;
 import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
-import com.scgraf.UI.panels.functions_view.functionalities_panel.SolverCaller;
 import com.scgraf.logger.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
@@ -20,7 +18,7 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
     protected SubfunctionButton execBtn;
     protected CancelButton cancelBtn;
 
-    public FunctionAbstractPanel(FunctionPanelManager root, String execBtnCaption, String infoText){
+    public FunctionAbstractPanel(FunctionPanelManager root, String execBtnCaption, String infoText) {
         super();
         setSpacing(UIConfig.panelRegularSpacing);
         setAlignment(Pos.CENTER);
@@ -46,7 +44,7 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
         btnPanel.getChildren().addAll(execBtn, cancelBtn);
     }
 
-    public void buildFunctionView(Pane inputPane){
+    public void buildFunctionView(Pane inputPane) {
         getChildren().addAll(infoText, inputPane, btnPanel);
     }
 }

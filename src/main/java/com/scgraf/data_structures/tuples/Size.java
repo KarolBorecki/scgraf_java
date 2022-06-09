@@ -1,9 +1,10 @@
 package com.scgraf.data_structures.tuples;
 
-public class Size extends Pair<Integer, Integer>{
-    public Size(){
+public class Size extends Pair<Integer, Integer> {
+    public Size() {
         super(0, 0);
     }
+
     public Size(int width, int height) {
         super(width, height);
     }
@@ -16,13 +17,20 @@ public class Size extends Pair<Integer, Integer>{
         return second;
     }
 
-    public void setWidth(int newWidth){
+    public void setWidth(int newWidth) {
         first = newWidth;
     }
 
-    public void setHeight(int newHeight){
+    public void setHeight(int newHeight) {
         second = newHeight;
     }
 
-    public int getTotalSize(){return width() * height();}
+    public int getTotalSize() {
+        return width() * height();
+    }
+
+    @Override
+    public String toString() {
+        return width() + "x" + height();
+    }
 }

@@ -8,7 +8,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 
 public class FormattedTextField extends TextField {
-    public FormattedTextField(String info){
+    public FormattedTextField(String info) {
         super();
         setPromptText(info);
         setBackground(new Background(new BackgroundFill(UIConfig.textFieldBckColor, new CornerRadii(UIConfig.borderRadius), Insets.EMPTY)));

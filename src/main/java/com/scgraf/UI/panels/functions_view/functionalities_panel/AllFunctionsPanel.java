@@ -1,14 +1,13 @@
 package com.scgraf.UI.panels.functions_view.functionalities_panel;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.UI.elements.buttons.RegularButton;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
-public class AllFunctionsPanel  extends HBox {
-    public AllFunctionsPanel(FunctionPanelManager root){
+public class AllFunctionsPanel extends HBox {
+    public AllFunctionsPanel(FunctionPanelManager root) {
         super();
         setSpacing(UIConfig.panelRegularSpacing);
         setAlignment(Pos.CENTER);

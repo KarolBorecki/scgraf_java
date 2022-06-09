@@ -2,7 +2,6 @@ package com.scgraf.UI.elements.popup;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.FormattedButton;
-import com.scgraf.UI.elements.buttons.RegularButton;
 import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.logger.Logger;
@@ -14,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public abstract class Popup extends Stage implements Popupable{
+public abstract class Popup extends Stage implements Popupable {
 
     public Popup(String titleTxt, String infoTxt, String okBtnTxt, Image img) {
         HBox main = new HBox();
@@ -51,11 +50,11 @@ public abstract class Popup extends Stage implements Popupable{
         //borderPane.setBackground(new Background(new BackgroundFill(UIConfig.backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
-    public void pop(){
+    public void pop() {
         show();
     }
 
-    public void onBtnClicked(){
+    public void onBtnClicked() {
         close();
         FormattedButton.EnableAll();
         Logger.getInstance().log(Logger.StatusLog.OK);

@@ -1,7 +1,7 @@
 package com.scgraf.data_structures.queue;
 
 public interface IQueue<T> {
-    static final int RESIZE_FACTOR = 2;
+    int RESIZE_FACTOR = 2;
 
     void push(T o) throws IndexOutOfBoundsException;
 

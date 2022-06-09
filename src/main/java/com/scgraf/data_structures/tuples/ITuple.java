@@ -1,4 +1,4 @@
 package com.scgraf.data_structures.tuples;
 
-public interface ITuple{
+public interface ITuple {
 }

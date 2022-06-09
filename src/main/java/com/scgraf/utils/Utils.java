@@ -1,7 +1,7 @@
 package com.scgraf.utils;
 
 public class Utils {
-    public static void swap(Object[] arr, int a, int b){
+    public static void swap(Object[] arr, int a, int b) {
         Object c = arr[a];
         arr[a] = arr[b];
         arr[b] = c;
@@ -15,9 +15,9 @@ public class Utils {
         return java.util.Arrays.copyOf(arr, Size);
     }
 
-    public static <T> boolean arrContains(T[] arr, T wanted, int start, int end){
-        for(int i=start; i<end; i++)
-            if(arr[i] == wanted) return true;
+    public static <T> boolean arrContains(T[] arr, T wanted, int start, int end) {
+        for (int i = start; i < end; i++)
+            if (arr[i] == wanted) return true;
         return false;
     }
 }

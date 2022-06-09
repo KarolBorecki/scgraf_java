@@ -1,7 +1,6 @@
 package com.scgraf.UI.panels.functions_view;
 
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.UI.elements.text.CaptionText;
 import com.scgraf.UI.panels.functions_view.functionalities_panel.*;
 import javafx.geometry.Insets;
@@ -27,7 +26,7 @@ public class FunctionPanelManager extends BorderPane {
         GENERATE
     }
 
-    public FunctionPanelManager(){
+    public FunctionPanelManager() {
         super();
         setPrefWidth(UIConfig.functionsPanelWidth);
         setPadding(UIConfig.panelPadding);
@@ -49,16 +48,16 @@ public class FunctionPanelManager extends BorderPane {
         switchFunction(Functionality.ALL);
     }
 
-    public void switchFunction(Functionality functionality){
+    public void switchFunction(Functionality functionality) {
         functionPanelWrapper.getChildren().clear();
         setTop(null);
-        if(functionality == Functionality.ALL) {
+        if (functionality == Functionality.ALL) {
             functionPanelWrapper.getChildren().add(allFunctionsPanel);
             setTop(captionText);
         }
-        if(functionality == Functionality.SHORTEST) functionPanelWrapper.getChildren().add(shortestPathPanel);
-        if(functionality == Functionality.DIVIDE) functionPanelWrapper.getChildren().add(dividePanel);
-        if(functionality == Functionality.CONSISTENCY) functionPanelWrapper.getChildren().add(consistencyPanel);
-        if(functionality == Functionality.GENERATE) functionPanelWrapper.getChildren().add(generatePanel);
+        if (functionality == Functionality.SHORTEST) functionPanelWrapper.getChildren().add(shortestPathPanel);
+        if (functionality == Functionality.DIVIDE) functionPanelWrapper.getChildren().add(dividePanel);
+        if (functionality == Functionality.CONSISTENCY) functionPanelWrapper.getChildren().add(consistencyPanel);
+        if (functionality == Functionality.GENERATE) functionPanelWrapper.getChildren().add(generatePanel);
     }
 }

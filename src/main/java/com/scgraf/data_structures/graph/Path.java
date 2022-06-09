@@ -6,7 +6,7 @@ public record Path(double weight) {
         return weight;
     }
 
-    public enum Side{
+    public enum Side {
         TOP(0),
         RIGHT(1),
         BOTTOM(2),
@@ -16,7 +16,7 @@ public record Path(double weight) {
 
         public final int index;
 
-        Side(int index){
+        Side(int index) {
             this.index = index;
         }
 
@@ -26,44 +26,44 @@ public record Path(double weight) {
         }
 
         //Można wykorzystać fakt, że jest to (Side.index + 2) % 4
-        public Side getOppositeSide() throws Exception{
-            if(this.index == Side.TOP.index)
+        public Side getOppositeSide() throws Exception {
+            if (this.index == Side.TOP.index)
                 return Side.BOTTOM;
-            if(this.index == Side.BOTTOM.index)
+            if (this.index == Side.BOTTOM.index)
                 return Side.TOP;
-            if(this.index == Side.LEFT.index)
+            if (this.index == Side.LEFT.index)
                 return Side.RIGHT;
-            if(this.index == Side.RIGHT.index)
+            if (this.index == Side.RIGHT.index)
                 return Side.LEFT;
 
             throw new Exception();
         }
 
-        public Side getSideTurnedBy(int ammountOf90degreeTurns) throws Exception{
-            if(ammountOf90degreeTurns == 0)
+        public Side getSideTurnedBy(int ammountOf90degreeTurns) throws Exception {
+            if (ammountOf90degreeTurns == 0)
                 return this;
             int sideIndex;
-            if(ammountOf90degreeTurns>0){
+            if (ammountOf90degreeTurns > 0) {
                 ammountOf90degreeTurns %= 4;
-            }else{
+            } else {
                 ammountOf90degreeTurns = 4 + ammountOf90degreeTurns % 4;
             }
             sideIndex = (this.index + ammountOf90degreeTurns) % 4;
 
-            if(sideIndex == Side.TOP.index)
+            if (sideIndex == Side.TOP.index)
                 return Side.TOP;
-            if(sideIndex == Side.BOTTOM.index)
+            if (sideIndex == Side.BOTTOM.index)
                 return Side.BOTTOM;
-            if(sideIndex == Side.LEFT.index)
+            if (sideIndex == Side.LEFT.index)
                 return Side.LEFT;
-            if(sideIndex == Side.RIGHT.index)
+            if (sideIndex == Side.RIGHT.index)
                 return Side.RIGHT;
             throw new Exception();
         }
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return Double.toString(getWeight());
     }
 }

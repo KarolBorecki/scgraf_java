@@ -2,12 +2,6 @@ package com.scgraf;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.views.MainView;
-import com.scgraf.algorithms.BFS;
-import com.scgraf.algorithms.DijkstraDivider;
-import com.scgraf.algorithms.SimpleDivider;
-import com.scgraf.data_structures.graph.Graph;
-import com.scgraf.data_structures.tuples.Size;
-import com.scgraf.generator.GraphGenerator;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -28,7 +22,7 @@ public class Application extends javafx.application.Application {
         stage.show();
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch();
     }
 }

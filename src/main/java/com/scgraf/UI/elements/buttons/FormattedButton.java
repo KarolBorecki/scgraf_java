@@ -2,27 +2,20 @@ package com.scgraf.UI.elements.buttons;
 
 import com.scgraf.Application;
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.UILoader;
-import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FormattedButton extends Button {
     DropShadow shadow = new DropShadow(UIConfig.shadowRadius, UIConfig.shadowColor);
@@ -66,7 +59,6 @@ public class FormattedButton extends Button {
                     }
                 });
     }
-
 
 
     public static void DisableAll() {

@@ -5,7 +5,6 @@ import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class DividePanel extends FunctionAbstractPanel {
@@ -26,6 +25,6 @@ public class DividePanel extends FunctionAbstractPanel {
     @Override
     public void solve() {
         final int n = Integer.parseInt(divideNumberInput.getText());
-        Solver.getInstance().divide(n-1);
+        Solver.getInstance().divide(n - 1);
     }
 }

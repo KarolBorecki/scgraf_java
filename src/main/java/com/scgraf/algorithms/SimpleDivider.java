@@ -4,9 +4,7 @@ import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 
-import java.util.Random;
-
-public class SimpleDivider{
+public class SimpleDivider {
 
     private static void singleDivisionParallel(Graph dividedGraph, int parallel_division_point) {
         if (parallel_division_point < 0 || parallel_division_point > dividedGraph.getSize().height() - 1)
@@ -53,7 +51,7 @@ public class SimpleDivider{
 
     }
 
-    public static class TooManyDividesException extends Throwable{
+    public static class TooManyDividesException extends Throwable {
 
     }
 }

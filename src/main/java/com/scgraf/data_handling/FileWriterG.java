@@ -32,7 +32,7 @@ public class FileWriterG {
         printWriter.close();
     }
 
-    public static void writeGraphToFile(Graph g, String fileName){
+    public static void writeGraphToFile(Graph g, String fileName) {
         File newFile = new File(fileName);
         writeGraphToFile(g, newFile);
     }

@@ -2,7 +2,6 @@ package com.scgraf.UI.views;
 
 import com.scgraf.Application;
 import com.scgraf.UI.UIConfig;
-import com.scgraf.UI.elements.buttons.FormattedButton;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;

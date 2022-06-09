@@ -1,6 +1,6 @@
 package com.scgraf.data_structures.graph;
 
-public class Node implements Comparable<Node>{
+public class Node implements Comparable<Node> {
     protected final int ID;
     protected final int graphID;
 
@@ -8,36 +8,48 @@ public class Node implements Comparable<Node>{
 
     private static int nodeIDCounter = 0;
 
-    public Node(Graph parentGraph){
+    public Node(Graph parentGraph) {
         this.ID = nodeIDCounter++;
         this.graphID = parentGraph.getNextGraphID();
     }
 
-    public void setupPath(Path.Side side, double pathWeight){
+    public void setupPath(Path.Side side, double pathWeight) {
         setupPath(side, new Path(pathWeight));
     }
 
-    public void setupPath(Path.Side side, Path path){
+    public void setupPath(Path.Side side, Path path) {
         paths[side.index] = path;
     }
 
-    public void deletePath(Path.Side side){paths[side.index] = null;}
+    public void deletePath(Path.Side side) {
+        paths[side.index] = null;
+    }
 
-    public boolean isConnected(Path.Side side){
+    public boolean isConnected(Path.Side side) {
         return paths[side.index] != null;
     }
 
-    public int getID(){return ID;}
+    public int getID() {
+        return ID;
+    }
 
-    public int getGraphID(){return graphID;}
+    public int getGraphID() {
+        return graphID;
+    }
 
-    public Path[] getPaths(){return paths;}
+    public Path[] getPaths() {
+        return paths;
+    }
 
-    public Path getPath(Path.Side side){return getPath(side.index);}
+    public Path getPath(Path.Side side) {
+        return getPath(side.index);
+    }
 
-    public Path getPath(int sideIndex){return paths[sideIndex];}
+    public Path getPath(int sideIndex) {
+        return paths[sideIndex];
+    }
 
-    public double getConnectionWeight(Path.Side side){
+    public double getConnectionWeight(Path.Side side) {
         return paths[side.index].getWeight();
     }
 
@@ -47,11 +59,11 @@ public class Node implements Comparable<Node>{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder resultString = new StringBuilder("   [" + graphID + "]" + "Node " + ID + ":\n");
-        for(Path.Side side : Path.Side.values())
-            if(paths[side.index] != null)
+        for (Path.Side side : Path.Side.values())
+            if (paths[side.index] != null)
                 resultString.append("      ").append(side).append(": ").append(paths[side.index].getWeight()).append("\n");
-        return  resultString.toString();
+        return resultString.toString();
     }
 }

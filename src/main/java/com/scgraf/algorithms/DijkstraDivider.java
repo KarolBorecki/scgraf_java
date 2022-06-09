@@ -6,7 +6,7 @@ import com.scgraf.data_structures.graph.Path;
 
 import java.util.Random;
 
-public class DijkstraDivider{
+public class DijkstraDivider {
 
     public static void singleDivision(Graph dividedGraph, int divisionPoint) throws Dijkstra.DijkstraNotSolvedException, Dijkstra.DijkstraCannotFindPathException, Exception {
         Node firstNode = dividedGraph.getNode(divisionPoint, 0);
@@ -88,8 +88,8 @@ public class DijkstraDivider{
             }
     }
 
-    private static Path.Side [] initializeConnections(Graph dividedGraph, Node[] tabNode) throws Graph.InvalidMeshConnection {
-        Path.Side [] tabPath = new Path.Side [tabNode.length - 1];
+    private static Path.Side[] initializeConnections(Graph dividedGraph, Node[] tabNode) throws Graph.InvalidMeshConnection {
+        Path.Side[] tabPath = new Path.Side[tabNode.length - 1];
         for (int i = 1; i < tabNode.length && tabNode[i] != null; i++) {
             tabPath[i - 1] = dividedGraph.getPathSideForConnection(tabNode[i - 1], tabNode[i]);
         }
@@ -124,7 +124,7 @@ public class DijkstraDivider{
         return PathToNode != PathFromNode;
     }
 
-    public static class TooManyDividesException extends Throwable{
+    public static class TooManyDividesException extends Throwable {
 
     }
 }

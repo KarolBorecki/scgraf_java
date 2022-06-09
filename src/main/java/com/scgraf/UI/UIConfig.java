@@ -80,18 +80,18 @@ public class UIConfig {
 
     static {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        stageHeight = (int)(screenBounds.getHeight() * 0.93);
-        stageWidth = (int)(stageHeight/1.15);
+        stageHeight = (int) (screenBounds.getHeight() * 0.93);
+        stageWidth = (int) (stageHeight / 1.15);
 
-        btnPrefHeight = (int)(stageHeight/15);
+        btnPrefHeight = stageHeight / 15;
 
-        functionsViewHeight = (int)(stageHeight / 4.5);
+        functionsViewHeight = (int) (stageHeight / 4.5);
         functionsPanelWidth = (int) (stageWidth * 0.75);
-        filePanelWidth = (int) (stageWidth - functionsPanelWidth);
+        filePanelWidth = stageWidth - functionsPanelWidth;
 
         popupWidth = stageWidth / 2;
         popupHeight = stageHeight / 6;
-        popupImgSize = (int)(popupHeight / 1.5);
+        popupImgSize = (int) (popupHeight / 1.5);
 
         graphInfoWidth = stageWidth;
         graphInfoHeight = stageHeight / 15;

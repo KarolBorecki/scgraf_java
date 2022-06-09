@@ -6,12 +6,12 @@ import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.queue.PriorityQueue;
 import com.scgraf.utils.Utils;
 
-public class Dijkstra extends Thread{
+public class Dijkstra extends Thread {
 
     private final static int STARTING_SIZE = 4;
 
     private static PriorityQueue<DijkstraData> queToVisit;
-    private static DijkstraData [] dijkstraTable;
+    private static DijkstraData[] dijkstraTable;
 
     public static Node[] getShortestPathArray(Graph graph, Node startNode, Node finishNode) throws DijkstraNotSolvedException, DijkstraCannotFindPathException {
         Solve(graph, startNode);
@@ -35,7 +35,7 @@ public class Dijkstra extends Thread{
         return t;
     }
 
-    public static double getShortestPathLength(Graph graph, Node startNode, Node finishNode){
+    public static double getShortestPathLength(Graph graph, Node startNode, Node finishNode) {
         Solve(graph, startNode);
         double shortestPath = 0;
         if (finishNode == startNode)
@@ -76,8 +76,8 @@ public class Dijkstra extends Thread{
         }
     }
 
-    private static DijkstraData [] initializeDijkstraTable(Graph graph, Node startNode) {
-        DijkstraData [] dijkstraTable = new DijkstraData[graph.getNodesCount()];
+    private static DijkstraData[] initializeDijkstraTable(Graph graph, Node startNode) {
+        DijkstraData[] dijkstraTable = new DijkstraData[graph.getNodesCount()];
         queToVisit = new PriorityQueue<>(graph.getNextGraphID());
         for (int i = 0; i < graph.getSize().height(); i++)
             for (int j = 0; j < graph.getSize().width(); j++) {
@@ -120,8 +120,7 @@ public class Dijkstra extends Thread{
         }
     }
 
-    //TODO DELETE AND USE LOGGER
-    public class DijkstraNotSolvedException extends Throwable {
+    public static class DijkstraNotSolvedException extends Throwable {
 
     }
 

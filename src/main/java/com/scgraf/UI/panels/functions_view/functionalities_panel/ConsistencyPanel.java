@@ -7,7 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 public class ConsistencyPanel extends FunctionAbstractPanel {
-    public ConsistencyPanel(FunctionPanelManager root){
+    public ConsistencyPanel(FunctionPanelManager root) {
         super(root, "Check consistency", "The consistency will be checked:");
         VBox inputPane = new VBox();
         inputPane.setAlignment(Pos.CENTER);
