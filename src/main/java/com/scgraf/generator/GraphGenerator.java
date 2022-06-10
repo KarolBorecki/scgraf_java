@@ -10,9 +10,15 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
     private static final Random randomGenerator = new Random();
 
     public enum GeneratingType {
-        DIRECTED,
-        NOT_DIRECTED,
-        LINEAR_NOT_DIRECTED,
+        DIRECTED("Random"),
+        NOT_DIRECTED("Not directed"),
+        LINEAR_NOT_DIRECTED("Linear");
+
+        public final String str;
+
+        GeneratingType(String str) {
+            this.str = str;
+        }
     }
 
     public static Graph Generate(Size size, double maxPathWeight) {

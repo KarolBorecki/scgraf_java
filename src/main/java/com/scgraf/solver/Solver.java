@@ -90,8 +90,8 @@ public class Solver {
         });
     }
 
-    public void generate(int width, int height, double maxWeight) {
-        startBackgroundSolverTask(() -> GraphGenerator.Generate(new Size(width, height), maxWeight, GraphGenerator.GeneratingType.LINEAR_NOT_DIRECTED));
+    public void generate(int width, int height, double maxWeight, GraphGenerator.GeneratingType type) {
+        startBackgroundSolverTask(() -> GraphGenerator.Generate(new Size(width, height), maxWeight, type));
     }
 
     public void SaveGraph() {
