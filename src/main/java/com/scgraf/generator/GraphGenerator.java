@@ -12,6 +12,7 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
     public enum GeneratingType {
         DIRECTED,
         NOT_DIRECTED,
+        LINEAR_NOT_DIRECTED,
     }
 
     public static Graph Generate(Size size, double maxPathWeight) {
@@ -22,6 +23,7 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
     public static Graph Generate(Size size, double maxPathWeight, GeneratingType type) {
         if (type == GeneratingType.NOT_DIRECTED) return GenerateNotDirected(size, maxPathWeight);
         else if (type == GeneratingType.DIRECTED) return GenerateDirected(size, maxPathWeight);
+        else if (type == GeneratingType.LINEAR_NOT_DIRECTED) return GenerateNotDirectedLinear(size, maxPathWeight);
         else return null;
     }
 
@@ -59,6 +61,29 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
                     g.getNode(y, x).setupPath(Path.Side.TOP, maxWeight * randomGenerator.nextDouble());
                 if (y != size.height() - 1)
                     g.getNode(y, x).setupPath(Path.Side.BOTTOM, maxWeight * randomGenerator.nextDouble());
+            }
+        }
+
+        return g;
+    }
+
+    public static Graph GenerateNotDirectedLinear(Size size, double maxWeight){
+        Graph g = new Graph();
+        g.setSize(size).setWeight(maxWeight).build();
+        double step = maxWeight / g.getSize().getTotalSize();
+        double weight = 0;
+
+        for (int y = 0; y < size.height(); y++) {
+            for (int x = 0; x < size.width(); x++) {
+                if (x != 0)
+                    g.getNode(y, x).setupPath(Path.Side.LEFT, weight);
+                if (x != size.width() - 1)
+                    g.getNode(y, x).setupPath(Path.Side.RIGHT, weight);
+                if (y != 0)
+                    g.getNode(y, x).setupPath(Path.Side.TOP, weight);
+                if (y != size.height() - 1)
+                    g.getNode(y, x).setupPath(Path.Side.BOTTOM, weight);
+                weight+=step;
             }
         }
 

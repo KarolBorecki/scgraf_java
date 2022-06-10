@@ -1,6 +1,7 @@
 package com.scgraf.UI.elements.popup;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.elements.buttons.ButtonsDisabler;
 import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import com.scgraf.UI.elements.text.FormattedText;
@@ -59,14 +60,14 @@ public abstract class Popup extends Stage implements Popupable {
     }
 
     public void pop() {
-        FormattedButton.DisableAll();
+        ButtonsDisabler.DisableAll();
         okBtn.setDisable(false);
         show();
     }
 
     public void onBtnClicked() {
         close();
-        FormattedButton.EnableAll();
+        ButtonsDisabler.EnableAll();
         Logger.getInstance().log(Logger.StatusLog.OK);
     }
 }

@@ -1,12 +1,14 @@
 package com.scgraf.UI.panels.functions_view.functionalities_panel;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.elements.buttons.FormattedRadioButton;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.RadioButton;
 import javafx.scene.layout.HBox;
 
 public class GeneratePanel extends FunctionAbstractPanel implements SolverCaller {
@@ -24,8 +26,9 @@ public class GeneratePanel extends FunctionAbstractPanel implements SolverCaller
         widthInput = new FormattedTextField("Width");
         heightInput = new FormattedTextField("Height");
         maxPathWeightInput = new FormattedTextField("Maximum path weight");
+        FormattedRadioButton radio = new FormattedRadioButton();
 
-        inputPane.getChildren().addAll(widthInput, heightInput, maxPathWeightInput);
+        inputPane.getChildren().addAll(widthInput, heightInput, maxPathWeightInput, radio);
         buildFunctionView(inputPane);
     }
 

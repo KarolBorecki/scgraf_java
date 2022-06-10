@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -20,8 +21,6 @@ import java.util.ArrayList;
 public class FormattedButton extends Button {
     DropShadow shadow = new DropShadow(UIConfig.shadowRadius, UIConfig.shadowColor);
 
-    protected static ArrayList<FormattedButton> instances = new ArrayList();
-
     public FormattedButton(String label, Color bckColor, Color textColor, Font font, double sizeFactor) {
         this(label, bckColor, textColor, font);
 
@@ -30,7 +29,7 @@ public class FormattedButton extends Button {
 
     public FormattedButton(String label, Color bckColor, Color textColor, Font font) {
         super(label);
-        instances.add(this);
+        ButtonsDisabler.Add(this);
         setPrefSize(UIConfig.btnPrefWidth, UIConfig.btnPrefHeight);
 
         //setBackground(UILoader.buttonBck);
@@ -58,16 +57,5 @@ public class FormattedButton extends Button {
                         Application.scene.setCursor(Cursor.DEFAULT);
                     }
                 });
-    }
-
-
-    public static void DisableAll() {
-        for (FormattedButton btn : instances)
-            btn.setDisable(true);
-    }
-
-    public static void EnableAll() {
-        for (FormattedButton btn : instances)
-            btn.setDisable(false);
     }
 }

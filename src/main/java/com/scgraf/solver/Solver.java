@@ -1,5 +1,6 @@
 package com.scgraf.solver;
 
+import com.scgraf.UI.elements.buttons.ButtonsDisabler;
 import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.algorithms.BFS;
 import com.scgraf.algorithms.Dijkstra;
@@ -90,7 +91,7 @@ public class Solver {
     }
 
     public void generate(int width, int height, double maxWeight) {
-        startBackgroundSolverTask(() -> GraphGenerator.Generate(new Size(width, height), maxWeight));
+        startBackgroundSolverTask(() -> GraphGenerator.Generate(new Size(width, height), maxWeight, GraphGenerator.GeneratingType.LINEAR_NOT_DIRECTED));
     }
 
     public void SaveGraph() {
@@ -144,12 +145,12 @@ public class Solver {
     }
 
     private void OnSolverTaskStart() {
-        FormattedButton.DisableAll();
+        ButtonsDisabler.DisableAll();
         Logger.getInstance().log(Logger.StatusLog.CALCULATING);
     }
 
     private <T> void OnSolverTaskEnd(Task<T> task) {
-        FormattedButton.EnableAll();
+        ButtonsDisabler.EnableAll();
         Logger.getInstance().log(Logger.StatusLog.OK);
 
         if (task.getValue() instanceof Graph)
