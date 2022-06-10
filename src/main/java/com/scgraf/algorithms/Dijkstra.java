@@ -13,6 +13,7 @@ public class Dijkstra extends Thread {
     private static PriorityQueue<DijkstraData> queToVisit;
     private static DijkstraData[] dijkstraTable;
 
+    //TODO throw exception when wrong node
     public static Node[] getShortestPathArray(Graph graph, Node startNode, Node finishNode) throws DijkstraNotSolvedException, DijkstraCannotFindPathException {
         Solve(graph, startNode);
         Node[] t = new Node[STARTING_SIZE];

@@ -56,11 +56,15 @@ public class Solver {
         return instance;
     }
 
-    public void findShortest(Node startNode, Node endNode) {
+    public void findShortest(int startNodeID, int endNodeID) {
         startBackgroundSolverTask(() -> {
             try {
+                Node startNode = graph.getNode(startNodeID);
+                Node endNode = graph.getNode(endNodeID);
+                if(startNode == null || endNode == null)
+                    throw new Graph.NodeNotFoundException();
                 return Dijkstra.getShortestPathArray(graph, startNode, endNode);
-            } catch (Dijkstra.DijkstraNotSolvedException | Dijkstra.DijkstraCannotFindPathException e) {
+            } catch (Graph.NodeNotFoundException | Dijkstra.DijkstraNotSolvedException | Dijkstra.DijkstraCannotFindPathException e) {
                 Platform.runLater(()->Logger.getInstance().errPopup(e.getMessage()));
             }
             return null;

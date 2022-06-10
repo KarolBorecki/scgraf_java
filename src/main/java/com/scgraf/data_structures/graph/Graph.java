@@ -211,8 +211,8 @@ public class Graph implements Iterable<Node> {
 
     public static class NodeNotFoundException extends Throwable {
         @Override
-        public String toString(){
-            return "Could not found node!";
+        public String getMessage(){
+            return "Could not found the node!";
         }
     }
 }

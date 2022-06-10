@@ -28,7 +28,7 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
         try {
             final int startNodeID = Integer.parseInt(startNodeIDIInput.getText());
             final int endNodeID = Integer.parseInt(endNodeIDInput.getText());
-            Solver.getInstance().findShortest(Solver.getInstance().getGraph().getNode(startNodeID), Solver.getInstance().getGraph().getNode(endNodeID));
+            Solver.getInstance().findShortest(startNodeID, endNodeID);
         } catch (NumberFormatException e) {
             Logger.getInstance().errPopup("Provided wrong input data!");
         }

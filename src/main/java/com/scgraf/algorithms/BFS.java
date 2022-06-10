@@ -24,7 +24,9 @@ public class BFS extends Thread {
 
     private static Fifo<Node> initializeQue(Graph graph) {
         Fifo<Node> queToCheck = new Fifo<>(graph.getNodesCount());
-        Node startNode = graph.getNode(0, 0);
+        Node startNode = null;
+       startNode = graph.getNode(0, 0);
+
         queToCheck.push(startNode);
         for (Path.Side s : Path.Side.values()) {
             if (startNode.isConnected(s)) {
