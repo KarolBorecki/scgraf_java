@@ -32,7 +32,7 @@ public class GraphInfoPanel extends BorderPane {
     }
 
     public void updateGraph(Graph graph) {
-        graphInfo.setText("Width: " + graph.getSize().width() + "     Height: " + graph.getSize().height() + "     Weight: " + String.format("%.2f", graph.getMaxConnectionWeight()));
+        graphInfo.setText("Width: " + graph.getSize().width() + "     Height: " + graph.getSize().height() + "     Weight: " + String.format("%.2f", graph.getMaxPathWeight()));
     }
 
 }

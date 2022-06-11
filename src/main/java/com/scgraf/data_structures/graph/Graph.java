@@ -9,7 +9,7 @@ public class Graph implements Iterable<Node> {
 
     private Size size = new Size(); /* TODO assigndefault values */
 
-    private double maxConnectionWeight;
+    private double maxPathWeight;
 
     private int graphIDCounter = 0;
 
@@ -31,7 +31,7 @@ public class Graph implements Iterable<Node> {
     }
 
     public Graph setWeight(double weight) {
-        this.maxConnectionWeight = weight;
+        this.maxPathWeight = weight;
         return this;
     }
 
@@ -43,8 +43,8 @@ public class Graph implements Iterable<Node> {
                 nodes[y][x] = new Node(this);
     }
 
-    public double getMaxConnectionWeight() {
-        return maxConnectionWeight;
+    public double getMaxPathWeight() {
+        return maxPathWeight;
     }
 
     public Node getNeighbourNode(Node node, Path.Side side) {
@@ -84,19 +84,14 @@ public class Graph implements Iterable<Node> {
         throw new InvalidMeshConnection(startNode, endNode);
     }
 
+    public void setupPathBothWays(Node node, Path.Side side, double pathWeight) {
+        setupPathBothWays(node, side, new Path(pathWeight));
+    }
+
     public void setupPathBothWays(Node node, Path.Side side, Path path) {
         node.setupPath(side, path);
         try {
             this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setupPathBothWays(Node node, Path.Side side, double pathWeight) {
-        node.setupPath(side, pathWeight);
-        try {
-            this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), pathWeight);
         } catch (Exception e) {
             e.printStackTrace();
         }
