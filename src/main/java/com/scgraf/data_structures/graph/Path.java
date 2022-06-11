@@ -25,36 +25,16 @@ public record Path(double weight) {
             return sideNames[index];
         }
 
-        //Można wykorzystać fakt, że jest to (Side.index + 2) % 4
         public Side getOppositeSide() {
-            if (this.index == Side.TOP.index)
-                return Side.BOTTOM;
-            else if (this.index == Side.BOTTOM.index)
-                return Side.TOP;
-            else if (this.index == Side.LEFT.index)
-                return Side.RIGHT;
-            else return Side.LEFT;
-
+            return getSideTurnedBy(2);
         }
 
-        public Side getSideTurnedBy(int ammountOf90degreeTurns) {
-            if (ammountOf90degreeTurns == 0)
-                return this;
-            int sideIndex;
-            if (ammountOf90degreeTurns > 0) {
-                ammountOf90degreeTurns %= 4;
-            } else {
-                ammountOf90degreeTurns = 4 + ammountOf90degreeTurns % 4;
-            }
-            sideIndex = (this.index + ammountOf90degreeTurns) % 4;
+        public Side getSideTurnedBy(int amountOf90degreeTurns) {
+            int sideIndex = index;
+            if (amountOf90degreeTurns > 0) sideIndex = (sideIndex + amountOf90degreeTurns) % 4;
+            else sideIndex =  (sideIndex + 4 + amountOf90degreeTurns % 4) % 4;
 
-            if (sideIndex == Side.TOP.index)
-                return Side.TOP;
-            if (sideIndex == Side.BOTTOM.index)
-                return Side.BOTTOM;
-            if (sideIndex == Side.LEFT.index)
-                return Side.LEFT;
-            else return Side.RIGHT;
+            return values()[sideIndex];
         }
     }
 

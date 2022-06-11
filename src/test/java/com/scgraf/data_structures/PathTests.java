@@ -24,6 +24,8 @@ public class PathTests {
         Path.Side bottom = Path.Side.BOTTOM;
         Path.Side left = Path.Side.LEFT;
 
+        Assert.assertEquals(top.getSideTurnedBy(-5), left);
+        Assert.assertEquals(top.getSideTurnedBy(-4), top);
         Assert.assertEquals(top.getSideTurnedBy(-3), right);
         Assert.assertEquals(top.getSideTurnedBy(-2), bottom);
         Assert.assertEquals(top.getSideTurnedBy(-1), left);
