@@ -2,6 +2,7 @@ package com.scgraf.data_handling;
 
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
+import com.scgraf.data_structures.graph.Path;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -67,7 +68,7 @@ public class FileReaderG {
                 Node finishNode = graph.getNode(finishNodeIndex / graph.getSize().width(), finishNodeIndex % graph.getSize().width());
                 Node currNode = graph.getNode(i / graph.getSize().width(), i % graph.getSize().width());
 
-                currNode.setupPath(graph.getPathSideForConnection(currNode, finishNode), weight);
+                graph.setupPath(currNode, finishNode, new Path(weight));
 
                 oldEnd = matcher.end();
             }

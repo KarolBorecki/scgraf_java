@@ -74,7 +74,7 @@ public class GraphPanel extends AnchorPane {
             actualNode.highlight();
             nextNode.highlight();
             try {
-                Path.Side side = graph.getPathSideForConnection(pathNodes[i], pathNodes[i + 1]);
+                Path.Side side = graph.getPathSideBetween(pathNodes[i], pathNodes[i + 1]);
                 if (side == Path.Side.RIGHT) actualNode.highlightRight();
                 else if (side == Path.Side.BOTTOM) actualNode.highlightBottom();
                 else if (side == Path.Side.TOP) nextNode.highlightBottom();

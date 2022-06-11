@@ -62,35 +62,63 @@ public class GraphTests {
         Graph graph = GraphGenerator.GenerateExample();
 
         try {
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(0), graph.getNode(1)), Path.Side.RIGHT);
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(0), graph.getNode(3)), Path.Side.BOTTOM);
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(1), graph.getNode(2)), Path.Side.RIGHT);
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(1), graph.getNode(4)), Path.Side.BOTTOM);
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(4), graph.getNode(1)), Path.Side.TOP);
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(4), graph.getNode(3)), Path.Side.LEFT);
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(4), graph.getNode(5)), Path.Side.RIGHT);
-            Assert.assertEquals(graph.getPathSideForConnection(graph.getNode(4), graph.getNode(7)), Path.Side.BOTTOM);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(0), graph.getNode(1)), Path.Side.RIGHT);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(0), graph.getNode(3)), Path.Side.BOTTOM);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(1), graph.getNode(2)), Path.Side.RIGHT);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(1), graph.getNode(4)), Path.Side.BOTTOM);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(4), graph.getNode(1)), Path.Side.TOP);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(4), graph.getNode(3)), Path.Side.LEFT);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(4), graph.getNode(5)), Path.Side.RIGHT);
+            Assert.assertEquals(graph.getPathSideBetween(graph.getNode(4), graph.getNode(7)), Path.Side.BOTTOM);
         } catch (Graph.InvalidMeshConnection e) {
             e.printStackTrace();
         }
     }
 
     @org.junit.Test
-    public void testSetupPathBothWays() {
+    public void testSetupPath() {
         Graph graph = new Graph();
         Assert.assertNotNull(graph);
 
         graph.setSize(new Size(testGrapWidth, testGrapHeight)).setWeight(testGrapMaxPathWeight).build();
         for (int x = 1; x < testGrapWidth-1; x++) {
             for (int y = 1; y < testGrapHeight-1; y++) {
-                graph.setupPathBothWays(graph.getNode(x, y), Path.Side.TOP, testGrapMaxPathWeight);
+                graph.setupPath(graph.getNode(x, y), Path.Side.TOP, testGrapMaxPathWeight);
                 Assert.assertNotNull(graph.getNode(x, y).getPath(Path.Side.TOP));
-                graph.setupPathBothWays(graph.getNode(x, y), Path.Side.RIGHT, testGrapMaxPathWeight);
+                graph.setupPath(graph.getNode(x, y), Path.Side.RIGHT, testGrapMaxPathWeight);
                 Assert.assertNotNull(graph.getNode(x, y).getPath(Path.Side.RIGHT));
-                graph.setupPathBothWays(graph.getNode(x, y), Path.Side.BOTTOM, testGrapMaxPathWeight);
+                graph.setupPath(graph.getNode(x, y), Path.Side.BOTTOM, testGrapMaxPathWeight);
                 Assert.assertNotNull(graph.getNode(x, y).getPath(Path.Side.BOTTOM));
-                graph.setupPathBothWays(graph.getNode(x, y), Path.Side.LEFT, testGrapMaxPathWeight);
+                graph.setupPath(graph.getNode(x, y), Path.Side.LEFT, testGrapMaxPathWeight);
                 Assert.assertNotNull(graph.getNode(x, y).getPath(Path.Side.LEFT));
+            }
+        }
+    }
+
+    @org.junit.Test
+    public void testDeletePath() {
+        Graph graph = new Graph();
+        Assert.assertNotNull(graph);
+
+        graph.setSize(new Size(testGrapWidth, testGrapHeight)).setWeight(testGrapMaxPathWeight).build();
+        for (int x = 1; x < testGrapWidth-1; x++) {
+            for (int y = 1; y < testGrapHeight-1; y++) {
+                Node tempNode = graph.getNode(x, y);
+                graph.setupPath(tempNode, Path.Side.TOP, testGrapMaxPathWeight);
+                graph.setupPath(tempNode, Path.Side.RIGHT, testGrapMaxPathWeight);
+                graph.setupPath(tempNode, Path.Side.BOTTOM, testGrapMaxPathWeight);
+                graph.setupPath(tempNode, Path.Side.LEFT, testGrapMaxPathWeight);
+                if(tempNode.getPath(Path.Side.TOP) != null && tempNode.getPath(Path.Side.RIGHT) != null &&
+                        tempNode.getPath(Path.Side.BOTTOM) != null && tempNode.getPath(Path.Side.LEFT) != null){
+                    graph.deletePath(tempNode, Path.Side.TOP);
+                    Assert.assertNull(tempNode.getPath(Path.Side.TOP));
+                    graph.deletePath(tempNode, Path.Side.RIGHT);
+                    Assert.assertNull(tempNode.getPath(Path.Side.RIGHT));
+                    graph.deletePath(tempNode, Path.Side.BOTTOM);
+                    Assert.assertNull(tempNode.getPath(Path.Side.BOTTOM));
+                    graph.deletePath(tempNode, Path.Side.LEFT);
+                    Assert.assertNull(tempNode.getPath(Path.Side.LEFT));
+                }
             }
         }
     }

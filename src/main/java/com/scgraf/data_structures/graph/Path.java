@@ -26,17 +26,15 @@ public record Path(double weight) {
         }
 
         //Można wykorzystać fakt, że jest to (Side.index + 2) % 4
-        public Side getOppositeSide() throws Exception {
+        public Side getOppositeSide() {
             if (this.index == Side.TOP.index)
                 return Side.BOTTOM;
-            if (this.index == Side.BOTTOM.index)
+            else if (this.index == Side.BOTTOM.index)
                 return Side.TOP;
-            if (this.index == Side.LEFT.index)
+            else if (this.index == Side.LEFT.index)
                 return Side.RIGHT;
-            if (this.index == Side.RIGHT.index)
-                return Side.LEFT;
+            else return Side.LEFT;
 
-            throw new Exception();
         }
 
         public Side getSideTurnedBy(int ammountOf90degreeTurns) throws Exception {

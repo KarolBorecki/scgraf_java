@@ -13,11 +13,11 @@ public class Node implements Comparable<Node> {
         this.graphID = parentGraph.getNextGraphID();
     }
 
-    public void setupPath(Path.Side side, Path path) {
+    protected void setupPath(Path.Side side, Path path) {
         paths[side.index] = path;
     }
 
-    public void deletePath(Path.Side side) {
+    protected void deletePath(Path.Side side) {
         paths[side.index] = null;
     }
 

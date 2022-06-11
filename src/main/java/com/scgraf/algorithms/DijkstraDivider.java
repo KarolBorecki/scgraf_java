@@ -3,7 +3,6 @@ package com.scgraf.algorithms;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
-import com.scgraf.logger.Logger;
 
 import java.util.Random;
 
@@ -34,21 +33,21 @@ public class DijkstraDivider {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
-        dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
+        dividedGraph.deletePath(nodesToVisit[i], connectionToCut);
+        dividedGraph.deletePath(nodesToVisit[i], secondConnectionToCut);
 
         for (i = 1; i < nodesToVisit.length - 1 && nodesToVisit[i] != null; i++) {
             if (isNodeAnEdge(connectionsFromPrevToCurr[i - 1], connectionsFromPrevToCurr[i])) {
                 connectionToCut = connectionsFromPrevToCurr[i - 1].getSideTurnedBy(directionOfCutNodes);
                 if (connectionToCut != connectionsFromPrevToCurr[i])
-                    dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
+                    dividedGraph.deletePath(nodesToVisit[i], connectionToCut);
 
                 secondConnectionToCut = connectionsFromPrevToCurr[i].getSideTurnedBy(directionOfCutNodes);
                 if (secondConnectionToCut != connectionsFromPrevToCurr[i - 1].getOppositeSide())
-                    dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
+                    dividedGraph.deletePath(nodesToVisit[i], secondConnectionToCut);
             } else {
                 connectionToCut = connectionsFromPrevToCurr[i - 1].getSideTurnedBy(directionOfCutNodes);
-                dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
+                dividedGraph.deletePath(nodesToVisit[i], connectionToCut);
             }
         }
         //EndNode
@@ -60,10 +59,10 @@ public class DijkstraDivider {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        dividedGraph.deletePathBothWays(nodesToVisit[i], connectionToCut);
+        dividedGraph.deletePath(nodesToVisit[i], connectionToCut);
 
         secondConnectionToCut = connectionsFromPrevToCurr[i - 2];
-        dividedGraph.deletePathBothWays(nodesToVisit[i], secondConnectionToCut);
+        dividedGraph.deletePath(nodesToVisit[i], secondConnectionToCut);
     }
 
     public static void divideGraphThisManyTimes(Graph dividedGraph, int divisionNumber) throws WrongDivisionsNumber, Exception, Dijkstra.DijkstraNotSolvedException {
@@ -92,7 +91,7 @@ public class DijkstraDivider {
     private static Path.Side[] initializeConnections(Graph dividedGraph, Node[] tabNode) throws Graph.InvalidMeshConnection {
         Path.Side[] tabPath = new Path.Side[tabNode.length - 1];
         for (int i = 1; i < tabNode.length && tabNode[i] != null; i++) {
-            tabPath[i - 1] = dividedGraph.getPathSideForConnection(tabNode[i - 1], tabNode[i]);
+            tabPath[i - 1] = dividedGraph.getPathSideBetween(tabNode[i - 1], tabNode[i]);
         }
         return tabPath;
     }

@@ -71,7 +71,7 @@ public class Graph implements Iterable<Node> {
         return getNode(row, column);
     }
 
-    public Path.Side getPathSideForConnection(Node startNode, Node endNode) throws InvalidMeshConnection {
+    public Path.Side getPathSideBetween(Node startNode, Node endNode) throws InvalidMeshConnection {
         if (startNode.getGraphID() + 1 == endNode.getGraphID()) {
             return Path.Side.RIGHT;
         } else if (startNode.getGraphID() - 1 == endNode.getGraphID()) {
@@ -84,24 +84,33 @@ public class Graph implements Iterable<Node> {
         throw new InvalidMeshConnection(startNode, endNode);
     }
 
-    public void setupPathBothWays(Node node, Path.Side side, double pathWeight) {
-        setupPathBothWays(node, side, new Path(pathWeight));
+    public void setupPath(Node node, Path.Side direction, double pathWeight) {
+        setupPath(node, direction, new Path(pathWeight));
     }
 
-    public void setupPathBothWays(Node node, Path.Side side, Path path) {
-        node.setupPath(side, path);
+    public void setupPath(Node node, Path.Side direction, Path path) {
         try {
-            this.getNeighbourNode(node, side).setupPath(side.getOppositeSide(), path);
+            setupPath(node, getNeighbourNode(node, direction), path);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void deletePathBothWays(Node node, Path.Side side) {
-        node.deletePath(side);
-        if (this.getNeighbourNode(node, side) != null)
+    public void setupPath(Node node1, Node node2, Path path){
+        try {
+            Path.Side side = getPathSideBetween(node1, node2);
+            node1.setupPath(side, path);
+            node2.setupPath(side.getOppositeSide(), path);
+        } catch (InvalidMeshConnection e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePath(Node node, Path.Side direction) {
+        node.deletePath(direction);
+        if (this.getNeighbourNode(node, direction) != null)
             try {
-                this.getNeighbourNode(node, side).deletePath(side.getOppositeSide());
+                this.getNeighbourNode(node, direction).deletePath(direction.getOppositeSide());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -111,19 +120,23 @@ public class Graph implements Iterable<Node> {
         return nodes[row][column];
     }
 
-    //TODO change - we can calculate row and column for this
     public Node getNode(int graphID) {
-        for (Node node : this)
-            if (node.getGraphID() == graphID) return node;
-        return null;
+        return getNode(getNodeX(graphID), getNodeY(graphID));
     }
 
+
     public int getNodeX(Node node) {
-        return node.getGraphID() / size.width();
+        return getNodeX(node.graphID);
+    }
+    public int getNodeX(int graphID) {
+        return graphID / size.width();
     }
 
     public int getNodeY(Node node) {
-        return node.getGraphID() % size.width();
+        return getNodeY(node.graphID);
+    }
+    public int getNodeY(int graphID) {
+        return graphID % size.width();
     }
 
     public int getNodesCount() {

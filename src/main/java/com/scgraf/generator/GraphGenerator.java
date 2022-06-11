@@ -55,13 +55,13 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         for (int y = 0; y < size.height(); y++) {
             for (int x = 0; x < size.width(); x++) {
                 if (x != 0)
-                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.LEFT, weightGeneratingFunction.getWeight(x, y));
+                    graph.setupPath(graph.getNode(y, x), Path.Side.LEFT, weightGeneratingFunction.getWeight(x, y));
                 if (x != size.width() - 1)
-                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.RIGHT, weightGeneratingFunction.getWeight(x, y));
+                    graph.setupPath(graph.getNode(y, x), Path.Side.RIGHT, weightGeneratingFunction.getWeight(x, y));
                 if (y != 0)
-                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.TOP, weightGeneratingFunction.getWeight(x, y));
+                    graph.setupPath(graph.getNode(y, x), Path.Side.TOP, weightGeneratingFunction.getWeight(x, y));
                 if (y != size.height() - 1)
-                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.BOTTOM, weightGeneratingFunction.getWeight(x, y));
+                    graph.setupPath(graph.getNode(y, x), Path.Side.BOTTOM, weightGeneratingFunction.getWeight(x, y));
             }
         }
         return graph;
@@ -71,34 +71,23 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         Graph g = new Graph();
         g.setWidth(3).setHeight(3).setWeight(3).build();
 
-        g.getNode(0, 0).setupPath(Path.Side.RIGHT, 1.4);
+        g.setupPath(g.getNode(0, 0), Path.Side.RIGHT,1.4);
 
-        g.getNode(0, 1).setupPath(Path.Side.LEFT, 1.4);
-        g.getNode(0, 1).setupPath(Path.Side.RIGHT, 0.1);
-        g.getNode(0, 1).setupPath(Path.Side.BOTTOM, 2.3);
+        g.setupPath(g.getNode(0, 1), Path.Side.RIGHT,0.1);
+        g.setupPath(g.getNode(0, 1), Path.Side.BOTTOM,2.3);
 
-        g.getNode(0, 2).setupPath(Path.Side.LEFT, 0.1);
-        g.getNode(0, 2).setupPath(Path.Side.BOTTOM, 0.1);
+        g.setupPath(g.getNode(0, 2), Path.Side.BOTTOM,0.1);
 
-        g.getNode(1, 0).setupPath(Path.Side.RIGHT, 1.3);
-        g.getNode(1, 0).setupPath(Path.Side.BOTTOM, 0.1);
+        g.setupPath(g.getNode(1, 0), Path.Side.RIGHT,1.3);
+        g.setupPath(g.getNode(1, 0), Path.Side.BOTTOM,0.1);
 
-        g.getNode(1, 1).setupPath(Path.Side.TOP, 2.3);
-        g.getNode(1, 1).setupPath(Path.Side.RIGHT, 2);
-        g.getNode(1, 1).setupPath(Path.Side.BOTTOM, 3);
-        g.getNode(1, 1).setupPath(Path.Side.LEFT, 1.3);
+        g.setupPath(g.getNode(1, 1), Path.Side.RIGHT,2);
+        g.setupPath(g.getNode(1, 1), Path.Side.BOTTOM,3);
 
-        g.getNode(1, 2).setupPath(Path.Side.TOP, 0.1);
-        g.getNode(1, 2).setupPath(Path.Side.LEFT, 2);
+        g.setupPath(g.getNode(2, 0), Path.Side.RIGHT,0.2);
 
-        g.getNode(2, 0).setupPath(Path.Side.TOP, 0.1);
-        g.getNode(2, 0).setupPath(Path.Side.RIGHT, 0.2);
+        g.setupPath(g.getNode(2, 1), Path.Side.RIGHT,1.0);
 
-        g.getNode(2, 1).setupPath(Path.Side.TOP, 3);
-        g.getNode(2, 1).setupPath(Path.Side.RIGHT, 1);
-        g.getNode(2, 1).setupPath(Path.Side.LEFT, 0.2);
-
-        g.getNode(2, 2).setupPath(Path.Side.LEFT, 1);
         return g;
     }
 

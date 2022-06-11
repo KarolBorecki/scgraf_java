@@ -12,7 +12,7 @@ public class SimpleDivider {
 
         for (int i = 0; i < dividedGraph.getSize().width(); i++) {
             Node currNode = dividedGraph.getNode(parallel_division_point, i);
-            dividedGraph.deletePathBothWays(currNode, Path.Side.BOTTOM);
+            dividedGraph.deletePath(currNode, Path.Side.BOTTOM);
         }
 
     }
@@ -23,7 +23,7 @@ public class SimpleDivider {
 
         for (int i = 0; i < dividedGraph.getSize().height(); i++) {
             Node currNode = dividedGraph.getNode(i, perpendicular_division_point);
-            dividedGraph.deletePathBothWays(currNode, Path.Side.RIGHT);
+            dividedGraph.deletePath(currNode, Path.Side.RIGHT);
         }
     }
 
