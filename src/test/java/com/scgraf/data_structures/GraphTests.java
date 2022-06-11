@@ -1,4 +1,4 @@
-package com.scgraf.data_structure;
+package com.scgraf.data_structures;
 
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;

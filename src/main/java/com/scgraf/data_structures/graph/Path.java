@@ -37,7 +37,7 @@ public record Path(double weight) {
 
         }
 
-        public Side getSideTurnedBy(int ammountOf90degreeTurns) throws Exception {
+        public Side getSideTurnedBy(int ammountOf90degreeTurns) {
             if (ammountOf90degreeTurns == 0)
                 return this;
             int sideIndex;
@@ -54,9 +54,7 @@ public record Path(double weight) {
                 return Side.BOTTOM;
             if (sideIndex == Side.LEFT.index)
                 return Side.LEFT;
-            if (sideIndex == Side.RIGHT.index)
-                return Side.RIGHT;
-            throw new Exception();
+            else return Side.RIGHT;
         }
     }
 
