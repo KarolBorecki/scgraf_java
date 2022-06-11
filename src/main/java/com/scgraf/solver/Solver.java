@@ -58,6 +58,7 @@ public class Solver {
     }
 
     public void findShortest(int startNodeID, int endNodeID) {
+        cleanPath();
         startBackgroundSolverTask(() -> {
             try {
                 Node startNode = graph.getNode(startNodeID);

@@ -19,7 +19,7 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         SINX_COSY("sin(x) - cos(y)"),
         POWEX_POWEY("e^x - e^y"),
         SQRTXY("sqrt(x*y)");
-        
+
         public final String str;
 
         GeneratingType(String str) {
