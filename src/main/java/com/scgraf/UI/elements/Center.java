@@ -2,8 +2,6 @@ package com.scgraf.UI.elements;
 
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 
@@ -13,16 +11,7 @@ public class Center {
 
     public Center(Node node) {
         calcCenter(node.getBoundsInParent());
-        node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends Bounds> observableValue,
-                    Bounds oldBounds,
-                    Bounds bounds
-            ) {
-                calcCenter(bounds);
-            }
-        });
+        node.boundsInParentProperty().addListener((observableValue, oldBounds, bounds) -> calcCenter(bounds));
     }
 
     private void calcCenter(Bounds bounds) {

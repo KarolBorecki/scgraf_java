@@ -1,7 +1,6 @@
 package com.scgraf.solver;
 
 import com.scgraf.UI.elements.buttons.ButtonsDisabler;
-import com.scgraf.UI.elements.buttons.FormattedButton;
 import com.scgraf.algorithms.BFS;
 import com.scgraf.algorithms.Dijkstra;
 import com.scgraf.algorithms.DijkstraDivider;
@@ -63,11 +62,11 @@ public class Solver {
             try {
                 Node startNode = graph.getNode(startNodeID);
                 Node endNode = graph.getNode(endNodeID);
-                if(startNode == null || endNode == null)
+                if (startNode == null || endNode == null)
                     throw new Graph.NodeNotFoundException();
                 return Dijkstra.getShortestPathArray(graph, startNode, endNode);
             } catch (Graph.NodeNotFoundException | Dijkstra.DijkstraNotSolvedException | Dijkstra.DijkstraCannotFindPathException e) {
-                Platform.runLater(()->Logger.getInstance().errPopup(e.getMessage()));
+                Platform.runLater(() -> Logger.getInstance().errPopup(e.getMessage()));
             }
             return null;
         });
@@ -78,7 +77,7 @@ public class Solver {
             try {
                 DijkstraDivider.divideGraphThisManyTimes(graph, n);
             } catch (DijkstraDivider.WrongDivisionsNumber | Dijkstra.DijkstraNotSolvedException | Exception e) {
-                Platform.runLater(()->Logger.getInstance().errPopup(e.getMessage()));
+                Platform.runLater(() -> Logger.getInstance().errPopup(e.getMessage()));
             }
             return graph;
         });
@@ -102,7 +101,7 @@ public class Solver {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         File file = fileChooser.showSaveDialog(new Popup());
         if (file != null)
-            startBackgroundSolverTask(()->{
+            startBackgroundSolverTask(() -> {
                 FileWriterG.writeGraphToFile(graph, file);
                 return null;
             });
@@ -115,14 +114,14 @@ public class Solver {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         File file = fileChooser.showOpenDialog(new Popup());
         if (file != null)
-        startBackgroundSolverTask(()->{
-            try {
-                return FileReaderG.readGraphFromFile(file);
-            } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
-                Logger.getInstance().errPopup("File read error.");
-            }
-            return null;
-        });
+            startBackgroundSolverTask(() -> {
+                try {
+                    return FileReaderG.readGraphFromFile(file);
+                } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
+                    Logger.getInstance().errPopup("File read error.");
+                }
+                return null;
+            });
     }
 
     private <T> void startBackgroundSolverTask(Callable<T> method) {
@@ -178,7 +177,7 @@ public class Solver {
             c.call(path);
     }
 
-    public void cleanPath(){
+    public void cleanPath() {
         for (Observer<Node[]> c : onPathCleanNotify)
             c.call(null);
     }

@@ -40,7 +40,7 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
         execBtn.setOnAction(actionEvent -> solve());
 
         cancelBtn = new CancelButton("Cancel");
-        cancelBtn.setOnAction(event->cancel());
+        cancelBtn.setOnAction(event -> cancel());
 
         btnPanel.getChildren().addAll(execBtn, cancelBtn);
     }
@@ -49,7 +49,7 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
         getChildren().addAll(infoText, inputPane, btnPanel);
     }
 
-    protected void cancel(){
+    protected void cancel() {
         panelManager.switchFunction(FunctionPanelManager.Functionality.ALL);
         Logger.getInstance().log(Logger.StatusLog.OK); //TODO not sure about it
     }

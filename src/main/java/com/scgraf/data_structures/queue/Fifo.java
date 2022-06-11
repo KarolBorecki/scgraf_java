@@ -12,7 +12,4 @@ public class Fifo<T> extends Queue<T> {
         return getAtIndex(head++);
     }
 
-    public int fifoHeadIndex() {
-        return head;
-    }
 }

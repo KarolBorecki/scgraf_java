@@ -2,11 +2,9 @@ package com.scgraf.UI.elements.buttons;
 
 import com.scgraf.Application;
 import com.scgraf.UI.UIConfig;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBase;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -15,8 +13,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-
-import java.util.ArrayList;
 
 public class FormattedButton extends Button {
     DropShadow shadow = new DropShadow(UIConfig.shadowRadius, UIConfig.shadowColor);
@@ -41,21 +37,13 @@ public class FormattedButton extends Button {
         textAlignmentProperty().set(TextAlignment.CENTER);
         setTextFill(textColor);
 
-        addEventHandler(MouseEvent.MOUSE_ENTERED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent e) {
-                        setEffect(shadow);
-                        Application.scene.setCursor(Cursor.HAND);
-                    }
-                });
-        addEventHandler(MouseEvent.MOUSE_EXITED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent e) {
-                        setEffect(null);
-                        Application.scene.setCursor(Cursor.DEFAULT);
-                    }
-                });
+        addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            setEffect(shadow);
+            Application.scene.setCursor(Cursor.HAND);
+        });
+        addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            setEffect(null);
+            Application.scene.setCursor(Cursor.DEFAULT);
+        });
     }
 }

@@ -4,10 +4,7 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.UILoader;
 
 public class RegularButton extends FormattedButton {
-    public boolean isDisabled;
-
     public RegularButton(String label) {
         super(label, UIConfig.regularBtnColor, UIConfig.textColor, UILoader.regularFont);
-        //disableProperty().bind(Bindings.createBooleanBinding(()->isDisabled));
     }
 }

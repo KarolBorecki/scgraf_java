@@ -71,10 +71,12 @@ public class NodeElement extends StackPane {
         circle.setFill(UIConfig.graphShortestPathColor);
     }
 
-    public void stopHighlight(){
+    public void stopHighlight() {
         circle.setFill(UIConfig.graphNodeColor);
-        if(rightPathLine != null) rightPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.RIGHT), maxWeight));
-        if(bottomPathLine != null) bottomPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.BOTTOM), maxWeight));
+        if (rightPathLine != null)
+            rightPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.RIGHT), maxWeight));
+        if (bottomPathLine != null)
+            bottomPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.BOTTOM), maxWeight));
     }
 
     private static Color getPathColor(double weight, double maxWeight) {

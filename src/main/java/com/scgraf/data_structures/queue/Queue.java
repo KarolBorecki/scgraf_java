@@ -30,11 +30,11 @@ public abstract class Queue<T> implements IQueue<T> {
     }
 
     public boolean containsInPopped(T obj) {
-        return Utils.arrContains(queue, obj, 0, head-1);
+        return Utils.arrContains(queue, obj, 0, head - 1);
     }
 
     public boolean containsInFilledElements(T obj) {
-        return Utils.arrContains(queue, obj, 0, tail-1);
+        return Utils.arrContains(queue, obj, 0, tail - 1);
     }
 
     public int queueFilledSize() {
@@ -43,6 +43,10 @@ public abstract class Queue<T> implements IQueue<T> {
 
     public int queueSize() {
         return tail - head;
+    }
+
+    public int getHead() {
+        return head;
     }
 
     @Override

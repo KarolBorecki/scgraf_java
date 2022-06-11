@@ -1,6 +1,5 @@
 package com.scgraf.UI.elements.buttons;
 
-import javafx.scene.Node;
 import javafx.scene.control.ButtonBase;
 
 import java.util.ArrayList;
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 public abstract class ButtonsDisabler {
     protected static ArrayList<ButtonBase> instances = new ArrayList();
 
-    public static void Add(ButtonBase btn){
+    public static void Add(ButtonBase btn) {
         instances.add(btn);
     }
 

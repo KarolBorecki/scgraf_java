@@ -19,7 +19,6 @@ public class FilePanel extends BorderPane {
         setMargin(this, UIConfig.panelMargin);
 
         setBackground(new Background(new BackgroundFill(UIConfig.functionsViewBckColor, new CornerRadii(UIConfig.borderRadius), Insets.EMPTY)));
-        //setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         captionText = new CaptionText("Save/Load:");
 

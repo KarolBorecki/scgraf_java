@@ -2,15 +2,12 @@ package com.scgraf.UI.panels.functions_view.functionalities_panel;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.FormattedDropdown;
-import com.scgraf.UI.elements.buttons.FormattedRadioButton;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import com.scgraf.generator.GraphGenerator;
 import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
-import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.RadioButton;
 import javafx.scene.layout.HBox;
 
 public class GeneratePanel extends FunctionAbstractPanel implements SolverCaller {
@@ -43,7 +40,7 @@ public class GeneratePanel extends FunctionAbstractPanel implements SolverCaller
             final double maxWeight = Double.parseDouble(maxPathWeightInput.getText());
             final GraphGenerator.GeneratingType type = generatingType.getValue();
             Solver.getInstance().generate(width, height, maxWeight, type);
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             Logger.getInstance().errPopup("Provided wrong input data!");
         }
 

@@ -83,13 +83,13 @@ public class GraphPanel extends AnchorPane {
                 e.printStackTrace();
             }
             drawPath[i] = actualNode;
-            drawPath[i+1] = nextNode;
+            drawPath[i + 1] = nextNode;
         }
     }
 
-    public void cleanPath(Node[] path){
-        if(drawPath == null) return;
-System.out.println("CLEANING PATH");
+    public void cleanPath(Node[] path) {
+        if (drawPath == null) return;
+        System.out.println("CLEANING PATH");
         for (NodeElement nodeElement : drawPath)
             nodeElement.stopHighlight();
     }

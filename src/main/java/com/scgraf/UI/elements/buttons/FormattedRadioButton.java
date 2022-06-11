@@ -2,14 +2,13 @@ package com.scgraf.UI.elements.buttons;
 
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedText;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.RadioButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.TextAlignment;
 
 public class FormattedRadioButton extends HBox {
-    public FormattedRadioButton(){
+    public FormattedRadioButton() {
         super();
 
         setAlignment(Pos.CENTER);
