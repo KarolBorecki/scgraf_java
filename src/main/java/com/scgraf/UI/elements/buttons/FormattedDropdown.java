@@ -1,12 +1,17 @@
 package com.scgraf.UI.elements.buttons;
 
+import com.scgraf.Application;
 import com.scgraf.UI.UIConfig;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
@@ -14,32 +19,41 @@ import javafx.util.Callback;
 public class FormattedDropdown<T> extends ComboBox<T> {
     public FormattedDropdown(T[] list) {
         super();
-        setBackground(new Background(new BackgroundFill(UIConfig.textFieldBckColor, new CornerRadii(UIConfig.borderRadius), Insets.EMPTY)));
+        getItems().setAll(list);
+        getSelectionModel().selectFirst();
+        setPrefWidth(UIConfig.btnPrefWidth);
+        setStyle("-fx-text-fill: #f8f4e3; -fx-background-color: #363b44;");
 
-        getEditor().setStyle("-fx-text-fill: #fff;" + "-fx-backgroundcolor: #000;");
-        setCellFactory(new Callback<ListView<T>, ListCell<T>>() {
+        setCellFactory(new Callback<>() {
             @Override public ListCell<T> call(ListView<T> param) {
-                final ListCell<T> cell = new ListCell<T>() {
-                    {
-                        super.setPrefWidth(100);
-                    }
+                return new ListCell<>() {
                     @Override public void updateItem(T item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item != null) {
+                        param.setStyle("-fx-background-color: #363b44;");
+                        setStyle("-fx-background-color: #363b44;");
+                        setTextFill(UIConfig.textColor);
+                        if(item != null){
                             setText(item.toString());
-                            setTextFill(UIConfig.textColor);
-                            setBackground(new Background(new BackgroundFill(UIConfig.textFieldBckColor, null, Insets.EMPTY)));
-                        }
-                        else {
-                            setTextFill(UIConfig.textColor);
-                            setText(null);
+                            addEventHandler(MouseEvent.MOUSE_ENTERED, event -> OnMouseEnter());
+                            addEventHandler(MouseEvent.MOUSE_EXITED, event -> OnMouseExit());
                         }
                     }
                 };
-                return cell;
             }
         });
-        getSelectionModel().selectFirst();
-        getItems().setAll(list);
+
+        addEventHandler(MouseEvent.MOUSE_ENTERED, event -> OnMouseEnter());
+        addEventHandler(MouseEvent.MOUSE_EXITED, event -> OnMouseExit());
+
+
+
+    }
+
+    private void OnMouseEnter(){
+        Application.scene.setCursor(Cursor.HAND);
+    }
+
+    private void OnMouseExit(){
+        Application.scene.setCursor(Cursor.DEFAULT);
     }
 }

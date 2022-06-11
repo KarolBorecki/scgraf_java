@@ -5,95 +5,66 @@ import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.tuples.Size;
 
 import java.util.Random;
+import java.lang.Math;
 
 public class GraphGenerator extends Thread implements IGenerator<Graph> {
     private static final Random randomGenerator = new Random();
 
     public enum GeneratingType {
-        DIRECTED("Random"),
-        NOT_DIRECTED("Not directed"),
-        LINEAR_NOT_DIRECTED("Linear");
-
+        RANDOM("Random"),
+        LINEAR_Y("Linear Y"),
+        LINEAR_X("Linear X"),
+        SKEWED_LINEAR("Skewed linear"),
+        XX_YY("x^2 - y^2"),
+        SINX_COSY("sin(x) - cos(y)"),
+        POWEX_POWEY("e^x - e^y"),
+        SQRTXY("sqrt(x*y)");
+        
         public final String str;
 
         GeneratingType(String str) {
             this.str = str;
         }
+
+        @Override
+        public String toString(){
+            return str;
+        }
     }
 
     public static Graph Generate(Size size, double maxPathWeight) {
-        System.out.println("GENERATING"); //TODO DELETE
-        return Generate(size, maxPathWeight, GeneratingType.NOT_DIRECTED);
+        return Generate(size, maxPathWeight, GeneratingType.RANDOM);
     }
 
     public static Graph Generate(Size size, double maxPathWeight, GeneratingType type) {
-        if (type == GeneratingType.NOT_DIRECTED) return GenerateNotDirected(size, maxPathWeight);
-        else if (type == GeneratingType.DIRECTED) return GenerateDirected(size, maxPathWeight);
-        else if (type == GeneratingType.LINEAR_NOT_DIRECTED) return GenerateNotDirectedLinear(size, maxPathWeight);
+        if (type == GeneratingType.RANDOM) return Generate(size, maxPathWeight, (x, y) -> maxPathWeight * randomGenerator.nextDouble());
+        else if (type == GeneratingType.LINEAR_Y) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.height() * y);
+        else if (type == GeneratingType.LINEAR_X) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.width() * x);
+        else if (type == GeneratingType.SKEWED_LINEAR) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / (size.width() * 2) * x + maxPathWeight / (size.height() * 2) * y);
+        else if (type == GeneratingType.XX_YY) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.width() / 4 * x*x - maxPathWeight / size.height() / 4 * y*y);
+        else if (type == GeneratingType.SINX_COSY) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight  * Math.sin(x) / 2 - maxPathWeight * Math.cos(y) / 2);
+        else if (type == GeneratingType.POWEX_POWEY) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.width() / 2 * Math.pow(Math.E, x) - maxPathWeight / size.height() / 2 * Math.pow(Math.E, y));
+        else if (type == GeneratingType.SQRTXY) return Generate(size, maxPathWeight, (x, y)-> Math.sqrt(x*y));
         else return null;
     }
 
-    public static Graph GenerateNotDirected(Size size, double maxWeight) { /* TODO REFACTOR */
-        Graph g = new Graph();
-        g.setSize(size).setWeight(maxWeight).build();
+    public static Graph Generate(Size size, double maxWeight, GenerateWeightCallable<Double> weightGeneratingFunction){
+        Graph graph = new Graph();
+        graph.setSize(size).setWeight(maxWeight).build();
 
         for (int y = 0; y < size.height(); y++) {
             for (int x = 0; x < size.width(); x++) {
                 if (x != 0)
-                    g.setupPathBothWays(g.getNode(y, x), Path.Side.LEFT, maxWeight * randomGenerator.nextDouble());
+                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.LEFT, weightGeneratingFunction.getWeight(x, y));
                 if (x != size.width() - 1)
-                    g.setupPathBothWays(g.getNode(y, x), Path.Side.RIGHT, maxWeight * randomGenerator.nextDouble());
+                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.RIGHT, weightGeneratingFunction.getWeight(x, y));
                 if (y != 0)
-                    g.setupPathBothWays(g.getNode(y, x), Path.Side.TOP, maxWeight * randomGenerator.nextDouble());
+                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.TOP, weightGeneratingFunction.getWeight(x, y));
                 if (y != size.height() - 1)
-                    g.setupPathBothWays(g.getNode(y, x), Path.Side.BOTTOM, maxWeight * randomGenerator.nextDouble());
+                    graph.setupPathBothWays(graph.getNode(y, x), Path.Side.BOTTOM, weightGeneratingFunction.getWeight(x, y));
             }
         }
-        System.out.println("GENERATING DONE"); //TODO DELETE
-        return g;
-    }
-
-    public static Graph GenerateDirected(Size size, double maxWeight) { /* TODO REFACTOR */
-        Graph g = new Graph();
-        g.setSize(size).setWeight(maxWeight).build();
-
-        for (int y = 0; y < size.height(); y++) {
-            for (int x = 0; x < size.width(); x++) {
-                if (x != 0)
-                    g.getNode(y, x).setupPath(Path.Side.LEFT, maxWeight * randomGenerator.nextDouble());
-                if (x != size.width() - 1)
-                    g.getNode(y, x).setupPath(Path.Side.RIGHT, maxWeight * randomGenerator.nextDouble());
-                if (y != 0)
-                    g.getNode(y, x).setupPath(Path.Side.TOP, maxWeight * randomGenerator.nextDouble());
-                if (y != size.height() - 1)
-                    g.getNode(y, x).setupPath(Path.Side.BOTTOM, maxWeight * randomGenerator.nextDouble());
-            }
-        }
-
-        return g;
-    }
-
-    public static Graph GenerateNotDirectedLinear(Size size, double maxWeight){
-        Graph g = new Graph();
-        g.setSize(size).setWeight(maxWeight).build();
-        double step = maxWeight / g.getSize().getTotalSize();
-        double weight = 0;
-
-        for (int y = 0; y < size.height(); y++) {
-            for (int x = 0; x < size.width(); x++) {
-                if (x != 0)
-                    g.getNode(y, x).setupPath(Path.Side.LEFT, weight);
-                if (x != size.width() - 1)
-                    g.getNode(y, x).setupPath(Path.Side.RIGHT, weight);
-                if (y != 0)
-                    g.getNode(y, x).setupPath(Path.Side.TOP, weight);
-                if (y != size.height() - 1)
-                    g.getNode(y, x).setupPath(Path.Side.BOTTOM, weight);
-                weight+=step;
-            }
-        }
-
-        return g;
+        return graph;
     }
 
     public static Graph GenerateExample() {
@@ -131,55 +102,7 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         return g;
     }
 
-    //TODO DELETE
-    public static Graph GraphForDivision() {
-        Graph g = new Graph();
-        g.setWidth(4).setHeight(4).build();
-
-        g.setupPathBothWays(g.getNode(0, 0), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(0, 0), Path.Side.BOTTOM, 0.001);
-
-        g.setupPathBothWays(g.getNode(0, 1), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(0, 1), Path.Side.BOTTOM, 1);
-
-        g.setupPathBothWays(g.getNode(0, 2), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(0, 2), Path.Side.BOTTOM, 1);
-
-        g.setupPathBothWays(g.getNode(0, 3), Path.Side.BOTTOM, 0.001);
-
-        //ROW 2
-
-        g.setupPathBothWays(g.getNode(1, 0), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(1, 0), Path.Side.BOTTOM, 0.001);
-
-        g.setupPathBothWays(g.getNode(1, 1), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(1, 1), Path.Side.BOTTOM, 0.01);
-
-        g.setupPathBothWays(g.getNode(1, 2), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(1, 2), Path.Side.BOTTOM, 1);
-
-        g.setupPathBothWays(g.getNode(1, 3), Path.Side.BOTTOM, 0.001);
-
-        //ROW 3
-
-        g.setupPathBothWays(g.getNode(2, 0), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(2, 0), Path.Side.BOTTOM, 0.001);
-
-        g.setupPathBothWays(g.getNode(2, 1), Path.Side.RIGHT, 0.01);
-        g.setupPathBothWays(g.getNode(2, 1), Path.Side.BOTTOM, 1);
-
-        g.setupPathBothWays(g.getNode(2, 2), Path.Side.RIGHT, 1);
-        g.setupPathBothWays(g.getNode(2, 2), Path.Side.BOTTOM, 0.01);
-
-        g.setupPathBothWays(g.getNode(2, 3), Path.Side.BOTTOM, 0.001);
-
-        //ROW 4
-
-        g.setupPathBothWays(g.getNode(3, 0), Path.Side.RIGHT, 0.001);
-
-        g.setupPathBothWays(g.getNode(3, 1), Path.Side.RIGHT, 0.001);
-
-        g.setupPathBothWays(g.getNode(3, 2), Path.Side.RIGHT, 0.001);
-        return g;
+    protected interface GenerateWeightCallable<T>{
+        public T getWeight(int x, int y);
     }
 }

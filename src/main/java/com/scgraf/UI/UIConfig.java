@@ -37,12 +37,12 @@ public class UIConfig {
     public static int btnPrefWidth = 200;
     public static int btnPrefHeight;
     public static Color regularBtnColor = Color.web("6ea4bf");
-    public static Color subBtnColor = Color.web("6ea4bf");
+    public static Color subBtnColor; /* = regularBtnColor */
     public static Color cancelBtnColor = Color.web("ad343e");
 
     /* DROP SHADOW SETTINGS */
     public static int shadowRadius = 5;
-    public static Color shadowColor = Color.web("f8f4e3");
+    public static Color shadowColor = Color.web("9cc1d3");
 
     /* TEXTFIELD SETTINGS */
     public static int textFieldPrefWidth = 150;
@@ -77,9 +77,11 @@ public class UIConfig {
     public static double minPathWidth = 0.5;
     public static int maxGraphNodesCountToDrawCaptions = 1000;
     public static Color graphNodeColor = Color.web("f8f4e3");
-    public static Color graphShortestPathColor = Color.web("b74f6f");
+    public static Color graphShortestPathColor = Color.web("bc96e6");
 
     static {
+        subBtnColor = regularBtnColor;
+
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         stageHeight = (int) (screenBounds.getHeight() * 0.93);
         stageWidth = (int) (stageHeight / 1.15);
