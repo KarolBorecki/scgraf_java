@@ -3,10 +3,11 @@ package com.scgraf.data_structures;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class NodeTests {
 
-    @org.junit.Test
+    @Test
     public void testConstructor() {
         Graph g1 = new Graph();
 

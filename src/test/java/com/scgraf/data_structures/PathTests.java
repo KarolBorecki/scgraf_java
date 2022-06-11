@@ -2,9 +2,10 @@ package com.scgraf.data_structures;
 
 import com.scgraf.data_structures.graph.Path;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class PathTests {
-    @org.junit.Test
+    @Test
     public void testGetOppositeSide() {
         Path.Side top = Path.Side.TOP;
         Path.Side right = Path.Side.RIGHT;
@@ -17,7 +18,7 @@ public class PathTests {
         Assert.assertEquals(left.getOppositeSide(), right);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetSideTurnedBy() {
         Path.Side top = Path.Side.TOP;
         Path.Side right = Path.Side.RIGHT;

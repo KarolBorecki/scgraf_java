@@ -34,15 +34,15 @@ public abstract class Queue<T> implements IQueue<T> {
     }
 
     public boolean containsInFilledElements(T obj) {
-        return Utils.arrContains(queue, obj, 0, queue.length-1);
+        return Utils.arrContains(queue, obj, 0, tail-1);
     }
 
     public int queueFilledSize() {
-        return tail + 1;
+        return tail;
     }
 
     public int queueSize() {
-        return head - tail;
+        return tail - head;
     }
 
     @Override

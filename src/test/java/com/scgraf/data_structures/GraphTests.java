@@ -6,13 +6,14 @@ import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import org.junit.Assert;
+import org.junit.Test;
 
 public class GraphTests {
     private static final int testGrapWidth = 10;
     private static final int testGrapHeight = 10;
     private static final double testGrapMaxPathWeight = 10.0;
 
-    @org.junit.Test
+    @Test
     public void testBuilder() {
         Graph graph = new Graph();
         Assert.assertNotNull(graph);
@@ -23,7 +24,7 @@ public class GraphTests {
                 Assert.assertNotNull(graph.getNode(x, y));
     }
 
-    @org.junit.Test
+    @Test
     public void testGetNode() {
         Graph graph = GraphGenerator.GenerateExample();
         int width = graph.getSize().width();
@@ -37,7 +38,7 @@ public class GraphTests {
             Assert.assertEquals(graph.getNode(id).getGraphID(), id);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetNeighbourNode() {
         Graph graph = GraphGenerator.GenerateExample();
 
@@ -57,7 +58,7 @@ public class GraphTests {
         Assert.assertNull(graph.getNeighbourNode(graph.getNode(8), Path.Side.BOTTOM));
     }
 
-    @org.junit.Test
+    @Test
     public void testGetPathSideForConnection() {
         Graph graph = GraphGenerator.GenerateExample();
 
@@ -75,7 +76,7 @@ public class GraphTests {
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testSetupPath() {
         Graph graph = new Graph();
         Assert.assertNotNull(graph);
@@ -95,7 +96,7 @@ public class GraphTests {
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testDeletePath() {
         Graph graph = new Graph();
         Assert.assertNotNull(graph);
@@ -123,7 +124,7 @@ public class GraphTests {
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testGetNodeXAndY() {
         Graph graph = new Graph();
         Assert.assertNotNull(graph);
@@ -137,7 +138,7 @@ public class GraphTests {
         }
     }
 
-    @org.junit.Test
+    @Test
     public void testIterator() {
         Graph graph = new Graph();
         Assert.assertNotNull(graph);
