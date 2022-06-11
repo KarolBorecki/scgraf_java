@@ -103,6 +103,6 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
     }
 
     protected interface GenerateWeightCallable<T>{
-        public T getWeight(int x, int y);
+        T getWeight(int x, int y);
     }
 }

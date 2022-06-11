@@ -14,11 +14,13 @@ public class Graph implements Iterable<Node> {
     private int graphIDCounter = 0;
 
     public Graph setWidth(int width) {
+        if(size == null) size = new Size();
         size.setWidth(width);
         return this;
     }
 
     public Graph setHeight(int height) {
+        if(size == null) size = new Size();
         size.setHeight(height);
         return this;
     }
@@ -45,11 +47,6 @@ public class Graph implements Iterable<Node> {
         return maxConnectionWeight;
     }
 
-    /*
-        public Node getNeighbourNode(Node node, Path.Side side){
-            return nodes[node.graphID / size.height() + (side == Path.Side.LEFT ? -1 : side == Path.Side.RIGHT ? 1 : 0)][node.graphID % size.height() + (side == Path.Side.TOP ? -size.width() : side == Path.Side.BOTTOM ? size.width() : 0)];
-        }
-    */
     public Node getNeighbourNode(Node node, Path.Side side) {
         int row = getNodeX(node);
         int column = getNodeY(node);
@@ -145,12 +142,6 @@ public class Graph implements Iterable<Node> {
     public int getNextGraphID() {
         return graphIDCounter++;
     }
-
-    public void setMaxConnectionWeight(double newMaxConnectionWeight) {
-        //TODO maybe we should update this value depended by analysing the graph connections?
-        maxConnectionWeight = newMaxConnectionWeight;
-    }
-
 
     @Override
     public String toString() {
