@@ -79,7 +79,7 @@ public class Dijkstra extends Thread {
 
     private static DijkstraData[] initializeDijkstraTable(Graph graph, Node startNode) {
         DijkstraData[] dijkstraTable = new DijkstraData[graph.getNodesCount()];
-        queToVisit = new PriorityQueue<>(graph.getNextGraphID()); //TODO NOOOOOO DONT DO THAT!
+        queToVisit = new PriorityQueue<>(graph.getNodesCount());
         for (int i = 0; i < graph.getSize().height(); i++)
             for (int j = 0; j < graph.getSize().width(); j++) {
                 int indexInGraph = i * graph.getSize().width() + j;

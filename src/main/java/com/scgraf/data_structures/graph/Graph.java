@@ -139,7 +139,7 @@ public class Graph implements Iterable<Node> {
         return size;
     }
 
-    public int getNextGraphID() {
+    protected int getNextGraphID() {
         return graphIDCounter++;
     }
 
