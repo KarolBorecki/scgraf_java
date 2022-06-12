@@ -91,7 +91,7 @@ public class GraphPanel extends AnchorPane {
         if (drawPath == null) return;
         System.out.println("CLEANING PATH");
         for (NodeElement nodeElement : drawPath)
-            nodeElement.stopHighlight();
+            if(nodeElement != null) nodeElement.stopHighlight();
     }
 
     private void setSize(double width, double height) {

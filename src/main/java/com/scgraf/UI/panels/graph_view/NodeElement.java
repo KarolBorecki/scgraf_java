@@ -83,6 +83,6 @@ public class NodeElement extends StackPane {
         final double lightHUE = Color.GREEN.getHue();
         final double heavyHUE = Color.RED.getHue();
         double hue = lightHUE + (heavyHUE - lightHUE) * weight / maxWeight;
-        return Color.hsb(hue, 0.6, 0.9);
+        return Color.hsb(hue, 0.7, 0.9);
     }
 }

@@ -20,6 +20,11 @@ public class Utils {
         return java.util.Arrays.copyOf(arr, size);
     }
 
+    public static <T> T[] resizeArrayBy(T[] arr, int size) {
+        if (size <= 0) return arr;
+        return java.util.Arrays.copyOf(arr, arr.length + size);
+    }
+
     public static <T> boolean arrContains(T[] arr, T wanted, int start, int end) {
         if (start < 0 || start >= arr.length || end < 0 || end >= arr.length)
             return false;

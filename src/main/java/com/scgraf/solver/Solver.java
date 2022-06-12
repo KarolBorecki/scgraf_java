@@ -97,7 +97,7 @@ public class Solver {
     public void SaveGraph() {
         //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Graph File");
+        fileChooser.setTitle("Save Graph to File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         File file = fileChooser.showSaveDialog(new Popup());
         if (file != null)
@@ -110,7 +110,7 @@ public class Solver {
     public void LoadGraph() {
         //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Graph File");
+        fileChooser.setTitle("Choose Graph from File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         File file = fileChooser.showOpenDialog(new Popup());
         if (file != null)
@@ -118,7 +118,7 @@ public class Solver {
                 try {
                     return FileReaderG.readGraphFromFile(file);
                 } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
-                    Logger.getInstance().errPopup("File read error.");
+                    Logger.getInstance().errPopup("File read error: " + e.getMessage());
                 }
                 return null;
             });
