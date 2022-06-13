@@ -3,6 +3,7 @@ package com.scgraf.UI.panels.functions_view.functionalities_panel;
 import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
+import com.scgraf.data_structures.graph.Node;
 import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
@@ -15,11 +16,17 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
     public ShortestPathPanel(FunctionPanelManager root) {
         super(root, "Find path", "The path will be find from start node to end node:");
         HBox inputPane = new HBox();
+
         inputPane.setAlignment(Pos.CENTER);
         inputPane.setSpacing(UIConfig.panelRegularSpacing);
+
         startNodeIDIInput = new FormattedTextField("Start node");
         endNodeIDInput = new FormattedTextField("End node");
+
         inputPane.getChildren().addAll(startNodeIDIInput, endNodeIDInput);
+
+        Solver.getInstance().addNodeChooseObserver(this::updateValues);
+
         buildFunctionView(inputPane);
     }
 
@@ -35,8 +42,8 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
     }
 
     @Override
-    public void cancel() {
-        super.cancel();
-        Solver.getInstance().cleanPath();
+    public void updateValues(Object[] val){
+        if(val[0] != null) startNodeIDIInput.setText(""+((Node)val[0]).getGraphID());
+        if(val[1] != null) endNodeIDInput.setText(""+((Node)val[1]).getGraphID());
     }
 }

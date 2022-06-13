@@ -5,25 +5,40 @@ import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 import com.scgraf.solver.Solver;
+import com.scgraf.utils.Observer;
 import com.scgraf.utils.UIUtils;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GraphPanel extends AnchorPane {
     Stage primaryStage;
 
     private Graph graph;
+    double cellSize;
     private NodeElement[][] drawNodes;
     private NodeElement[] drawPath;
+    private NodeElement[] drawChosenNodes;
+    private int currChoosingNode = 0;
+
+    public List<Observer<Node[]>> onNodeChooseNotify;
 
     public GraphPanel(Graph graph, Stage stage) {
         super();
         primaryStage = stage;
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
+        drawChosenNodes = new NodeElement[2];
+        onNodeChooseNotify = new ArrayList<>();
+
         Solver.getInstance().addGraphChangeObserver(this::updateGraph);
         Solver.getInstance().addPathDrawObserver(this::drawPath);
         Solver.getInstance().addPathCleanObserver(this::cleanPath);
+
+        setOnMousePressed(this::onNodeChoose);
 
         updateGraph(graph);
     }
@@ -43,7 +58,6 @@ public class GraphPanel extends AnchorPane {
         final double cellSizeWidth = ((getWidth()) / numCols);
         final double cellSizeHeight = ((getHeight()) / numRows);
 
-        double cellSize;
         if (cellSizeWidth > cellSizeHeight) {
             cellSize = cellSizeHeight;
             setSize(getHeight(), getHeight());
@@ -88,15 +102,44 @@ public class GraphPanel extends AnchorPane {
     }
 
     public void cleanPath(Node[] path) {
+        for (NodeElement n : drawChosenNodes)
+            if(n != null) n.stopHighlight();
         if (drawPath == null) return;
-        System.out.println("CLEANING PATH");
         for (NodeElement nodeElement : drawPath)
             if(nodeElement != null) nodeElement.stopHighlight();
+    }
+
+    private void onNodeChoose(MouseEvent event){
+        Solver.getInstance().cleanPath();
+
+        final int x = (int)(Math.ceil(event.getX() / cellSize)-1);
+        final int y = (int)(Math.ceil(event.getY() / cellSize)-1);
+        NodeElement chosen = drawNodes[y][x];
+
+        drawChosenNodes[(currChoosingNode++)%2] = chosen;
+
+        Node[] chosenNodes = new Node[2];
+        if(drawChosenNodes[0] != null) chosenNodes[0] = drawChosenNodes[0].getNode();
+        if(drawChosenNodes[1] != null) chosenNodes[1] = drawChosenNodes[1].getNode();
+
+        for(Observer<Node[]> obs : onNodeChooseNotify)
+            obs.call(chosenNodes);
+
+        if(drawChosenNodes[0] != null) drawChosenNodes[0].highlight();
+        if(drawChosenNodes[1] != null) drawChosenNodes[1].highlight();
     }
 
     private void setSize(double width, double height) {
         UIUtils.setStaticSize(this, width, height);
         setWidth(width);
         setHeight(height);
+    }
+
+    public void addNodeChooseObserver(Observer<Node[]> obs) {
+        onNodeChooseNotify.add(obs);
+    }
+
+    public void removeNodeChooseObserver(Observer<Node[]> obs) {
+        onNodeChooseNotify.remove(obs);
     }
 }

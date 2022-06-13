@@ -10,14 +10,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class GraphView extends BorderPane {
+    GraphInfoPanel infoPane;
+    GraphPanel graphPanel;
     public GraphView(Stage stage) {
         super();
         UIUtils.setStaticSize(this, UIConfig.graphPanelWidth, 0);
 
         Graph startGraph = Solver.getInstance().getGraph();
 
-        GraphInfoPanel infoPane = new GraphInfoPanel(startGraph);
-        GraphPanel graphPanel = new GraphPanel(startGraph, stage);
+        infoPane = new GraphInfoPanel(startGraph);
+        graphPanel = new GraphPanel(startGraph, stage);
+        graphPanel.addNodeChooseObserver(nodes -> Solver.getInstance().onNodeChoose(nodes));
 
         setCenter(graphPanel);
         setTop(infoPane);

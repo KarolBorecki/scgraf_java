@@ -11,10 +11,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class NodeElement extends StackPane {
-    Node node;
-    double maxWeight;
+    private final Node node;
+    private final double maxWeight;
 
-    Circle circle;
+    private final Circle circle;
     private Line rightPathLine;
     private Line bottomPathLine;
 
@@ -83,6 +83,10 @@ public class NodeElement extends StackPane {
         final double lightHUE = Color.GREEN.getHue();
         final double heavyHUE = Color.RED.getHue();
         double hue = lightHUE + (heavyHUE - lightHUE) * weight / maxWeight;
-        return Color.hsb(hue, 0.7, 0.9);
+        return Color.hsb(hue, UIConfig.hsbPathSaturation, UIConfig.hsbPathBrightness); //TODO
+    }
+
+    public Node getNode(){
+        return node;
     }
 }

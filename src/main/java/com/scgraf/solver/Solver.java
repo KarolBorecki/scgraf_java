@@ -27,6 +27,7 @@ public class Solver {
     public List<Observer<Graph>> onGraphChangeNotify;
     public List<Observer<Node[]>> onPathDrawNotify;
     public List<Observer<Node[]>> onPathCleanNotify;
+    public List<Observer<Node[]>> onNodeChooseNotify;
 
     public static Solver instance;
 
@@ -39,6 +40,7 @@ public class Solver {
         onGraphChangeNotify = new ArrayList<>();
         onPathDrawNotify = new ArrayList<>();
         onPathCleanNotify = new ArrayList<>();
+        onNodeChooseNotify = new ArrayList<>();
     }
 
     public static Solver getInstance(Graph graph) {
@@ -94,7 +96,7 @@ public class Solver {
         startBackgroundSolverTask(() -> GraphGenerator.Generate(new Size(width, height), maxWeight, type));
     }
 
-    public void SaveGraph() {
+    public void saveGraph() {
         //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Graph to File");
@@ -107,7 +109,7 @@ public class Solver {
             });
     }
 
-    public void LoadGraph() {
+    public void loadGraph() {
         //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph from File");
@@ -186,6 +188,11 @@ public class Solver {
         return graph;
     }
 
+    public void onNodeChoose(Node[] nodes){
+        for(Observer<Node[]> c : onNodeChooseNotify)
+            c.call(nodes);
+    }
+
     public void addGraphChangeObserver(Observer<Graph> obs) {
         onGraphChangeNotify.add(obs);
     }
@@ -208,5 +215,13 @@ public class Solver {
 
     public void removePathCleanObserver(Observer<Node[]> obs) {
         onPathCleanNotify.remove(obs);
+    }
+
+    public void addNodeChooseObserver(Observer<Node[]> obs) {
+        onNodeChooseNotify.add(obs);
+    }
+
+    public void removeNodeChooseObserver(Observer<Node[]> obs) {
+        onNodeChooseNotify.remove(obs);
     }
 }
