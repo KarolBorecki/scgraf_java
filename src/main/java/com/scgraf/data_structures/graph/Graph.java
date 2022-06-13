@@ -56,7 +56,7 @@ public class Graph implements Iterable<Node> {
             else column--;
 
         else if (side == Path.Side.RIGHT)
-            if (column > size.width()) return null;
+            if (column >= size.width() - 1) return null;
             else column++;
 
         else if (side == Path.Side.TOP)
@@ -64,7 +64,7 @@ public class Graph implements Iterable<Node> {
             else row--;
 
         else if (side == Path.Side.BOTTOM)
-            if (row > size.height()) return null;
+            if (row >= size.height() - 1) return null;
             else row++;
 
 
@@ -118,6 +118,8 @@ public class Graph implements Iterable<Node> {
     }
 
     public Node getNode(int row, int column) {
+        if(row < 0 || row > size.width() || column < 0 || column > size.height())
+            return null;
         return nodes[row][column];
     }
 
