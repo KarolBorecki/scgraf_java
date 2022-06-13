@@ -117,6 +117,8 @@ public class Graph implements Iterable<Node> {
     }
 
     public Node getNode(int row, int column) {
+        if(row < 0 || row >= size.width() || column < 0 || column >= size.height())
+            return null;
         return nodes[row][column];
     }
 
