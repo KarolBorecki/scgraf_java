@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public abstract class FunctionAbstractPanel extends VBox implements SolverCaller {
+public abstract class FunctionAbstractPanel extends VBox implements IFunctionPanel {
     protected FunctionPanelManager panelManager;
 
     protected VBox btnPanel;
@@ -49,8 +49,12 @@ public abstract class FunctionAbstractPanel extends VBox implements SolverCaller
         getChildren().addAll(infoText, inputPane, btnPanel);
     }
 
-    protected void cancel() {
+    public void cancel() {
         panelManager.switchFunction(FunctionPanelManager.Functionality.ALL);
         Logger.getInstance().log(Logger.StatusLog.OK); //TODO not sure about it
+    }
+
+    public void updateValues(){
+        ;;
     }
 }

@@ -41,9 +41,8 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         else if (type == GeneratingType.LINEAR_Y) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.height() * y);
         else if (type == GeneratingType.LINEAR_X) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.width() * x);
         else if (type == GeneratingType.SKEWED_LINEAR) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / (size.width() * 2) * x + maxPathWeight / (size.height() * 2) * y);
-        else if (type == GeneratingType.XX_YY) return Generate(size, maxPathWeight, (x, y)-> (maxPathWeight / (size.width() * 2)) * x*x - (maxPathWeight /  (size.height() * 2)) * y*y);
-        else if (type == GeneratingType.SINX_COSY) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight  * Math.sin(x) / 2 - maxPathWeight * Math.cos(y) / 2);
-        else if (type == GeneratingType.POWEX_POWEY) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.width() / 2 * Math.pow(Math.E, x) - maxPathWeight / size.height() / 2 * Math.pow(Math.E, y));
+        else if (type == GeneratingType.XX_YY) return Generate(size, maxPathWeight, (x, y)-> (Math.abs(maxPathWeight / (size.width() * 2) * x*x - (maxPathWeight /  (size.height() * 2)) * y*y)));
+        else if (type == GeneratingType.SINX_COSY) return Generate(size, maxPathWeight, (x, y)-> Math.abs(maxPathWeight  * Math.sin(x) / 2 - maxPathWeight * Math.cos(y) / 2));
         else if (type == GeneratingType.SQRTXY) return Generate(size, maxPathWeight, (x, y)-> Math.sqrt(x*y));
         else return null;
     }

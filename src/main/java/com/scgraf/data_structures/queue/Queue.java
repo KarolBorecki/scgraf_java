@@ -56,7 +56,7 @@ public abstract class Queue<T> implements IQueue<T> {
 
     @Override
     public void resizeQueue(int resizeFactor) {
-        queue = Utils.resizeArrayBy(queue, resizeFactor);
+        queue = Utils.resizeArray(queue, resizeFactor);
     }
 
     public int getLength() {

@@ -55,6 +55,13 @@ public class Node implements Comparable<Node> {
     }
 
     @Override
+    public boolean equals(Object other){
+        if(other instanceof Node)
+            return ((Node) other).graphID == graphID;
+        return false;
+    }
+
+    @Override
     public String toString() {
         StringBuilder resultString = new StringBuilder("   [" + graphID + "]" + "Node " + ID + ":\n");
         for (Path.Side side : Path.Side.values())

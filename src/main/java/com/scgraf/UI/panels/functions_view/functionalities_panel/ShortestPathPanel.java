@@ -35,7 +35,7 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
     }
 
     @Override
-    protected void cancel() {
+    public void cancel() {
         super.cancel();
         Solver.getInstance().cleanPath();
     }

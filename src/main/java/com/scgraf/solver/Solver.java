@@ -1,9 +1,7 @@
 package com.scgraf.solver;
 
 import com.scgraf.UI.elements.buttons.ButtonsDisabler;
-import com.scgraf.algorithms.BFS;
-import com.scgraf.algorithms.Dijkstra;
-import com.scgraf.algorithms.DijkstraDivider;
+import com.scgraf.algorithms.*;
 import com.scgraf.data_handling.FileReaderG;
 import com.scgraf.data_handling.FileWriterG;
 import com.scgraf.data_structures.graph.Graph;
@@ -72,11 +70,11 @@ public class Solver {
         });
     }
 
-    public void divide(int n) {
+    public void divide(int n, Divider.DividingType dividingType) {
         startBackgroundSolverTask(() -> {
             try {
-                DijkstraDivider.divideGraphThisManyTimes(graph, n);
-            } catch (DijkstraDivider.WrongDivisionsNumber | Dijkstra.DijkstraNotSolvedException | Exception e) {
+                Divider.Divide(graph, n, dividingType);
+            } catch (SimpleDivider.TooManyDividesException | DijkstraDivider.WrongDivisionsNumber | Dijkstra.DijkstraNotSolvedException | Exception e) {
                 Platform.runLater(() -> Logger.getInstance().errPopup(e.getMessage()));
             }
             return graph;

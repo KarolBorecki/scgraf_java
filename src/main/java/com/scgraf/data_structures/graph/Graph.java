@@ -126,7 +126,6 @@ public class Graph implements Iterable<Node> {
         return getNode(getNodeX(graphID), getNodeY(graphID));
     }
 
-
     public int getNodeX(Node node) {
         return getNodeX(node.graphID);
     }

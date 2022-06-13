@@ -16,7 +16,7 @@ public class Utils {
     }
 
     public static <T> T[] resizeArrayTo(T[] arr, int size) {
-        if (size <= arr.length) return arr;
+        if (size < 0) return arr;
         return java.util.Arrays.copyOf(arr, size);
     }
 

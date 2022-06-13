@@ -18,6 +18,8 @@ public class FunctionPanelManager extends BorderPane {
     ConsistencyPanel consistencyPanel;
     GeneratePanel generatePanel;
 
+    public IFunctionPanel actualPanel;
+
     public enum Functionality {
         ALL,
         SHORTEST,
@@ -55,9 +57,9 @@ public class FunctionPanelManager extends BorderPane {
             functionPanelWrapper.getChildren().add(allFunctionsPanel);
             setTop(captionText);
         }
-        if (functionality == Functionality.SHORTEST) functionPanelWrapper.getChildren().add(shortestPathPanel);
-        if (functionality == Functionality.DIVIDE) functionPanelWrapper.getChildren().add(dividePanel);
-        if (functionality == Functionality.CONSISTENCY) functionPanelWrapper.getChildren().add(consistencyPanel);
-        if (functionality == Functionality.GENERATE) functionPanelWrapper.getChildren().add(generatePanel);
+        else if (functionality == Functionality.SHORTEST) functionPanelWrapper.getChildren().add(shortestPathPanel);
+        else if (functionality == Functionality.DIVIDE) functionPanelWrapper.getChildren().add(dividePanel);
+        else if (functionality == Functionality.CONSISTENCY) functionPanelWrapper.getChildren().add(consistencyPanel);
+        else if (functionality == Functionality.GENERATE) functionPanelWrapper.getChildren().add(generatePanel);
     }
 }
