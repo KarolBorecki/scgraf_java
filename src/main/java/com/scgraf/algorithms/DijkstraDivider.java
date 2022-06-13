@@ -6,7 +6,7 @@ import com.scgraf.data_structures.graph.Path;
 
 import java.util.Random;
 
-public class DijkstraDivider {
+public class DijkstraDivider implements IDivider{
 
     public static void singleDivision(Graph dividedGraph, int divisionPoint) throws Dijkstra.DijkstraNotSolvedException, Dijkstra.DijkstraCannotFindPathException, Exception {
         Node firstNode = dividedGraph.getNode(divisionPoint, 0);

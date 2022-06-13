@@ -4,7 +4,7 @@ import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 
-public class SimpleDivider {
+public class SimpleDivider implements IDivider{
 
     private static void singleDivisionParallel(Graph dividedGraph, int parallel_division_point) {
         if (parallel_division_point < 0 || parallel_division_point > dividedGraph.getSize().height() - 1)
@@ -27,7 +27,7 @@ public class SimpleDivider {
         }
     }
 
-    public static void divideGraphThisManyTimes(Graph dividedGraph, int divisionNumber) throws TooManyDividesException {
+    public static void divideGraphThisManyTimes(Graph dividedGraph, int divisionNumber) throws DijkstraDivider.WrongDivisionsNumber {
         int maxParallelDivisions = dividedGraph.getSize().height() - 1;
         int maxPerpendicularDivisions = dividedGraph.getSize().width() - 1;
         if (divisionNumber < 1 || divisionNumber > (maxParallelDivisions + maxPerpendicularDivisions))
