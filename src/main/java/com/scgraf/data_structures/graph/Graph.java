@@ -187,7 +187,7 @@ public class Graph implements Iterable<Node> {
         int curr;
 
         public GraphIterator(Graph graph) {
-            int n = graph.getSize().width() * graph.getSize().height();
+            int n = graph.getNodesCount();
             if (n != 0) {
                 this.t = graph.nodes;
                 this.x = graph.getSize().width();
