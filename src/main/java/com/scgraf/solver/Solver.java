@@ -132,7 +132,7 @@ public class Solver {
                 try {
                     return FileReaderG.readGraphFromFile(file);
                 } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
-                    Logger.getInstance().errPopup("File read error: " + e.getMessage());
+                    Platform.runLater(() -> Logger.getInstance().errPopup("File read error: " + e.getMessage()));
                 }
                 return null;
             });

@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 public class FileReaderG {
 
     public static Graph readGraphFromFile(File file) throws IOException, FileFormatError, Graph.InvalidMeshConnection {
-
         int readLines = 0;
         double maxWeightRead = 0.;
         String firstLineRegex = "\\d+\\s+\\d+";
@@ -97,11 +96,8 @@ public class FileReaderG {
             errorMsg += lineNumber + " in file: \"" + file.getName() + "\"\n" + cause + "\n";
         }
 
-        public void printMessage() {
-            System.err.println(this.errorMsg);
-        }
-
-        public String getErrorMsg() {
+        @Override
+        public String getMessage(){
             return errorMsg;
         }
     }

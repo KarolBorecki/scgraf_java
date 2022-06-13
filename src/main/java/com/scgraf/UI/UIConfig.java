@@ -98,7 +98,7 @@ public class UIConfig {
         popupWidth = stageWidth / 2;
         popupHeight = stageHeight / 6;
         popupImgSize = (int) (popupHeight / 1.5);
-        popupTextWrapWidth = popupWidth - popupImgSize * 2;
+        popupTextWrapWidth = (int) (popupWidth - popupImgSize * 1.8);
 
         graphInfoWidth = stageWidth;
         graphInfoHeight = stageHeight / 15;
