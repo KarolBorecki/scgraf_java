@@ -56,7 +56,7 @@ public class Graph implements Iterable<Node> {
             else column--;
 
         else if (side == Path.Side.RIGHT)
-            if (column >= size.width() - 1) return null;
+            if (column > size.width()) return null;
             else column++;
 
         else if (side == Path.Side.TOP)
@@ -64,7 +64,7 @@ public class Graph implements Iterable<Node> {
             else row--;
 
         else if (side == Path.Side.BOTTOM)
-            if (row >= size.height() - 1) return null;
+            if (row > size.height()) return null;
             else row++;
 
 
@@ -72,14 +72,14 @@ public class Graph implements Iterable<Node> {
     }
 
     public Path.Side getPathSideBetween(Node startNode, Node endNode) throws InvalidMeshConnection {
-        if (startNode.getGraphID() + 1 == endNode.getGraphID()) {
-            return Path.Side.RIGHT;
-        } else if (startNode.getGraphID() - 1 == endNode.getGraphID()) {
-            return Path.Side.LEFT;
-        } else if (startNode.getGraphID() + this.getSize().width() == endNode.getGraphID()) {
+        if (startNode.getGraphID() + this.getSize().width() == endNode.getGraphID()) {
             return Path.Side.BOTTOM;
         } else if (startNode.getGraphID() - this.getSize().width() == endNode.getGraphID()) {
             return Path.Side.TOP;
+        }else if (startNode.getGraphID() + 1 == endNode.getGraphID()) {
+            return Path.Side.RIGHT;
+        } else if (startNode.getGraphID() - 1 == endNode.getGraphID()) {
+            return Path.Side.LEFT;
         }
         throw new InvalidMeshConnection(startNode, endNode);
     }
@@ -90,7 +90,8 @@ public class Graph implements Iterable<Node> {
 
     public void setupPath(Node node, Path.Side direction, Path path) {
         try {
-            setupPath(node, getNeighbourNode(node, direction), path);
+            Node nNode = getNeighbourNode(node, direction);
+            setupPath(node, nNode, path);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -117,8 +118,6 @@ public class Graph implements Iterable<Node> {
     }
 
     public Node getNode(int row, int column) {
-        if(row < 0 || row >= size.width() || column < 0 || column >= size.height())
-            return null;
         return nodes[row][column];
     }
 
@@ -155,6 +154,7 @@ public class Graph implements Iterable<Node> {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
+        s.append("Width: ").append(size.width()).append(" Height:").append(size.height()).append("\n");
         for (int x = 0; x < this.size.height(); x++) {
             s.append("ROW ").append(x).append(": \n");
             for (int y = 0; y < this.size.width(); y++)

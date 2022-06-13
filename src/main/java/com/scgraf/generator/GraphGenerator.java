@@ -63,6 +63,7 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
                     graph.setupPath(graph.getNode(y, x), Path.Side.BOTTOM, weightGeneratingFunction.getWeight(x, y));
             }
         }
+        System.out.println(graph);
         return graph;
     }
 
