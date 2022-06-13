@@ -78,6 +78,8 @@ public class UIConfig {
     public static int maxGraphNodesCountToDrawCaptions = 1000;
     public static Color graphNodeColor = Color.web("f8f4e3");
     public static Color graphShortestPathColor = Color.web("bc96e6");
+    public static double hsbPathSaturation = 0.7;
+    public static double hsbPathBrightness = 0.9;
 
     static {
         subBtnColor = regularBtnColor;
