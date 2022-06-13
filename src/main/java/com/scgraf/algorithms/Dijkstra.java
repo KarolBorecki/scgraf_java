@@ -31,8 +31,7 @@ public class Dijkstra extends Thread {
         }
         t = Utils.resizeArrayTo(t, i + 1);
         t[i] = helpNode;
-        for(Node n : t)
-            System.out.println(n);
+
         return t;
     }
 

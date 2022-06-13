@@ -7,5 +7,5 @@ public interface IFunctionPanel {
 
     void solve();
     void cancel();
-    void updateValues();
+    void updateValues(Object[] val);
 }

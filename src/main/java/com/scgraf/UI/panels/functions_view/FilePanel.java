@@ -29,8 +29,8 @@ public class FilePanel extends BorderPane {
         SubfunctionButton saveBtn = new SubfunctionButton("Save");
         SubfunctionButton loadBtn = new SubfunctionButton("Load");
 
-        loadBtn.setOnAction(event -> Solver.getInstance().LoadGraph());
-        saveBtn.setOnAction(event -> Solver.getInstance().SaveGraph());
+        loadBtn.setOnAction(event -> Solver.getInstance().loadGraph());
+        saveBtn.setOnAction(event -> Solver.getInstance().saveGraph());
 
         optionsPane.getChildren().addAll(saveBtn, loadBtn);
 

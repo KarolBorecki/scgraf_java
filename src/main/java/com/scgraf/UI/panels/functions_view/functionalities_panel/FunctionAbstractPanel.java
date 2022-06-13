@@ -6,6 +6,7 @@ import com.scgraf.UI.elements.buttons.SubfunctionButton;
 import com.scgraf.UI.elements.text.FormattedText;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import com.scgraf.logger.Logger;
+import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -52,9 +53,10 @@ public abstract class FunctionAbstractPanel extends VBox implements IFunctionPan
     public void cancel() {
         panelManager.switchFunction(FunctionPanelManager.Functionality.ALL);
         Logger.getInstance().log(Logger.StatusLog.OK); //TODO not sure about it
+        Solver.getInstance().cleanPath();
     }
 
-    public void updateValues(){
+    public void updateValues(Object[] val){
         ;;
     }
 }
