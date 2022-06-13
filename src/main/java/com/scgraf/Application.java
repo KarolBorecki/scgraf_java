@@ -22,6 +22,11 @@ public class Application extends javafx.application.Application {
 
         stage.getIcons().add(UILoader.iconImg);
 
+        stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
+
         stage.setTitle("scgraf");
         stage.setScene(scene);
         stage.show();
