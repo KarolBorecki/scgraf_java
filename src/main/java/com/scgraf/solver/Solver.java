@@ -97,10 +97,13 @@ public class Solver {
     }
 
     public void saveGraph() {
-        //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Graph to File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TXT", "*.txt"),
+                new FileChooser.ExtensionFilter("ALL", "*.*")
+        );
         File file = fileChooser.showSaveDialog(new Popup());
         if (file != null)
             startBackgroundSolverTask(() -> {
@@ -110,10 +113,13 @@ public class Solver {
     }
 
     public void loadGraph() {
-        //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph from File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TXT", "*.txt"),
+                new FileChooser.ExtensionFilter("ALL", "*.*")
+        );
         File file = fileChooser.showOpenDialog(new Popup());
         if (file != null)
             startBackgroundSolverTask(() -> {

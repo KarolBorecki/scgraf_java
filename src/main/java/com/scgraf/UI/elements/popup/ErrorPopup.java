@@ -5,5 +5,6 @@ import com.scgraf.UI.UILoader;
 public class ErrorPopup extends Popup {
     public ErrorPopup(String infoTxt) {
         super("Error", infoTxt, "OK", UILoader.errImg);
+        getIcons().add(UILoader.errImg);
     }
 }

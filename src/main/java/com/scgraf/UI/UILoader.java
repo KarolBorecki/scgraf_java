@@ -14,6 +14,8 @@ public class UILoader {
     public static Image infoImg;
     public static Image errImg;
 
+    public static Image iconImg;
+
     public static Font regularFont;
     public static Font regularSmallFont;
     public static Font regularBigFont;
@@ -25,6 +27,7 @@ public class UILoader {
             buttonBckImg = new Image(new FileInputStream("src/main/resources/com/scgraf/img/btn_back.jpg"));
             infoImg = new Image(new FileInputStream("src/main/resources/com/scgraf/img/info_img.png"));
             errImg = new Image(new FileInputStream("src/main/resources/com/scgraf/img/err_img.png"));
+            iconImg = new Image(new FileInputStream("src/main/resources/com/scgraf/img/icon_img.png"));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
