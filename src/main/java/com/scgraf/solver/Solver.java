@@ -1,5 +1,6 @@
 package com.scgraf.solver;
 
+import com.scgraf.Application;
 import com.scgraf.UI.elements.buttons.ButtonsDisabler;
 import com.scgraf.algorithms.*;
 import com.scgraf.data_handling.FileReaderG;
@@ -13,7 +14,9 @@ import com.scgraf.utils.Observer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -97,6 +100,7 @@ public class Solver {
     }
 
     public void saveGraph() {
+        ButtonsDisabler.DisableAll();
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Graph to File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -104,15 +108,17 @@ public class Solver {
                 new FileChooser.ExtensionFilter("TXT", "*.txt"),
                 new FileChooser.ExtensionFilter("ALL", "*.*")
         );
-        File file = fileChooser.showSaveDialog(new Popup());
+        File file = fileChooser.showSaveDialog(Application.stage);
         if (file != null)
             startBackgroundSolverTask(() -> {
                 FileWriterG.writeGraphToFile(graph, file);
                 return null;
             });
+        ButtonsDisabler.EnableAll();
     }
 
     public void loadGraph() {
+        ButtonsDisabler.DisableAll();
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph from File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -120,7 +126,7 @@ public class Solver {
                 new FileChooser.ExtensionFilter("TXT", "*.txt"),
                 new FileChooser.ExtensionFilter("ALL", "*.*")
         );
-        File file = fileChooser.showOpenDialog(new Popup());
+        File file = fileChooser.showOpenDialog(Application.stage);
         if (file != null)
             startBackgroundSolverTask(() -> {
                 try {
@@ -130,6 +136,7 @@ public class Solver {
                 }
                 return null;
             });
+        ButtonsDisabler.EnableAll();
     }
 
     private <T> void startBackgroundSolverTask(Callable<T> method) {
