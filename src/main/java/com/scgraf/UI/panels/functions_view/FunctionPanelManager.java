@@ -56,8 +56,7 @@ public class FunctionPanelManager extends BorderPane {
         if (functionality == Functionality.ALL) {
             functionPanelWrapper.getChildren().add(allFunctionsPanel);
             setTop(captionText);
-        }
-        else if (functionality == Functionality.SHORTEST) functionPanelWrapper.getChildren().add(shortestPathPanel);
+        } else if (functionality == Functionality.SHORTEST) functionPanelWrapper.getChildren().add(shortestPathPanel);
         else if (functionality == Functionality.DIVIDE) functionPanelWrapper.getChildren().add(dividePanel);
         else if (functionality == Functionality.CONSISTENCY) functionPanelWrapper.getChildren().add(consistencyPanel);
         else if (functionality == Functionality.GENERATE) functionPanelWrapper.getChildren().add(generatePanel);

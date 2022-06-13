@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public abstract class FunctionAbstractPanel extends VBox implements IFunctionPanel {
+public abstract class FunctionAbstractPanel extends VBox implements IFunctionPanel, SolverCaller {
     protected FunctionPanelManager panelManager;
 
     protected VBox btnPanel;
@@ -52,11 +52,10 @@ public abstract class FunctionAbstractPanel extends VBox implements IFunctionPan
 
     public void cancel() {
         panelManager.switchFunction(FunctionPanelManager.Functionality.ALL);
-        Logger.getInstance().log(Logger.StatusLog.OK); //TODO not sure about it
+        Logger.getInstance().log(Logger.StatusLog.OK);
         Solver.getInstance().cleanPath();
     }
 
-    public void updateValues(Object[] val){
-        ;;
+    public void updateValues(Object[] val) {
     }
 }

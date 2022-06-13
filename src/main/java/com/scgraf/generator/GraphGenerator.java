@@ -5,7 +5,6 @@ import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.tuples.Size;
 
 import java.util.Random;
-import java.lang.Math;
 
 public class GraphGenerator extends Thread implements IGenerator<Graph> {
     private static final Random randomGenerator = new Random();
@@ -27,7 +26,7 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return str;
         }
     }
@@ -37,17 +36,23 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
     }
 
     public static Graph Generate(Size size, double maxPathWeight, GeneratingType type) {
-        if (type == GeneratingType.RANDOM) return Generate(size, maxPathWeight, (x, y) -> maxPathWeight * randomGenerator.nextDouble());
-        else if (type == GeneratingType.LINEAR_Y) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.height() * y);
-        else if (type == GeneratingType.LINEAR_X) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / size.width() * x);
-        else if (type == GeneratingType.SKEWED_LINEAR) return Generate(size, maxPathWeight, (x, y)-> maxPathWeight / (size.width() * 2) * x + maxPathWeight / (size.height() * 2) * y);
-        else if (type == GeneratingType.XX_YY) return Generate(size, maxPathWeight, (x, y)-> (Math.abs(maxPathWeight / (size.width() * 2) * x*x - (maxPathWeight /  (size.height() * 2)) * y*y)));
-        else if (type == GeneratingType.SINX_COSY) return Generate(size, maxPathWeight, (x, y)-> Math.abs(maxPathWeight  * Math.sin(x) / 2 - maxPathWeight * Math.cos(y) / 2));
-        else if (type == GeneratingType.SQRTXY) return Generate(size, maxPathWeight, (x, y)-> Math.sqrt(x*y));
+        if (type == GeneratingType.RANDOM)
+            return Generate(size, maxPathWeight, (x, y) -> maxPathWeight * randomGenerator.nextDouble());
+        else if (type == GeneratingType.LINEAR_Y)
+            return Generate(size, maxPathWeight, (x, y) -> maxPathWeight / size.height() * y);
+        else if (type == GeneratingType.LINEAR_X)
+            return Generate(size, maxPathWeight, (x, y) -> maxPathWeight / size.width() * x);
+        else if (type == GeneratingType.SKEWED_LINEAR)
+            return Generate(size, maxPathWeight, (x, y) -> maxPathWeight / (size.width() * 2) * x + maxPathWeight / (size.height() * 2) * y);
+        else if (type == GeneratingType.XX_YY)
+            return Generate(size, maxPathWeight, (x, y) -> (Math.abs(maxPathWeight / (size.width() * 2) * x * x - (maxPathWeight / (size.height() * 2)) * y * y)));
+        else if (type == GeneratingType.SINX_COSY)
+            return Generate(size, maxPathWeight, (x, y) -> Math.abs(maxPathWeight * Math.sin(x) / 2 - maxPathWeight * Math.cos(y) / 2));
+        else if (type == GeneratingType.SQRTXY) return Generate(size, maxPathWeight, (x, y) -> Math.sqrt(x * y));
         else return null;
     }
 
-    public static Graph Generate(Size size, double maxWeight, GenerateWeightCallable<Double> weightGeneratingFunction){
+    public static Graph Generate(Size size, double maxWeight, GenerateWeightCallable<Double> weightGeneratingFunction) {
         Graph graph = new Graph();
         graph.setSize(size).setWeight(maxWeight).build();
 
@@ -63,7 +68,6 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
                     graph.setupPath(graph.getNode(y, x), Path.Side.BOTTOM, weightGeneratingFunction.getWeight(x, y));
             }
         }
-        System.out.println(graph);
         return graph;
     }
 
@@ -71,27 +75,27 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         Graph g = new Graph();
         g.setWidth(3).setHeight(3).setWeight(3).build();
 
-        g.setupPath(g.getNode(0, 0), Path.Side.RIGHT,1.4);
+        g.setupPath(g.getNode(0, 0), Path.Side.RIGHT, 1.4);
 
-        g.setupPath(g.getNode(0, 1), Path.Side.RIGHT,0.1);
-        g.setupPath(g.getNode(0, 1), Path.Side.BOTTOM,2.3);
+        g.setupPath(g.getNode(0, 1), Path.Side.RIGHT, 0.1);
+        g.setupPath(g.getNode(0, 1), Path.Side.BOTTOM, 2.3);
 
-        g.setupPath(g.getNode(0, 2), Path.Side.BOTTOM,0.1);
+        g.setupPath(g.getNode(0, 2), Path.Side.BOTTOM, 0.1);
 
-        g.setupPath(g.getNode(1, 0), Path.Side.RIGHT,1.3);
-        g.setupPath(g.getNode(1, 0), Path.Side.BOTTOM,0.1);
+        g.setupPath(g.getNode(1, 0), Path.Side.RIGHT, 1.3);
+        g.setupPath(g.getNode(1, 0), Path.Side.BOTTOM, 0.1);
 
-        g.setupPath(g.getNode(1, 1), Path.Side.RIGHT,2);
-        g.setupPath(g.getNode(1, 1), Path.Side.BOTTOM,3);
+        g.setupPath(g.getNode(1, 1), Path.Side.RIGHT, 2);
+        g.setupPath(g.getNode(1, 1), Path.Side.BOTTOM, 3);
 
-        g.setupPath(g.getNode(2, 0), Path.Side.RIGHT,0.2);
+        g.setupPath(g.getNode(2, 0), Path.Side.RIGHT, 0.2);
 
-        g.setupPath(g.getNode(2, 1), Path.Side.RIGHT,1.0);
+        g.setupPath(g.getNode(2, 1), Path.Side.RIGHT, 1.0);
 
         return g;
     }
 
-    protected interface GenerateWeightCallable<T>{
+    protected interface GenerateWeightCallable<T> {
         T getWeight(int x, int y);
     }
 }

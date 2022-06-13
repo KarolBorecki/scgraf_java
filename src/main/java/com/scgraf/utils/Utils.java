@@ -2,8 +2,7 @@ package com.scgraf.utils;
 
 public class Utils {
     public static void swap(Object[] arr, int a, int b) {
-        if (a < 0 || b < 0 || a > arr.length - 1 || b > arr.length - 1)
-            return;
+        if (a < 0 || b < 0 || a > arr.length - 1 || b > arr.length - 1) return;
 
         Object c = arr[a];
         arr[a] = arr[b];
@@ -26,8 +25,7 @@ public class Utils {
     }
 
     public static <T> boolean arrContains(T[] arr, T wanted, int start, int end) {
-        if (start < 0 || start >= arr.length || end < 0 || end >= arr.length)
-            return false;
+        if (start < 0 || start >= arr.length || end < 0 || end >= arr.length) return false;
         for (int i = start; i <= end; i++)
             if (arr[i] == wanted) return true;
         return false;

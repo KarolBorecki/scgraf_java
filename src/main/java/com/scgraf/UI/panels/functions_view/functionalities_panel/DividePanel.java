@@ -9,7 +9,6 @@ import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class DividePanel extends FunctionAbstractPanel {
     FormattedTextField divideNumberInput;

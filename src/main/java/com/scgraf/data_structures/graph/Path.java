@@ -32,7 +32,7 @@ public record Path(double weight) {
         public Side getSideTurnedBy(int amountOf90degreeTurns) {
             int sideIndex = index;
             if (amountOf90degreeTurns > 0) sideIndex = (sideIndex + amountOf90degreeTurns) % 4;
-            else sideIndex =  (sideIndex + 4 + amountOf90degreeTurns % 4) % 4;
+            else sideIndex = (sideIndex + 4 + amountOf90degreeTurns % 4) % 4;
 
             return values()[sideIndex];
         }

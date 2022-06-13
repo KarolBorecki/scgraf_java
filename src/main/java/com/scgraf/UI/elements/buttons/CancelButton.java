@@ -5,7 +5,7 @@ import com.scgraf.UI.UILoader;
 
 public class CancelButton extends FormattedButton {
     public CancelButton(String label) {
-        super(label, UIConfig.cancelBtnColor, UIConfig.cancelBtnColor, UILoader.regularSmallFont, 0.3);
+        super(label, UIConfig.cancelBtnColor, UIConfig.cancelBtnColor, UILoader.regularSmallFont, UIConfig.cancelBtnSizeFactor);
         setBackground(null);
     }
 }

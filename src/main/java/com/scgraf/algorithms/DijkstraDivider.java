@@ -6,9 +6,9 @@ import com.scgraf.data_structures.graph.Path;
 
 import java.util.Random;
 
-public class DijkstraDivider implements IDivider{
+public class DijkstraDivider implements IDivider {
 
-    public static void singleDivision(Graph dividedGraph, int divisionPoint) throws Dijkstra.DijkstraNotSolvedException, Dijkstra.DijkstraCannotFindPathException, Exception {
+    public static void singleDivision(Graph dividedGraph, int divisionPoint) throws Dijkstra.DijkstraNotSolvedException, Dijkstra.DijkstraCannotFindPathException {
         Node firstNode = dividedGraph.getNode(divisionPoint, 0);
         Node endNode = dividedGraph.getNode(divisionPoint, dividedGraph.getSize().width() - 1);
 
@@ -104,19 +104,18 @@ public class DijkstraDivider implements IDivider{
     }
 
     private static int getCuttingDirection(Graph dividedGraph, int y, Path.Side connection) {
-        int directionOfCutNodes;
         if (y != 0 && y != dividedGraph.getSize().height() - 1) {
-            return directionOfCutNodes = -1;
+            return -1;
         } else if (y == 0) {
             if (connection.equals(Path.Side.RIGHT))
-                return directionOfCutNodes = 1;
+                return 1;
             else
-                return directionOfCutNodes = -1;
+                return -1;
         } else if (y == dividedGraph.getSize().height() - 1) {
             if (connection.equals(Path.Side.RIGHT))
-                return directionOfCutNodes = -1;
+                return -1;
             else
-                return directionOfCutNodes = 1;
+                return 1;
         }
         return 0;
     }
@@ -128,7 +127,7 @@ public class DijkstraDivider implements IDivider{
     public static class WrongDivisionsNumber extends Throwable {
         private String errMsg = "Wrong division number: ";
 
-        public WrongDivisionsNumber(int n){
+        public WrongDivisionsNumber(int n) {
             super();
             errMsg += n;
         }

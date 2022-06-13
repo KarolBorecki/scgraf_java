@@ -42,8 +42,8 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
     }
 
     @Override
-    public void updateValues(Object[] val){
-        if(val[0] != null) startNodeIDIInput.setText(""+((Node)val[0]).getGraphID());
-        if(val[1] != null) endNodeIDInput.setText(""+((Node)val[1]).getGraphID());
+    public void updateValues(Object[] val) {
+        if (val[0] != null) startNodeIDIInput.setText("" + ((Node) val[0]).getGraphID());
+        if (val[1] != null) endNodeIDInput.setText("" + ((Node) val[1]).getGraphID());
     }
 }

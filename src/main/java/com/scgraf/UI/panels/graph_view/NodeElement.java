@@ -86,7 +86,7 @@ public class NodeElement extends StackPane {
         return Color.hsb(hue, UIConfig.hsbPathSaturation, UIConfig.hsbPathBrightness); //TODO
     }
 
-    public Node getNode(){
+    public Node getNode() {
         return node;
     }
 }

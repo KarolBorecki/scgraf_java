@@ -194,8 +194,8 @@ public class Solver {
         return graph;
     }
 
-    public void onNodeChoose(Node[] nodes){
-        for(Observer<Node[]> c : onNodeChooseNotify)
+    public void onNodeChoose(Node[] nodes) {
+        for (Observer<Node[]> c : onNodeChooseNotify)
             c.call(nodes);
     }
 

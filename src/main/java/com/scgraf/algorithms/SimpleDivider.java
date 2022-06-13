@@ -4,7 +4,7 @@ import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 
-public class SimpleDivider implements IDivider{
+public class SimpleDivider implements IDivider {
 
     private static void singleDivisionParallel(Graph dividedGraph, int parallel_division_point) {
         if (parallel_division_point < 0 || parallel_division_point > dividedGraph.getSize().height() - 1)

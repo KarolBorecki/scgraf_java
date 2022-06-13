@@ -21,7 +21,7 @@ public class GraphPanel extends AnchorPane {
     double cellSize;
     private NodeElement[][] drawNodes;
     private NodeElement[] drawPath;
-    private NodeElement[] drawChosenNodes;
+    private final NodeElement[] drawChosenNodes;
     private int currChoosingNode = 0;
 
     public List<Observer<Node[]>> onNodeChooseNotify;

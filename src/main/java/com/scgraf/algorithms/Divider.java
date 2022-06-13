@@ -15,13 +15,13 @@ public class Divider {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return str;
         }
     }
 
     public static void Divide(Graph graph, int dividingNumber, DividingType dividingType) throws DijkstraDivider.WrongDivisionsNumber, Exception, Dijkstra.DijkstraNotSolvedException, SimpleDivider.TooManyDividesException {
-        if(dividingType == DividingType.DIJKSTRA) DijkstraDivider.divideGraphThisManyTimes(graph, dividingNumber);
-        else if(dividingType == DividingType.STRAIGHT) SimpleDivider.divideGraphThisManyTimes(graph, dividingNumber);
+        if (dividingType == DividingType.DIJKSTRA) DijkstraDivider.divideGraphThisManyTimes(graph, dividingNumber);
+        else if (dividingType == DividingType.STRAIGHT) SimpleDivider.divideGraphThisManyTimes(graph, dividingNumber);
     }
 }

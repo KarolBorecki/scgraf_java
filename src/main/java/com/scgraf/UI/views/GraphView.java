@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class GraphView extends BorderPane {
     GraphInfoPanel infoPane;
     GraphPanel graphPanel;
+
     public GraphView(Stage stage) {
         super();
         UIUtils.setStaticSize(this, UIConfig.graphPanelWidth, 0);

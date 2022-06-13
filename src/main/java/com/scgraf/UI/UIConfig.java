@@ -39,6 +39,7 @@ public class UIConfig {
     public static Color regularBtnColor = Color.web("6ea4bf");
     public static Color subBtnColor; /* = regularBtnColor */
     public static Color cancelBtnColor = Color.web("ad343e");
+    public static double cancelBtnSizeFactor = 0.3;
 
     /* DROP SHADOW SETTINGS */
     public static int shadowRadius = 5;
