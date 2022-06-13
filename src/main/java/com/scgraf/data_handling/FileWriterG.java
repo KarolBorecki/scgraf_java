@@ -44,8 +44,9 @@ public class FileWriterG {
             e.printStackTrace();
         }
 
-        printWriter.println("Path: " + Dijkstra.getShortestPathString(graph, startNode, finishNode));
-        printWriter.println("Length: " + Dijkstra.getShortestPathString(graph, startNode, finishNode));
+        Dijkstra.Solve(graph, startNode);
+        printWriter.println("Path: " + Dijkstra.getShortestPathString(finishNode));
+        printWriter.println("Length: " + Dijkstra.getShortestPathString(finishNode));
 
         printWriter.close();
     }

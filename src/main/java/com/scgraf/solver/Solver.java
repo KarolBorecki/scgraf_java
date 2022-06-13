@@ -64,7 +64,9 @@ public class Solver {
                 Node endNode = graph.getNode(endNodeID);
                 if (startNode == null || endNode == null)
                     throw new Graph.NodeNotFoundException();
-                return Dijkstra.getShortestPathArray(graph, startNode, endNode);
+                Dijkstra.Solve(graph, startNode);
+                Platform.runLater(() -> Logger.getInstance().popup("Shortest Path between Node " + startNodeID + " and Node " + endNodeID + " = " + String.format("%.2f", Dijkstra.getShortestPathLength(endNode))));
+                return Dijkstra.getShortestPathArray(endNode);
             } catch (Graph.NodeNotFoundException | Dijkstra.DijkstraNotSolvedException | Dijkstra.DijkstraCannotFindPathException e) {
                 Platform.runLater(() -> Logger.getInstance().errPopup(e.getMessage()));
             }
@@ -95,10 +97,13 @@ public class Solver {
     }
 
     public void saveGraph() {
-        //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Graph to File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TXT", "*.txt"),
+                new FileChooser.ExtensionFilter("ALL", "*.*")
+        );
         File file = fileChooser.showSaveDialog(new Popup());
         if (file != null)
             startBackgroundSolverTask(() -> {
@@ -108,10 +113,13 @@ public class Solver {
     }
 
     public void loadGraph() {
-        //TODO add extension filter
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph from File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TXT", "*.txt"),
+                new FileChooser.ExtensionFilter("ALL", "*.*")
+        );
         File file = fileChooser.showOpenDialog(new Popup());
         if (file != null)
             startBackgroundSolverTask(() -> {

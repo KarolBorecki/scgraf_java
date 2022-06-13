@@ -1,10 +1,10 @@
 package com.scgraf;
 
 import com.scgraf.UI.UIConfig;
+import com.scgraf.UI.UILoader;
 import com.scgraf.UI.views.MainView;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,8 +20,7 @@ public class Application extends javafx.application.Application {
         scene = new Scene(new MainView(), UIConfig.stageWidth, UIConfig.stageHeight);
         stage.setResizable(false);
 
-        Image Icon = new Image("file:icon_img.png");
-        stage.getIcons().add(Icon);
+        stage.getIcons().add(UILoader.iconImg);
 
         stage.setTitle("scgraf");
         stage.setScene(scene);

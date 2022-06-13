@@ -13,14 +13,15 @@ public class Dijkstra extends Thread {
     private static PriorityQueue<DijkstraData> queToVisit;
     private static DijkstraData[] dijkstraTable;
 
-    public static Node[] getShortestPathArray(Graph graph, Node startNode, Node finishNode) throws DijkstraNotSolvedException, DijkstraCannotFindPathException {
-        Solve(graph, startNode);
+    private static Node solvedFor;
+
+    public static Node[] getShortestPathArray(Node finishNode) throws DijkstraNotSolvedException, DijkstraCannotFindPathException {
         Node[] t = new Node[STARTING_SIZE];
 
         Node helpNode = finishNode;
 
         int i = 0;
-        while (!helpNode.equals(startNode)) {
+        while (!helpNode.equals(solvedFor)) {
             if (i >= t.length)
                 t = Utils.resizeArray(t, 2);
             t[i] = helpNode;
@@ -35,30 +36,29 @@ public class Dijkstra extends Thread {
         return t;
     }
 
-    public static double getShortestPathLength(Graph graph, Node startNode, Node finishNode) {
-        Solve(graph, startNode);
+    public static double getShortestPathLength(Node finishNode) {
         double shortestPath = 0;
-        if (finishNode == startNode)
+        if (finishNode == solvedFor)
             return 0;
-        for (int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
+        for (int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != solvedFor; i = dijkstraTable[i].previousNode.getGraphID())
             shortestPath += dijkstraTable[i].length;
         return shortestPath;
     }
 
-    public static String getShortestPathString(Graph graph, Node startNode, Node finishNode) {
-        Solve(graph, startNode);
+    public static String getShortestPathString(Node finishNode) {
         StringBuilder path = new StringBuilder();
-        if (finishNode == startNode)
+        if (finishNode == solvedFor)
             return path.toString();
         path.append(finishNode.getGraphID());
-        for (int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != startNode; i = dijkstraTable[i].previousNode.getGraphID())
+        for (int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != solvedFor; i = dijkstraTable[i].previousNode.getGraphID())
             path.append(" -> ").append(dijkstraTable[i].previousNode.getGraphID());
-        path.append(" -> ").append(startNode.getGraphID());
+        path.append(" -> ").append(solvedFor.getGraphID());
         return path.toString();
     }
 
-    private static void Solve(Graph graph, Node startNode) {
+    public static void Solve(Graph graph, Node startNode) {
         dijkstraTable = initializeDijkstraTable(graph, startNode);
+        solvedFor = startNode;
 
         while (!queToVisit.isEmpty()) {
             Node currentNode = queToVisit.pop().getCurrentNode();

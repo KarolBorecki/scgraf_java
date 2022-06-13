@@ -13,7 +13,8 @@ public class DijkstraDivider implements IDivider{
         Node endNode = dividedGraph.getNode(divisionPoint, dividedGraph.getSize().width() - 1);
 
         Node[] nodesToVisit = null;
-        nodesToVisit = Dijkstra.getShortestPathArray(dividedGraph, firstNode, endNode);
+        Dijkstra.Solve(dividedGraph, firstNode);
+        nodesToVisit = Dijkstra.getShortestPathArray(endNode);
 
         Path.Side[] connectionsFromPrevToCurr = new Path.Side[nodesToVisit.length - 1];
         try {
