@@ -62,7 +62,9 @@ public class Solver {
                 Node endNode = graph.getNode(endNodeID);
                 if (startNode == null || endNode == null)
                     throw new Graph.NodeNotFoundException();
-                return Dijkstra.getShortestPathArray(graph, startNode, endNode);
+                Dijkstra.Solve(graph, startNode);
+                Platform.runLater(() -> Logger.getInstance().popup("Shortest Path between Node " + startNodeID + " and Node " + endNodeID + " = " + String.format("%.2f", Dijkstra.getShortestPathLength(endNode))));
+                return Dijkstra.getShortestPathArray(endNode);
             } catch (Graph.NodeNotFoundException | Dijkstra.DijkstraNotSolvedException | Dijkstra.DijkstraCannotFindPathException e) {
                 Platform.runLater(() -> Logger.getInstance().errPopup(e.getMessage()));
             }
