@@ -7,6 +7,7 @@ import com.scgraf.algorithms.Dijkstra;
 import com.scgraf.algorithms.divider.DijkstraDivider;
 import com.scgraf.algorithms.divider.Divider;
 import com.scgraf.algorithms.divider.SimpleDivider;
+import com.scgraf.data_handling.DataManager;
 import com.scgraf.data_handling.FileReaderG;
 import com.scgraf.data_handling.FileWriterG;
 import com.scgraf.data_structures.graph.Graph;
@@ -104,17 +105,10 @@ public class Solver {
 
     public void saveGraph() {
         ButtonsDisabler.DisableAll();
-        final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Graph to File");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("TXT", "*.txt"),
-                new FileChooser.ExtensionFilter("ALL", "*.*")
-        );
-        File file = fileChooser.showSaveDialog(Application.stage);
+        File file = DataManager.openSaveDialog();
         if (file != null)
             startBackgroundSolverTask(() -> {
-                FileWriterG.writeGraphToFile(graph, file);
+                DataManager.saveGraphToFile(graph, file);
                 return null;
             });
         ButtonsDisabler.EnableAll();
@@ -122,18 +116,11 @@ public class Solver {
 
     public void loadGraph() {
         ButtonsDisabler.DisableAll();
-        final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Graph from File");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("TXT", "*.txt"),
-                new FileChooser.ExtensionFilter("ALL", "*.*")
-        );
-        File file = fileChooser.showOpenDialog(Application.stage);
+        File file = DataManager.openLoadDialog();
         if (file != null)
             startBackgroundSolverTask(() -> {
                 try {
-                    return FileReaderG.readGraphFromFile(file);
+                    return DataManager.graphFromFile(file);
                 } catch (IOException | FileReaderG.FileFormatError | Graph.InvalidMeshConnection e) {
                     Platform.runLater(() -> Logger.getInstance().errPopup("File read error: " + e.getMessage()));
                 }

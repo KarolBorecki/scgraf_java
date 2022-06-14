@@ -17,7 +17,6 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
         SKEWED_LINEAR("Skewed linear"),
         XX_YY("x^2 - y^2"),
         SINX_COSY("sin(x) - cos(y)"),
-        POWEX_POWEY("e^x - e^y"),
         SQRTXY("sqrt(x*y)");
 
         public final String str;
