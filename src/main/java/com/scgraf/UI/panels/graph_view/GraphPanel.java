@@ -129,8 +129,8 @@ public class GraphPanel extends AnchorPane {
         drawChosenNodes.setNext(chosen);
 
         SiblingPair<Node> chosenNodes = new SiblingPair<>();
-        if (drawChosenNodes.isFirstNotNull()) chosenNodes.setFirst(drawChosenNodes.getFirst().getNode());
-        if (drawChosenNodes.isSecondNotNull()) chosenNodes.setSecond(drawChosenNodes.getSecond().getNode());
+        if (drawChosenNodes.isFirstNotNull()) chosenNodes.setFirst(drawChosenNodes.getFirst().getDrawnNode());
+        if (drawChosenNodes.isSecondNotNull()) chosenNodes.setSecond(drawChosenNodes.getSecond().getDrawnNode());
 
         for (Observer<SiblingPair<Node>> obs : onNodeChooseNotify)
             obs.call(chosenNodes);
