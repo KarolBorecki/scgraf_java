@@ -132,8 +132,8 @@ public class GraphTests {
         graph.setSize(new Size(testGrapWidth, testGrapHeight)).setWeight(testGrapMaxPathWeight).build();
         for (int x = 0; x < testGrapWidth; x++) {
             for (int y = 0; y < testGrapHeight; y++) {
-                Assert.assertEquals(graph.getNodeX(graph.getNode(x, y)), x);
-                Assert.assertEquals(graph.getNodeY(graph.getNode(x, y)), y);
+                Assert.assertEquals(graph.getNodeRow(graph.getNode(x, y)), x);
+                Assert.assertEquals(graph.getNodeColumn(graph.getNode(x, y)), y);
             }
         }
     }

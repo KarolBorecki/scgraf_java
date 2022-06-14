@@ -7,20 +7,20 @@ import java.util.Iterator;
 public class Graph implements Iterable<Node> {
     private Node[][] nodes;
 
-    private Size size = new Size(); /* TODO assigndefault values */
+    private Size size = new Size();
 
     private double maxPathWeight;
 
     private int graphIDCounter = 0;
 
     public Graph setWidth(int width) {
-        if(size == null) size = new Size();
+        if (size == null) size = new Size();
         size.setWidth(width);
         return this;
     }
 
     public Graph setHeight(int height) {
-        if(size == null) size = new Size();
+        if (size == null) size = new Size();
         size.setHeight(height);
         return this;
     }
@@ -48,40 +48,35 @@ public class Graph implements Iterable<Node> {
     }
 
     public Node getNeighbourNode(Node node, Path.Side side) {
-        int row = getNodeX(node);
-        int column = getNodeY(node);
+        int row = getNodeRow(node);
+        int column = getNodeColumn(node);
 
         if (side == Path.Side.LEFT)
             if (column <= 0) return null;
             else column--;
-
         else if (side == Path.Side.RIGHT)
             if (column >= size.width() - 1) return null;
             else column++;
-
         else if (side == Path.Side.TOP)
             if (row <= 0) return null;
             else row--;
-
         else if (side == Path.Side.BOTTOM)
             if (row >= size.height() - 1) return null;
             else row++;
-
 
         return getNode(row, column);
     }
 
     public Path.Side getPathSideBetween(Node startNode, Node endNode) throws InvalidMeshConnection {
-        if (startNode.getGraphID() + this.getSize().width() == endNode.getGraphID()) {
+        if (getNodeRow(startNode) < size.height() - 1 && startNode.getGraphID() + size.width() == endNode.getGraphID())
             return Path.Side.BOTTOM;
-        } else if (startNode.getGraphID() - this.getSize().width() == endNode.getGraphID()) {
+        else if (getNodeRow(startNode) > 0 && startNode.getGraphID() - size.width() == endNode.getGraphID())
             return Path.Side.TOP;
-        }else if (startNode.getGraphID() + 1 == endNode.getGraphID()) {
+        else if (getNodeColumn(startNode) < size.width() - 1 && startNode.getGraphID() + 1 == endNode.getGraphID())
             return Path.Side.RIGHT;
-        } else if (startNode.getGraphID() - 1 == endNode.getGraphID()) {
+        else if (getNodeColumn(startNode) > 0 && startNode.getGraphID() - 1 == endNode.getGraphID())
             return Path.Side.LEFT;
-        }
-        throw new InvalidMeshConnection(startNode, endNode);
+        return null;
     }
 
     public void setupPath(Node node, Path.Side direction, double pathWeight) {
@@ -89,17 +84,14 @@ public class Graph implements Iterable<Node> {
     }
 
     public void setupPath(Node node, Path.Side direction, Path path) {
-        try {
-            Node nNode = getNeighbourNode(node, direction);
-            setupPath(node, nNode, path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Node nNode = getNeighbourNode(node, direction);
+        if(nNode != null) setupPath(node, nNode, path);
     }
 
-    public void setupPath(Node node1, Node node2, Path path){
+    public void setupPath(Node node1, Node node2, Path path) {
         try {
             Path.Side side = getPathSideBetween(node1, node2);
+            if(side == null) return;
             node1.setupPath(side, path);
             node2.setupPath(side.getOppositeSide(), path);
         } catch (InvalidMeshConnection e) {
@@ -118,26 +110,28 @@ public class Graph implements Iterable<Node> {
     }
 
     public Node getNode(int row, int column) {
-        if(row < 0 || row > size.width() || column < 0 || column > size.height())
+        if (row < 0 || row >= size.height() || column < 0 || column >= size.width())
             return null;
         return nodes[row][column];
     }
 
     public Node getNode(int graphID) {
-        return getNode(getNodeX(graphID), getNodeY(graphID));
+        return getNode(getNodeRow(graphID), getNodeColumn(graphID));
     }
 
-    public int getNodeX(Node node) {
-        return getNodeX(node.graphID);
+    public int getNodeRow(Node node) {
+        return getNodeRow(node.graphID);
     }
-    public int getNodeX(int graphID) {
+
+    public int getNodeRow(int graphID) {
         return graphID / size.width();
     }
 
-    public int getNodeY(Node node) {
-        return getNodeY(node.graphID);
+    public int getNodeColumn(Node node) {
+        return getNodeColumn(node.graphID);
     }
-    public int getNodeY(int graphID) {
+
+    public int getNodeColumn(int graphID) {
         return graphID % size.width();
     }
 
@@ -177,10 +171,14 @@ public class Graph implements Iterable<Node> {
             this.msg += "Connection between nodes: " + n1.getGraphID() + " and " + n2.getGraphID() + " couldn' t have been established!\n";
         }
 
-        public void printMessage() {System.err.println(this.msg);}
+        public void printMessage() {
+            System.err.println(this.msg);
+        }
 
         @Override
-        public String getMessage() {return msg;}
+        public String getMessage() {
+            return msg;
+        }
     }
 
     private static class GraphIterator implements Iterator<Node> {
@@ -213,7 +211,7 @@ public class Graph implements Iterable<Node> {
 
     public static class NodeNotFoundException extends Throwable {
         @Override
-        public String getMessage(){
+        public String getMessage() {
             return "Could not found the node!";
         }
     }

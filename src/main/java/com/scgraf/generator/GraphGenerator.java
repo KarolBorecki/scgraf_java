@@ -1,6 +1,7 @@
 package com.scgraf.generator;
 
 import com.scgraf.data_structures.graph.Graph;
+import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 import com.scgraf.data_structures.tuples.Size;
 
@@ -55,17 +56,17 @@ public class GraphGenerator extends Thread implements IGenerator<Graph> {
     public static Graph Generate(Size size, double maxWeight, GenerateWeightCallable<Double> weightGeneratingFunction) {
         Graph graph = new Graph();
         graph.setSize(size).setWeight(maxWeight).build();
-
         for (int y = 0; y < size.height(); y++) {
             for (int x = 0; x < size.width(); x++) {
-                if (x != 0)
-                    graph.setupPath(graph.getNode(y, x), Path.Side.LEFT, weightGeneratingFunction.getWeight(x, y));
-                if (x != size.width() - 1)
-                    graph.setupPath(graph.getNode(y, x), Path.Side.RIGHT, weightGeneratingFunction.getWeight(x, y));
-                if (y != 0)
-                    graph.setupPath(graph.getNode(y, x), Path.Side.TOP, weightGeneratingFunction.getWeight(x, y));
-                if (y != size.height() - 1)
-                    graph.setupPath(graph.getNode(y, x), Path.Side.BOTTOM, weightGeneratingFunction.getWeight(x, y));
+                Node generatedNode = graph.getNode(y, x);
+                if (x > 0)
+                    graph.setupPath(generatedNode, Path.Side.LEFT, weightGeneratingFunction.getWeight(x, y));
+                if (x < size.width() - 1)
+                    graph.setupPath(generatedNode, Path.Side.RIGHT, weightGeneratingFunction.getWeight(x, y));
+                if (y > 0)
+                    graph.setupPath(generatedNode, Path.Side.TOP, weightGeneratingFunction.getWeight(x, y));
+                if (y < size.height() - 1)
+                    graph.setupPath(generatedNode, Path.Side.BOTTOM, weightGeneratingFunction.getWeight(x, y));
             }
         }
         return graph;
