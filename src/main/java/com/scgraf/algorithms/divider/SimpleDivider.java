@@ -1,10 +1,19 @@
 package com.scgraf.algorithms.divider;
 
+import com.scgraf.algorithms.Dijkstra;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
 
 public class SimpleDivider implements IDivider {
+
+    public static void pathCut(Graph dividedGraph, Node startNode, Node endNode) throws Dijkstra.DijkstraCannotFindPathException, Dijkstra.DijkstraNotSolvedException, Graph.InvalidMeshConnection {
+        Dijkstra.Solve(dividedGraph, startNode);
+        Node[] path = Dijkstra.getShortestPathArray(endNode);
+        for(int i=0; i<path.length-1; i++){
+            dividedGraph.deletePath(path[0], dividedGraph.getPathSideBetween(path[i], path[i+1]));
+        }
+    }
 
     private static void singleDivisionParallel(Graph dividedGraph, int parallel_division_point) {
         if (parallel_division_point < 0 || parallel_division_point > dividedGraph.getSize().height() - 1)

@@ -4,6 +4,7 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
+import com.scgraf.data_structures.tuples.IdenticalPair;
 import com.scgraf.solver.Solver;
 import com.scgraf.utils.Observer;
 import com.scgraf.utils.UIUtils;
@@ -21,17 +22,16 @@ public class GraphPanel extends AnchorPane {
     double cellSize;
     private NodeElement[][] drawNodes;
     private NodeElement[] drawPath;
-    private final NodeElement[] drawChosenNodes;
-    private int currChoosingNode = 0;
+    private final IdenticalPair<NodeElement> drawChosenNodes;
 
-    public List<Observer<Node[]>> onNodeChooseNotify;
+    public List<Observer<IdenticalPair<Node>>> onNodeChooseNotify;
 
     public GraphPanel(Graph graph, Stage stage) {
         super();
         primaryStage = stage;
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
-        drawChosenNodes = new NodeElement[2];
+        drawChosenNodes = new IdenticalPair<>();
         onNodeChooseNotify = new ArrayList<>();
 
         Solver.getInstance().addGraphChangeObserver(this::updateGraph);
@@ -109,8 +109,10 @@ public class GraphPanel extends AnchorPane {
     }
 
     public void cleanChosenNodes(){
-        for (NodeElement n : drawChosenNodes)
-            if(n != null) n.stopHighlight();
+        if(drawChosenNodes.isFirstNotNull())
+            drawChosenNodes.getFirst().stopHighlight();
+        if(drawChosenNodes.isSecondNotNull())
+            drawChosenNodes.getSecond().stopHighlight();
     }
 
     private void onNodeChoose(MouseEvent event){
@@ -121,17 +123,17 @@ public class GraphPanel extends AnchorPane {
         final int y = (int)(Math.ceil(event.getY() / cellSize)-1);
         NodeElement chosen = drawNodes[y][x];
 
-        drawChosenNodes[(currChoosingNode++)%2] = chosen;
+        drawChosenNodes.setNext(chosen);
 
-        Node[] chosenNodes = new Node[2];
-        if(drawChosenNodes[0] != null) chosenNodes[0] = drawChosenNodes[0].getNode();
-        if(drawChosenNodes[1] != null) chosenNodes[1] = drawChosenNodes[1].getNode();
+        IdenticalPair<Node> chosenNodes = new IdenticalPair<>();
+        if(drawChosenNodes.isFirstNotNull()) chosenNodes.setFirst(drawChosenNodes.getFirst().getNode());
+        if(drawChosenNodes.isSecondNotNull()) chosenNodes.setSecond(drawChosenNodes.getSecond().getNode());
 
-        for(Observer<Node[]> obs : onNodeChooseNotify)
+        for(Observer<IdenticalPair<Node>> obs : onNodeChooseNotify)
             obs.call(chosenNodes);
 
-        if(drawChosenNodes[0] != null) drawChosenNodes[0].highlight();
-        if(drawChosenNodes[1] != null) drawChosenNodes[1].highlight();
+        if(drawChosenNodes.isFirstNotNull()) drawChosenNodes.getFirst().highlight();
+        if(drawChosenNodes.isSecondNotNull()) drawChosenNodes.getSecond().highlight();
     }
 
     private void setSize(double width, double height) {
@@ -140,11 +142,11 @@ public class GraphPanel extends AnchorPane {
         setHeight(height);
     }
 
-    public void addNodeChooseObserver(Observer<Node[]> obs) {
+    public void addNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
         onNodeChooseNotify.add(obs);
     }
 
-    public void removeNodeChooseObserver(Observer<Node[]> obs) {
+    public void removeNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
         onNodeChooseNotify.remove(obs);
     }
 }

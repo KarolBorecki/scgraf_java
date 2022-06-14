@@ -4,6 +4,7 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
 import com.scgraf.data_structures.graph.Node;
+import com.scgraf.data_structures.tuples.IdenticalPair;
 import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;
@@ -42,8 +43,14 @@ public class ShortestPathPanel extends FunctionAbstractPanel {
     }
 
     @Override
-    public void updateValues(Object[] val) {
-        if (val[0] != null) startNodeIDIInput.setText("" + ((Node) val[0]).getGraphID());
-        if (val[1] != null) endNodeIDInput.setText("" + ((Node) val[1]).getGraphID());
+    public void updateValues(Object val) {
+        IdenticalPair<Node> nodes;
+        if(val instanceof IdenticalPair<?>) {
+            nodes = (IdenticalPair<Node>) val;
+            if (nodes.isFirstNotNull())
+                startNodeIDIInput.setText("" + nodes.getFirst().getGraphID());
+            if (nodes.isSecondNotNull())
+                endNodeIDInput.setText("" + nodes.getSecond().getGraphID());
+        }
     }
 }

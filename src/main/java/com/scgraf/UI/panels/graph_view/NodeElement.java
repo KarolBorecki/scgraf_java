@@ -72,6 +72,7 @@ public class NodeElement extends StackPane {
     }
 
     public void stopHighlight() {
+        if(node == null) return;
         circle.setFill(UIConfig.graphNodeColor);
         if (rightPathLine != null)
             rightPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.RIGHT), maxWeight));

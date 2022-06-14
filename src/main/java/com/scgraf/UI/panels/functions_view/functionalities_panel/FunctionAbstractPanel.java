@@ -56,6 +56,6 @@ public abstract class FunctionAbstractPanel extends VBox implements IFunctionPan
         Solver.getInstance().cleanPath();
     }
 
-    public void updateValues(Object[] val) {
+    public void updateValues(Object val) {
     }
 }

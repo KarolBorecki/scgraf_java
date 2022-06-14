@@ -2,7 +2,8 @@ package com.scgraf.solver;
 
 import com.scgraf.Application;
 import com.scgraf.UI.elements.buttons.ButtonsDisabler;
-import com.scgraf.algorithms.*;
+import com.scgraf.algorithms.BFS;
+import com.scgraf.algorithms.Dijkstra;
 import com.scgraf.algorithms.divider.DijkstraDivider;
 import com.scgraf.algorithms.divider.Divider;
 import com.scgraf.algorithms.divider.SimpleDivider;
@@ -10,6 +11,7 @@ import com.scgraf.data_handling.FileReaderG;
 import com.scgraf.data_handling.FileWriterG;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
+import com.scgraf.data_structures.tuples.IdenticalPair;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import com.scgraf.logger.Logger;
@@ -26,11 +28,12 @@ import java.util.concurrent.Callable;
 
 public class Solver {
     private Graph graph;
+    private IdenticalPair<Node> chosenNodes;
 
     public List<Observer<Graph>> onGraphChangeNotify;
     public List<Observer<Node[]>> onPathDrawNotify;
     public List<Observer<Node[]>> onPathCleanNotify;
-    public List<Observer<Node[]>> onNodeChooseNotify;
+    public List<Observer<IdenticalPair<Node>>> onNodeChooseNotify;
 
     public static Solver instance;
 
@@ -81,7 +84,7 @@ public class Solver {
         startBackgroundSolverTask(() -> {
             try {
                 Divider.Divide(graph, n, dividingType);
-            } catch (SimpleDivider.TooManyDividesException | DijkstraDivider.WrongDivisionsNumber | Dijkstra.DijkstraNotSolvedException | Exception e) {
+            } catch (SimpleDivider.TooManyDividesException | DijkstraDivider.WrongDivisionsNumber | Dijkstra.DijkstraNotSolvedException | Exception | Dijkstra.DijkstraCannotFindPathException | Graph.InvalidMeshConnection e) {
                 Platform.runLater(() -> Logger.getInstance().errPopup(e.getMessage()));
             }
             return graph;
@@ -197,13 +200,18 @@ public class Solver {
             c.call(null);
     }
 
+    public void onNodeChoose(IdenticalPair<Node> nodes) {
+        chosenNodes = nodes;
+        for (Observer<IdenticalPair<Node>> c : onNodeChooseNotify)
+            c.call(nodes);
+    }
+
     public Graph getGraph() {
         return graph;
     }
 
-    public void onNodeChoose(Node[] nodes) {
-        for (Observer<Node[]> c : onNodeChooseNotify)
-            c.call(nodes);
+    public IdenticalPair<Node> getChosenNodes() {
+        return chosenNodes;
     }
 
     public void addGraphChangeObserver(Observer<Graph> obs) {
@@ -230,11 +238,11 @@ public class Solver {
         onPathCleanNotify.remove(obs);
     }
 
-    public void addNodeChooseObserver(Observer<Node[]> obs) {
+    public void addNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
         onNodeChooseNotify.add(obs);
     }
 
-    public void removeNodeChooseObserver(Observer<Node[]> obs) {
+    public void removeNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
         onNodeChooseNotify.remove(obs);
     }
 }
