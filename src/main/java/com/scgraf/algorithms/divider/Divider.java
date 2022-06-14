@@ -7,14 +7,16 @@ import com.scgraf.solver.Solver;
 public class Divider {
 
     public enum DividingType {
-        DIJKSTRA("Random, dijkstra"),
-        PATH_CUT("Path cut"),
-        STRAIGHT("Straight (don't)");
+        DIJKSTRA("Random, dijkstra", true),
+        PATH_CUT("Path cut", false),
+        STRAIGHT("Straight (don't)", true);
 
-        public final String str;
+        private final String str;
+        public final boolean checkDataFormat;
 
-        DividingType(String str) {
+        DividingType(String str, boolean checkDataFormat) {
             this.str = str;
+            this.checkDataFormat = checkDataFormat;
         }
 
         @Override
