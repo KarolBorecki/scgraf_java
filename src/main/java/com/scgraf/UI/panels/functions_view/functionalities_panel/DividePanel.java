@@ -4,7 +4,7 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.UI.elements.buttons.FormattedDropdown;
 import com.scgraf.UI.elements.text.FormattedTextField;
 import com.scgraf.UI.panels.functions_view.FunctionPanelManager;
-import com.scgraf.algorithms.Divider;
+import com.scgraf.algorithms.divider.Divider;
 import com.scgraf.logger.Logger;
 import com.scgraf.solver.Solver;
 import javafx.geometry.Pos;

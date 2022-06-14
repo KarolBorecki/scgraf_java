@@ -1,4 +1,4 @@
-package com.scgraf.algorithms;
+package com.scgraf.algorithms.divider;
 
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;

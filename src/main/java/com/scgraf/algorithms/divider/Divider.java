@@ -1,5 +1,6 @@
-package com.scgraf.algorithms;
+package com.scgraf.algorithms.divider;
 
+import com.scgraf.algorithms.Dijkstra;
 import com.scgraf.data_structures.graph.Graph;
 
 public class Divider {
