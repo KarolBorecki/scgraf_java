@@ -94,7 +94,7 @@ public class GraphPanel extends AnchorPane {
                 else if (side == Path.Side.TOP) nextNode.highlightBottom();
                 else if (side == Path.Side.LEFT) nextNode.highlightRight();
             } catch (Graph.InvalidMeshConnection e) {
-                e.printStackTrace();
+                System.err.println("Draw Path: " + e.getMessage());
             }
             drawPath[i] = actualNode;
             drawPath[i + 1] = nextNode;
@@ -105,12 +105,17 @@ public class GraphPanel extends AnchorPane {
         if (drawPath == null) return;
         for (NodeElement nodeElement : drawPath)
             if(nodeElement != null) nodeElement.stopHighlight();
+        cleanChosenNodes();
+    }
+
+    public void cleanChosenNodes(){
         for (NodeElement n : drawChosenNodes)
-            if(n != null) n.highlight();
+            if(n != null) n.stopHighlight();
     }
 
     private void onNodeChoose(MouseEvent event){
         Solver.getInstance().cleanPath();
+        cleanChosenNodes();
 
         final int x = (int)(Math.ceil(event.getX() / cellSize)-1);
         final int y = (int)(Math.ceil(event.getY() / cellSize)-1);
