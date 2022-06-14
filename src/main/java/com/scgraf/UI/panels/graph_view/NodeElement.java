@@ -15,6 +15,8 @@ public class NodeElement extends StackPane {
     private final double maxWeight;
 
     private final Circle circle;
+    private final Pane paths;
+
     private Line rightPathLine;
     private Line bottomPathLine;
 
@@ -25,31 +27,21 @@ public class NodeElement extends StackPane {
 
         double center = size / 2;
 
-        setWidth(size);
         setMinWidth(size);
         setMaxWidth(size);
-        setHeight(size);
         setMinHeight(size);
         setMaxHeight(size);
 
-        Pane paths = new Pane();
-        for (int i = Path.Side.RIGHT.index; i <= Path.Side.BOTTOM.index; i++) {
-            Path p = node.getPath(i);
-            if (p != null) {
-                double x = i == Path.Side.RIGHT.index ? center * UIConfig.graphNodePathSizeFactor : 0;
-                double y = i == Path.Side.BOTTOM.index ? center * UIConfig.graphNodePathSizeFactor : 0;
-                Line line = new Line(center, center, center + x, center + y);
-                line.setStrokeWidth(Math.max(size / 30, UIConfig.minPathWidth));
-                line.setStroke(getPathColor(p.getWeight(), maxWeight));
-                paths.getChildren().add(line);
+        paths = new Pane();
+        Path path;
+        if((path = node.getPath(Path.Side.RIGHT)) != null)
+            rightPathLine = addPath(center, center * UIConfig.graphNodePathLengthFactor, 0, size * UIConfig.graphNodePathStrokeFactor, path.getWeight());
+        if((path = node.getPath(Path.Side.BOTTOM)) != null)
+            bottomPathLine = addPath(center, 0, center * UIConfig.graphNodePathLengthFactor, size * UIConfig.graphNodePathStrokeFactor, path.getWeight());
 
-                if (i == Path.Side.RIGHT.index) rightPathLine = line;
-                else if (i == Path.Side.BOTTOM.index) bottomPathLine = line;
-            }
-        }
-
-        circle = new Circle(size / 4);
+        circle = new Circle(size * UIConfig.graphNodeSizeFactor);
         circle.setFill(UIConfig.graphNodeColor);
+
         getChildren().addAll(paths, circle);
 
         if (drawCaption) {
@@ -57,6 +49,21 @@ public class NodeElement extends StackPane {
             caption.setColor(UIConfig.functionsViewBckColor).setFontSize((int) (size / 4)).build();
             getChildren().add(caption);
         }
+    }
+
+    private Line addPath(double center, double x, double y, double stroke, double weight){
+        Line line = new Line(center, center, center + x, center + y);
+        line.setStrokeWidth(Math.max(stroke, UIConfig.minPathWidth));
+        line.setStroke(getPathColor(weight, maxWeight));
+        paths.getChildren().add(line);
+        return line;
+    }
+
+    private static Color getPathColor(double weight, double maxWeight) {
+        final double lightHUE = Color.GREEN.getHue();
+        final double heavyHUE = Color.RED.getHue();
+        double hue = lightHUE + (heavyHUE - lightHUE) * weight / maxWeight;
+        return Color.hsb(hue, UIConfig.hsbPathSaturation, UIConfig.hsbPathBrightness);
     }
 
     public void highlightRight() {
@@ -78,13 +85,6 @@ public class NodeElement extends StackPane {
             rightPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.RIGHT), maxWeight));
         if (bottomPathLine != null)
             bottomPathLine.setStroke(getPathColor(node.getConnectionWeight(Path.Side.BOTTOM), maxWeight));
-    }
-
-    private static Color getPathColor(double weight, double maxWeight) {
-        final double lightHUE = Color.GREEN.getHue();
-        final double heavyHUE = Color.RED.getHue();
-        double hue = lightHUE + (heavyHUE - lightHUE) * weight / maxWeight;
-        return Color.hsb(hue, UIConfig.hsbPathSaturation, UIConfig.hsbPathBrightness); //TODO
     }
 
     public Node getNode() {

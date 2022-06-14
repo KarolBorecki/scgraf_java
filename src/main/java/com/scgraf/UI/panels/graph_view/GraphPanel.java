@@ -58,35 +58,32 @@ public class GraphPanel extends AnchorPane {
         final double cellSizeWidth = ((getWidth()) / numCols);
         final double cellSizeHeight = ((getHeight()) / numRows);
 
-        if (cellSizeWidth > cellSizeHeight) {
-            cellSize = cellSizeHeight;
-            setSize(getHeight(), getHeight());
-        } else {
-            cellSize = cellSizeWidth;
-            setSize(getWidth(), getWidth());
-        }
+        cellSize = Math.min(cellSizeWidth, cellSizeHeight);
+        setSize(cellSize * numCols, cellSize * numRows);
 
         drawNodes = new NodeElement[numRows][numCols];
 
         boolean drawCaptions = graph.getNodesCount() <= UIConfig.maxGraphNodesCountToDrawCaptions;
-        for (int y = 0; y < numRows; y++)
-            for (int x = 0; x < numCols; x++) {
-                drawNodes[y][x] = new NodeElement(graph.getNode(y, x), cellSize, graph.getMaxPathWeight(), drawCaptions);
-                setLeftAnchor(drawNodes[y][x], cellSize * x);
-                setTopAnchor(drawNodes[y][x], cellSize * y);
+        for (int row = 0; row < numRows; row++)
+            for (int column = 0; column < numCols; column++) {
+                drawNodes[row][column] = new NodeElement(graph.getNode(row, column), cellSize, graph.getMaxPathWeight(), drawCaptions);
+                setLeftAnchor(drawNodes[row][column], cellSize * column);
+                setTopAnchor(drawNodes[row][column], cellSize * row);
 
-                getChildren().add(drawNodes[y][x]);
+                getChildren().add(drawNodes[row][column]);
             }
-        setSize(cellSize * numCols, cellSize * numRows);
     }
 
     public void drawPath(Node[] pathNodes) {
         drawPath = new NodeElement[pathNodes.length];
-        for (int i = 0; i < pathNodes.length - 1; i++) {
+
+        for (int i = 0; i < pathNodes.length - 1; i += 2) {
             NodeElement actualNode = drawNodes[graph.getNodeRow(pathNodes[i])][graph.getNodeColumn(pathNodes[i])];
             NodeElement nextNode = drawNodes[graph.getNodeRow(pathNodes[i + 1])][graph.getNodeColumn(pathNodes[i + 1])];
+
             actualNode.highlight();
             nextNode.highlight();
+
             try {
                 Path.Side side = graph.getPathSideBetween(pathNodes[i], pathNodes[i + 1]);
                 if (side == Path.Side.RIGHT) actualNode.highlightRight();
@@ -94,8 +91,9 @@ public class GraphPanel extends AnchorPane {
                 else if (side == Path.Side.TOP) nextNode.highlightBottom();
                 else if (side == Path.Side.LEFT) nextNode.highlightRight();
             } catch (Graph.InvalidMeshConnection e) {
-                System.err.println("Draw Path: " + e.getMessage());
+                System.err.println("Draw Path problem: " + e.getMessage());
             }
+
             drawPath[i] = actualNode;
             drawPath[i + 1] = nextNode;
         }
@@ -103,37 +101,41 @@ public class GraphPanel extends AnchorPane {
 
     public void cleanPath(Node[] path) {
         if (drawPath == null) return;
+
         for (NodeElement nodeElement : drawPath)
-            if(nodeElement != null) nodeElement.stopHighlight();
-        cleanChosenNodes();
+            if (nodeElement != null) nodeElement.stopHighlight();
+
+        highlightChosenNodes();
     }
 
-    public void cleanChosenNodes(){
-        if(drawChosenNodes.isFirstNotNull())
-            drawChosenNodes.getFirst().stopHighlight();
-        if(drawChosenNodes.isSecondNotNull())
-            drawChosenNodes.getSecond().stopHighlight();
+    private void highlightChosenNodes() {
+        if (drawChosenNodes.isFirstNotNull()) drawChosenNodes.getFirst().highlight();
+        if (drawChosenNodes.isSecondNotNull()) drawChosenNodes.getSecond().highlight();
     }
 
-    private void onNodeChoose(MouseEvent event){
+    public void cleanChosenNodes() {
+        if (drawChosenNodes.isFirstNotNull()) drawChosenNodes.getFirst().stopHighlight();
+        if (drawChosenNodes.isSecondNotNull()) drawChosenNodes.getSecond().stopHighlight();
+    }
+
+    private void onNodeChoose(MouseEvent event) {
         Solver.getInstance().cleanPath();
         cleanChosenNodes();
 
-        final int x = (int)(Math.ceil(event.getX() / cellSize)-1);
-        final int y = (int)(Math.ceil(event.getY() / cellSize)-1);
-        NodeElement chosen = drawNodes[y][x];
+        final int column = (int) (Math.ceil(event.getX() / cellSize) - 1);
+        final int row = (int) (Math.ceil(event.getY() / cellSize) - 1);
+        NodeElement chosen = drawNodes[row][column];
 
         drawChosenNodes.setNext(chosen);
 
         SiblingPair<Node> chosenNodes = new SiblingPair<>();
-        if(drawChosenNodes.isFirstNotNull()) chosenNodes.setFirst(drawChosenNodes.getFirst().getNode());
-        if(drawChosenNodes.isSecondNotNull()) chosenNodes.setSecond(drawChosenNodes.getSecond().getNode());
+        if (drawChosenNodes.isFirstNotNull()) chosenNodes.setFirst(drawChosenNodes.getFirst().getNode());
+        if (drawChosenNodes.isSecondNotNull()) chosenNodes.setSecond(drawChosenNodes.getSecond().getNode());
 
-        for(Observer<SiblingPair<Node>> obs : onNodeChooseNotify)
+        for (Observer<SiblingPair<Node>> obs : onNodeChooseNotify)
             obs.call(chosenNodes);
 
-        if(drawChosenNodes.isFirstNotNull()) drawChosenNodes.getFirst().highlight();
-        if(drawChosenNodes.isSecondNotNull()) drawChosenNodes.getSecond().highlight();
+        highlightChosenNodes();
     }
 
     private void setSize(double width, double height) {
