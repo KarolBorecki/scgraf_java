@@ -1,14 +1,14 @@
 package com.scgraf.data_structures.tuples;
 
-public class IdenticalPair<T> extends Pair<T, T>{
+public class SiblingPair<T> extends Pair<T, T>{
     private int nextGet;
     private int nextSet;
 
-    public IdenticalPair(){
+    public SiblingPair(){
         this(null, null);
     }
 
-    public IdenticalPair(T first, T second){
+    public SiblingPair(T first, T second){
         super(first, second);
         nextGet = 0;
         nextSet = 0;

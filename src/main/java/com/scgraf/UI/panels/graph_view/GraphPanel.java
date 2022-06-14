@@ -4,7 +4,7 @@ import com.scgraf.UI.UIConfig;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
 import com.scgraf.data_structures.graph.Path;
-import com.scgraf.data_structures.tuples.IdenticalPair;
+import com.scgraf.data_structures.tuples.SiblingPair;
 import com.scgraf.solver.Solver;
 import com.scgraf.utils.Observer;
 import com.scgraf.utils.UIUtils;
@@ -22,16 +22,16 @@ public class GraphPanel extends AnchorPane {
     double cellSize;
     private NodeElement[][] drawNodes;
     private NodeElement[] drawPath;
-    private final IdenticalPair<NodeElement> drawChosenNodes;
+    private final SiblingPair<NodeElement> drawChosenNodes;
 
-    public List<Observer<IdenticalPair<Node>>> onNodeChooseNotify;
+    public List<Observer<SiblingPair<Node>>> onNodeChooseNotify;
 
     public GraphPanel(Graph graph, Stage stage) {
         super();
         primaryStage = stage;
         setSize(UIConfig.graphPanelWidth, UIConfig.graphPanelHeight);
 
-        drawChosenNodes = new IdenticalPair<>();
+        drawChosenNodes = new SiblingPair<>();
         onNodeChooseNotify = new ArrayList<>();
 
         Solver.getInstance().addGraphChangeObserver(this::updateGraph);
@@ -125,11 +125,11 @@ public class GraphPanel extends AnchorPane {
 
         drawChosenNodes.setNext(chosen);
 
-        IdenticalPair<Node> chosenNodes = new IdenticalPair<>();
+        SiblingPair<Node> chosenNodes = new SiblingPair<>();
         if(drawChosenNodes.isFirstNotNull()) chosenNodes.setFirst(drawChosenNodes.getFirst().getNode());
         if(drawChosenNodes.isSecondNotNull()) chosenNodes.setSecond(drawChosenNodes.getSecond().getNode());
 
-        for(Observer<IdenticalPair<Node>> obs : onNodeChooseNotify)
+        for(Observer<SiblingPair<Node>> obs : onNodeChooseNotify)
             obs.call(chosenNodes);
 
         if(drawChosenNodes.isFirstNotNull()) drawChosenNodes.getFirst().highlight();
@@ -142,11 +142,11 @@ public class GraphPanel extends AnchorPane {
         setHeight(height);
     }
 
-    public void addNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
+    public void addNodeChooseObserver(Observer<SiblingPair<Node>> obs) {
         onNodeChooseNotify.add(obs);
     }
 
-    public void removeNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
+    public void removeNodeChooseObserver(Observer<SiblingPair<Node>> obs) {
         onNodeChooseNotify.remove(obs);
     }
 }

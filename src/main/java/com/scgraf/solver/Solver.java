@@ -1,6 +1,5 @@
 package com.scgraf.solver;
 
-import com.scgraf.Application;
 import com.scgraf.UI.elements.buttons.ButtonsDisabler;
 import com.scgraf.algorithms.BFS;
 import com.scgraf.algorithms.Dijkstra;
@@ -9,17 +8,15 @@ import com.scgraf.algorithms.divider.Divider;
 import com.scgraf.algorithms.divider.SimpleDivider;
 import com.scgraf.data_handling.DataManager;
 import com.scgraf.data_handling.FileReaderG;
-import com.scgraf.data_handling.FileWriterG;
 import com.scgraf.data_structures.graph.Graph;
 import com.scgraf.data_structures.graph.Node;
-import com.scgraf.data_structures.tuples.IdenticalPair;
+import com.scgraf.data_structures.tuples.SiblingPair;
 import com.scgraf.data_structures.tuples.Size;
 import com.scgraf.generator.GraphGenerator;
 import com.scgraf.logger.Logger;
 import com.scgraf.utils.Observer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,12 +26,12 @@ import java.util.concurrent.Callable;
 
 public class Solver {
     private Graph graph;
-    private IdenticalPair<Node> chosenNodes;
+    private SiblingPair<Node> chosenNodes;
 
     public List<Observer<Graph>> onGraphChangeNotify;
     public List<Observer<Node[]>> onPathDrawNotify;
     public List<Observer<Node[]>> onPathCleanNotify;
-    public List<Observer<IdenticalPair<Node>>> onNodeChooseNotify;
+    public List<Observer<SiblingPair<Node>>> onNodeChooseNotify;
 
     public static Solver instance;
 
@@ -187,9 +184,9 @@ public class Solver {
             c.call(null);
     }
 
-    public void onNodeChoose(IdenticalPair<Node> nodes) {
+    public void onNodeChoose(SiblingPair<Node> nodes) {
         chosenNodes = nodes;
-        for (Observer<IdenticalPair<Node>> c : onNodeChooseNotify)
+        for (Observer<SiblingPair<Node>> c : onNodeChooseNotify)
             c.call(nodes);
     }
 
@@ -197,7 +194,7 @@ public class Solver {
         return graph;
     }
 
-    public IdenticalPair<Node> getChosenNodes() {
+    public SiblingPair<Node> getChosenNodes() {
         return chosenNodes;
     }
 
@@ -225,11 +222,11 @@ public class Solver {
         onPathCleanNotify.remove(obs);
     }
 
-    public void addNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
+    public void addNodeChooseObserver(Observer<SiblingPair<Node>> obs) {
         onNodeChooseNotify.add(obs);
     }
 
-    public void removeNodeChooseObserver(Observer<IdenticalPair<Node>> obs) {
+    public void removeNodeChooseObserver(Observer<SiblingPair<Node>> obs) {
         onNodeChooseNotify.remove(obs);
     }
 }
