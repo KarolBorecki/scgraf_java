@@ -102,11 +102,11 @@ public class GraphPanel extends AnchorPane {
     }
 
     public void cleanPath(Node[] path) {
-        for (NodeElement n : drawChosenNodes)
-            if(n != null) n.stopHighlight();
         if (drawPath == null) return;
         for (NodeElement nodeElement : drawPath)
             if(nodeElement != null) nodeElement.stopHighlight();
+        for (NodeElement n : drawChosenNodes)
+            if(n != null) n.highlight();
     }
 
     private void onNodeChoose(MouseEvent event){
