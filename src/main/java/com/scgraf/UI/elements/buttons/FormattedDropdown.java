@@ -15,7 +15,7 @@ public class FormattedDropdown<T> extends ComboBox<T> {
         getItems().setAll(list);
         getSelectionModel().selectFirst();
         setPrefWidth(UIConfig.btnPrefWidth);
-        setStyle("-fx-text-fill: #f8f4e3; -fx-background-color: #363b44;");
+        setStyle("-fx-text-fill: #f8f4e3; -fx-background-color: #f8f4e3; -fx-prompt-text-fill: #f8f4e3; -fx-color-label-visible: #f8f4e3; -fx-highlight-fill: #f8f4e3;");
 
         setCellFactory(new Callback<>() {
             @Override
