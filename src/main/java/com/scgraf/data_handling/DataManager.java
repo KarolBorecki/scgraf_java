@@ -19,13 +19,11 @@ public class DataManager {
     }
 
     public static File openLoadDialog(){
-        final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Graph from File");
         return fileChooser.showOpenDialog(Application.stage);
     }
 
     public static File openSaveDialog(){
-        final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Graph to File");
         return fileChooser.showSaveDialog(Application.stage);
     }
