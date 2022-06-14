@@ -32,8 +32,8 @@ public class DividePanel extends FunctionAbstractPanel {
     @Override
     public void solve() {
         try {
-            final int n = Integer.parseInt(divideNumberInput.getText());
             final Divider.DividingType dividingType = dividingTypeInput.getValue();
+            final int n = dividingType != Divider.DividingType.PATH_CUT ? Integer.parseInt(divideNumberInput.getText()) : 1;
             Solver.getInstance().divide(n, dividingType);
         } catch (NumberFormatException e) {
             Logger.getInstance().errPopup("Provided wrong input data!");

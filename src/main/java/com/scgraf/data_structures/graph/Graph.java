@@ -100,12 +100,13 @@ public class Graph implements Iterable<Node> {
     }
 
     public void deletePath(Node node, Path.Side direction) {
-        node.deletePath(direction);
-        if (this.getNeighbourNode(node, direction) != null)
+        Node nNode = getNeighbourNode(node, direction);
+        if (nNode != null)
             try {
-                this.getNeighbourNode(node, direction).deletePath(direction.getOppositeSide());
+                nNode.deletePath(direction.getOppositeSide());
+                node.deletePath(direction);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.err.println("Deleting path: " + e.getMessage());
             }
     }
 

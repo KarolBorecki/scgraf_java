@@ -46,7 +46,9 @@ public class Node implements Comparable<Node> {
     }
 
     public double getConnectionWeight(Path.Side side) {
-        return paths[side.index].getWeight();
+        Path path = paths[side.index];
+        if(path == null) return 0;
+        return path.getWeight();
     }
 
     @Override
