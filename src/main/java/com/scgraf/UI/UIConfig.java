@@ -76,7 +76,7 @@ public class UIConfig {
     public static int graphPanelHeight;
     public static double graphNodePathSizeFactor = 2;
     public static double minPathWidth = 0.5;
-    public static int maxGraphNodesCountToDrawCaptions = 1000;
+    public static int maxGraphNodesCountToDrawCaptions = 1500;
     public static Color graphNodeColor = Color.web("f8f4e3");
     public static Color graphShortestPathColor = Color.web("ff5154");
     public static double hsbPathSaturation = 0.7;
