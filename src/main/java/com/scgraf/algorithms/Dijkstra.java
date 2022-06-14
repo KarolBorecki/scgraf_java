@@ -37,11 +37,15 @@ public class Dijkstra extends Thread {
     }
 
     public static double getShortestPathLength(Node finishNode) {
-        double shortestPath = 0;
         if (finishNode == solvedFor)
             return 0;
-        for (int i = finishNode.getGraphID(); dijkstraTable[i].previousNode != solvedFor; i = dijkstraTable[i].previousNode.getGraphID())
+        int i = finishNode.getGraphID();
+        double shortestPath = 0;
+        do{
             shortestPath += dijkstraTable[i].length;
+            i = dijkstraTable[i].previousNode.getGraphID();
+        }while(dijkstraTable[i].previousNode != solvedFor);
+
         return shortestPath;
     }
 
