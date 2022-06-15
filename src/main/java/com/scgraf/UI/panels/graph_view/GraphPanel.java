@@ -77,7 +77,7 @@ public class GraphPanel extends AnchorPane {
     public void drawPath(Node[] pathNodes) {
         drawPath = new NodeElement[pathNodes.length];
 
-        for (int i = 0; i < pathNodes.length - 1; i += 2) {
+        for (int i = 0; i < pathNodes.length - 1; i++) {
             NodeElement actualNode = drawNodes[graph.getNodeRow(pathNodes[i])][graph.getNodeColumn(pathNodes[i])];
             NodeElement nextNode = drawNodes[graph.getNodeRow(pathNodes[i + 1])][graph.getNodeColumn(pathNodes[i + 1])];
 
